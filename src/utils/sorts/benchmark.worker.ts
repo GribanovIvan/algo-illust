@@ -1,15 +1,14 @@
 import generateRandomArray from "../randomArrays";
 
 const startSorting = () => {
-  let STEPS = 0;
-
   type SortTypeId =
   | "bubble"
   | "selection"
   | "shell"
   | "quick"
   | "merge"
-  | "counting";
+  | "counting"
+  | "heap";
 
   const sorts = {
     bubble: bubbleSort,
@@ -17,12 +16,12 @@ const startSorting = () => {
     shell: shellSort,
     merge: mergeSort,
     quick: quickSort,
-    counting: countingSort
+    counting: countingSort,
+    heap: heapSort
   }
 
   onmessage = async (message) => {
     const data = message.data;
-    console.log('Message received from main script', data);
     const arr = generateRandomArray(data.length, 100);
 
     data.sorts.forEach((sort: any) => {
@@ -55,9 +54,6 @@ const startSorting = () => {
     let sorted = false;
     const start = performance.now();
     while (!sorted) {
-      if (steps % 10000 === 0) {
-        console.log('steps', steps);
-      }
       sorted = true;
       for (let i = 0; i < arr.length - 1; i++) {
         steps++;
@@ -75,10 +71,7 @@ const startSorting = () => {
   function selectionSort(arr: number[]) {
     let steps = 0;
     const start = performance.now();
-    const len = arr.length;
-    let percent = 0;
     for (let i = 0; i < arr.length - 1; i++) {
-      if (percent !== (percent = Math.floor((i / len) * 100)) && percent % 10 === 0) console.log(`selectionSort: ${percent}%`);
       let min = i;
       for (let j = i + 1; j < arr.length; j++) {
         steps++;
@@ -101,7 +94,7 @@ const startSorting = () => {
     let gap = Math.floor(arr.length / 2);
     while (gap > 0) {
       for (let i = gap; i < arr.length; i++) {
-        let temp = arr[i];
+        const temp = arr[i];
         let j = i;
         while (j >= gap && arr[j - gap] > temp) {
           steps++;
@@ -118,12 +111,11 @@ const startSorting = () => {
   }
 
   function mergeSort(arr: number[]) {
-    console.log("mergeSort started");
-    STEPS = 0;
+    let steps = 0;
     const len = arr.length;
     let currSize;
     let leftStart;
-    let start = performance.now();
+    const start = performance.now();
 
     for (currSize = 1; currSize <= len - 1; currSize = 2 * currSize) {
       for (leftStart = 0; leftStart < len - 1; leftStart += 2 * currSize) {
@@ -134,23 +126,69 @@ const startSorting = () => {
     }
     const end = performance.now();
     const sorted = isSorted(arr);
-    return {sortId: "merge", steps: STEPS, name: "Merge Sort", time: Math.floor((end - start) * 100) / 100, sorted};
+    return {sortId: "merge", steps, name: "Merge Sort", time: Math.floor((end - start) * 100) / 100, sorted};
+
+    function merge(mergeArr: number[], left: number, mid: number, right: number) {
+      let i, j, k;
+      const len1 = mid - left + 1;
+      const len2 = right - mid;
+
+      const leftArray = mergeArr.slice(left, mid + 1);
+      const rightArray = mergeArr.slice(mid + 1, right + 1);
+
+      i = 0; j = 0; k = left;
+      while (i < len1 && j < len2) {
+        steps++;
+        if (leftArray[i] <= rightArray[j]) {
+          mergeArr[k] = leftArray[i];
+          i++;
+        } else {
+          mergeArr[k] = rightArray[j];
+          j++;
+        }
+        k++;
+      }
+
+      while (i < len1) {
+        mergeArr[k] = leftArray[i];
+        i++; k++;
+      }
+
+      while (j < len2) {
+        mergeArr[k] = rightArray[j];
+        j++; k++;
+      }
+    }
   }
 
   function quickSort(arr: number[]) {
-    STEPS = 0;
+    let steps = 0;
     const start = performance.now();
     const result = quickSortRecursive(arr);
     const end = performance.now();
     const sorted = isSorted(result);
-    return {sortId: "quick", steps: STEPS, name: "Quick Sort", time: Math.floor((end - start) * 100) / 100, sorted};
+    return {sortId: "quick", steps, name: "Quick Sort", time: Math.floor((end - start) * 100) / 100, sorted};
+
+    function quickSortRecursive(qArr: number[]): number[] {
+      if (qArr.length <= 1 || isSorted(qArr)) {
+        return qArr;
+      }
+      const pivot = qArr[0];
+      const left: number[] = [];
+      const right: number[] = [];
+      for (let i = 1; i < qArr.length; i++) {
+        steps++;
+        qArr[i] < pivot ? left.push(qArr[i]) : right.push(qArr[i]);
+      }
+      return quickSortRecursive(left).concat(pivot, quickSortRecursive(right));
+    }
   }
 
   function countingSort(arr: number[]) {
-    STEPS = 0;
+    let steps = 0;
     const start = performance.now();
-    const min = 0;
     let max = 0;
+    const min = 0;
     for (let i = 0; i < arr.length; i++) {
       if (arr[i] > max) {
         max = arr[i];
@@ -162,68 +200,57 @@ const startSorting = () => {
     });
     let sortedIndex = 0;
     countArr.forEach((num, i) => {
-      while (num > 0) {
-        STEPS++;
+      let count = num;
+      while (count > 0) {
+        steps++;
         arr[sortedIndex++] = i + min;
-        num--;
+        count--;
       }
     });
     const end = performance.now();
     const sorted = isSorted(arr);
-    return {sortId: "counting", steps: STEPS, name: "Counting Sort", time: Math.floor((end - start) * 100) / 100, sorted};
+    return {sortId: "counting", steps, name: "Counting Sort", time: Math.floor((end - start) * 100) / 100, sorted};
   }
 
-  function quickSortRecursive(arr: number[]): any {
-    if (arr.length <= 1 || isSorted(arr)) {
-      return arr;
-    }
-    const pivot = arr[0];
-    const left = []; 
-    const right = [];
-    for (let i = 1; i < arr.length; i++) {
-      STEPS++;
-      arr[i] < pivot ? left.push(arr[i]) : right.push(arr[i]);
-    }
-    return quickSortRecursive(left).concat(pivot, quickSortRecursive(right));
-  };
+  function heapSort(arr: number[]) {
+    let steps = 0;
+    const start = performance.now();
+    const n = arr.length;
 
-  function merge(arr: number[],
-    left: number,
-    mid: number,
-    right: number) {
-    let i, j, k;
-    let len1 = mid - left + 1;
-    let len2 = right - mid;
+    function heapify(heapArr: number[], size: number, i: number) {
+      let largest = i;
+      const left = 2 * i + 1;
+      const right = 2 * i + 2;
 
-    let leftArray = arr.slice(left, mid + 1);
-    let rightArray = arr.slice(mid + 1, right + 1);
-
-    i = 0; j = 0; k = left;
-    while (i < len1 && j < len2) {
-      STEPS++;
-      if (leftArray[i] <= rightArray[j]) {
-        arr[k] = leftArray[i];
-        i++;
-      } else {
-        arr[k] = rightArray[j];
-        j++;
+      if (left < size && heapArr[left] > heapArr[largest]) {
+        largest = left;
       }
-      k++;
+      if (right < size && heapArr[right] > heapArr[largest]) {
+        largest = right;
+      }
+      if (largest !== i) {
+        [heapArr[i], heapArr[largest]] = [heapArr[largest], heapArr[i]];
+        steps++;
+        heapify(heapArr, size, largest);
+      }
     }
 
-    // Copy the remaining elements of L, if there are any
-    while (i < len1) {
-      arr[k] = leftArray[i];
-      i++; k++;
+    // Build max heap
+    for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
+      heapify(arr, n, i);
     }
 
-    // Copy the remaining elements of R, if there are any
-    while (j < len2) {
-      arr[k] = rightArray[j];
-      j++; k++;
+    // Extract elements
+    for (let i = n - 1; i > 0; i--) {
+      [arr[0], arr[i]] = [arr[i], arr[0]];
+      steps++;
+      heapify(arr, i, 0);
     }
+
+    const end = performance.now();
+    const sorted = isSorted(arr);
+    return {sortId: "heap", steps, name: "Heap Sort", time: Math.floor((end - start) * 100) / 100, sorted};
   }
-
 };
 
 export default startSorting;

@@ -7,7 +7,7 @@ import styles from './Home.module.scss';
 const Home = () => {
   const [showTittle, setShowTittle] = React.useState(true);
   const [selectedItem, setSelectedItem] = React.useState(0);
-  const [inputFocus, setInputFocus]: any = useFocus();
+  const [inputFocus, setInputFocus] = useFocus();
   const navigate = useNavigate();
   const header = "Let's get started!";
 

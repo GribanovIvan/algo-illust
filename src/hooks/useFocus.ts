@@ -1,9 +1,9 @@
 import { useRef } from "react";
 
-const useFocus = () => {
+const useFocus = (): [React.RefObject<HTMLInputElement>, () => void] => {
     const inputFocus = useRef<HTMLInputElement>(null);
     const setFocus = () => { inputFocus.current && inputFocus.current?.focus() }
-    return [inputFocus as React.RefObject<HTMLInputElement>, setFocus as () => void]
+    return [inputFocus, setFocus]
 };
 
 export default useFocus;

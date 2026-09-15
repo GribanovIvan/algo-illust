@@ -12,7 +12,8 @@ const sorts: SortType[] = [
   {id: 'shell', name: 'Shell Sort'},
   {id: 'merge', name: 'Merge Sort'},
   {id: 'quick', name: 'Quick Sort'},
-  {id: 'counting', name: 'Counting Sort'}
+  {id: 'counting', name: 'Counting Sort'},
+  {id: 'heap', name: 'Heap Sort'}
 ];
 
 const SortsTable = () => {

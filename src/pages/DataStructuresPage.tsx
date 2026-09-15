@@ -30,9 +30,7 @@ const dsClasses: DSClassMap = {
 
 const DataStructuresPage = () => {
   const [array, setArray] = React.useState<DSArray>([]);
-  const [type, setType] = React.useState<DSTypeId>(
-    window.location.href.split("/").pop() as DSTypeId
-  );
+  const [type, setType] = React.useState<DSTypeId>("stack");
   const [stats, setStats] = React.useState<DSStats | null>(null);
 
   const stringifyStats = (stats: DSStats) => {

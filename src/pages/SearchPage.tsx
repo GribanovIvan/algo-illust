@@ -9,7 +9,7 @@ import styles from './SearchPage.module.scss';
 const MAX = 15; 
 
 const SearchPage = () => {
-  const [type, setType] = React.useState<SearchTypeId>(window.location.href.split("/").pop() as SearchTypeId);
+  const [type, setType] = React.useState<SearchTypeId>("binary");
   const [text, setText] = React.useState<string>("Some text");
   const [searchValue, setSearchValue] = React.useState<string>("");
   const [variant, setVariant] = React.useState<number>(8);
