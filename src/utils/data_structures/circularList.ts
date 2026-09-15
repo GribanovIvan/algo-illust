@@ -40,22 +40,18 @@ export default class CircularList {
   }
 
   remove(value: any) {
-    if (this._length === 0) {
-      return null;
-    }
     let currentNode = this._head;
-    let previousNode = null;
-    while (currentNode) {
+    let previousNode = this._tail;
+    for (let index = 0; index < this._length; index++) {
       if (currentNode.value === value) {
-        if (previousNode === null) {
-          this._head = currentNode.next;
-          this._tail.next = this._head;
+        if (this._length === 1) {
+          this._head = null;
+          this._tail = null;
         } else {
           previousNode.next = currentNode.next;
-          if (currentNode.next === null) {
-            this._tail = previousNode;
-            this._tail.next = this._head;
-          }
+          if (currentNode === this._head) this._head = currentNode.next;
+          if (currentNode === this._tail) this._tail = previousNode;
+          this._tail.next = this._head;
         }
         this._length--;
         return currentNode.value;
@@ -67,14 +63,17 @@ export default class CircularList {
   }
 
   contains(value: any) {
-    let currentNode = this._head;
-    while (currentNode) {
-      if (currentNode.value === value) {
-        return true;
-      }
-      currentNode = currentNode.next;
-    }
-    return false;
+    return this.findIndex(value) !== null;
+  }
+
+  clear() {
+    this._head = null;
+    this._tail = null;
+    this._length = 0;
+  }
+
+  isEmpty() {
+    return this._length === 0;
   }
 
   toArray() {
@@ -91,6 +90,7 @@ export default class CircularList {
   }
 
   findMin() {
+    if (!this._head) return null;
     let currentNode = this._head;
     let min = currentNode.value;
     while (currentNode) {
@@ -106,6 +106,7 @@ export default class CircularList {
   }
 
   findMax() {
+    if (!this._head) return null;
     let currentNode = this._head;
     let max = currentNode.value;
     while (currentNode) {
@@ -133,7 +134,7 @@ export default class CircularList {
         break;
       }
     }
-    return -1;
+    return null;
   }
 
   find(index: number) {
@@ -153,6 +154,7 @@ export default class CircularList {
   }
 
   merge(list: CircularList) {
+    if (list === this) throw new Error("Cannot merge a list with itself");
     let currentNode = list.head;
     while (currentNode) {
       this.add(currentNode.value);

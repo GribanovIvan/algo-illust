@@ -13,8 +13,7 @@ const Tree = () => {
   useEffect(() => {
     const canvas = canvasRef?.current;
     drawTree(canvas, tree, isChar);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [canvasRef]);
+  }, [tree, isChar]);
 
 
   function compare(a: BRTreeArrayElement, b: BRTreeArrayElement) {
@@ -38,8 +37,8 @@ const Tree = () => {
 
     var value = input.value.trim();
     if (!isChar) {
-      if (value === "" || isNaN(+value)) return;
-      if (tree.search(value)) {
+      if (value === "" || !Number.isFinite(+value)) return;
+      if (tree.search(+value)) {
         alert("key " + value + " is already in the tree");
       } else {
         tree.insert(+value);

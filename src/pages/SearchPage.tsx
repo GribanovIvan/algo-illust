@@ -1,5 +1,5 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import SearchNavBar from '../components/navigations/SearchNavBar';
 import SizeForm from '../components/SizeForm';
 import generateRandomArray from '../utils/randomArrays';
@@ -9,7 +9,9 @@ import styles from './SearchPage.module.scss';
 const MAX = 15; 
 
 const SearchPage = () => {
-  const [type, setType] = React.useState<SearchTypeId>(window.location.href.split("/").pop() as SearchTypeId);
+  const type = useLocation().pathname.split("/").pop() as SearchTypeId;
+  const [request, setRequest] = React.useState(0);
+  const [error, setError] = React.useState("");
   const [text, setText] = React.useState<string>("Some text");
   const [searchValue, setSearchValue] = React.useState<string>("");
   const [variant, setVariant] = React.useState<number>(8);
@@ -21,7 +23,12 @@ const SearchPage = () => {
     const data = new FormData(event.currentTarget);
     const searchIn = data.get('searchIn')?.toString() || text;
     const searchFor = data.get('searchFor')?.toString() || '';
-    console.log(searchIn, searchFor);
+    if (!searchFor.trim() || searchIn.length > 5000 || searchFor.length > 200) {
+      setError("Введіть непорожній шаблон до 200 символів і текст до 5000 символів.");
+      return;
+    }
+    setError("");
+    setRequest(previous => previous + 1);
     setText(searchIn)
     setSearchValue(searchFor)
   }
@@ -29,7 +36,7 @@ const SearchPage = () => {
   return (
     <>
       <header>
-        <SearchNavBar type={type} setType={setType}/>      
+        <SearchNavBar type={type}/>      
       </header>
       <span className={styles.center}>
         <select name="variants" onChange={e => setVariant(parseInt(e.target.value))}>
@@ -46,11 +53,12 @@ const SearchPage = () => {
           </form>
         }
       </span>   
+      {error && <p role="alert">{error}</p>}
       <main>
         {type === 'binary' ? 
           <Outlet context={[[binaryArray, setBinaryArray], variant]} /> : 
           // TODO: Make it HOC
-          <Outlet context={[text, searchValue, variant]} />}
+          <Outlet context={[text, searchValue, variant, request]} />}
       </main>
     </>
 

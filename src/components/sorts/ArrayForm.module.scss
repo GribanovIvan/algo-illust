@@ -1,0 +1,28 @@
+@use '../../styles/variables' as *;
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: .5rem;
+  color: $primary-clr;
+
+  textarea {
+    width: min(24rem, 80vw);
+    border-radius: .6rem;
+    padding: .5rem;
+  }
+
+  button {
+    padding: .5rem;
+    border-radius: .6rem;
+    border: .15rem solid $primary-clr;
+    background: $secondary-clr;
+    color: $primary-clr;
+    cursor: pointer;
+  }
+
+  [role='alert'] {
+    flex-basis: 100%;
+  }
+}

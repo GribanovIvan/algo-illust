@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <script>
+      // Resolve relative assets when the server falls back to this file for a nested route.
+      const path = window.location.pathname;
+      const route = path.match(/\/(?:sort|search|ds)(?:\/|$)/);
+      const base = document.createElement('base');
+      base.href = route ? path.slice(0, route.index + 1) : path.slice(0, path.lastIndexOf('/') + 1);
+      document.head.appendChild(base);
+    </script>
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/root.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Algorithm and data structure visualizations"
+    />
+    <title>Sort</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root" ></div>
+    <script type="module" src="/src/index.tsx"></script>
+  </body>
+</html>

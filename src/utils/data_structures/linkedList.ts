@@ -49,6 +49,7 @@ export default class LinkedList {
         } else {
           previousNode.next = currentNode.next;
         }
+        if (currentNode === this._tail) this._tail = previousNode;
         this._length--;
         return currentNode.value;
       }
@@ -143,6 +144,7 @@ export default class LinkedList {
   }
 
   merge(list: LinkedList) {
+    if (list === this) throw new Error("Cannot merge a list with itself");
     let currentNode = list._head;
     while (currentNode) {
       this.add(currentNode.value);

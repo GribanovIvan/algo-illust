@@ -40,7 +40,7 @@ const SortPage = () => {
   return (
     <>
       <header>
-        <NavBar type={sortType} setType={() => {}} />
+        <NavBar type={sortType} />
         <span>
           <button
             className={`${styles.sortWay} ${!isASC && styles.checked}`}
