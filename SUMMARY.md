@@ -1,0 +1,15 @@
+# SUMMARY
+- **Файли.** Рецензія: `REVIEW.md` (33 дефекти, 3 свідомо не змінено). Нове: `ArrayForm.tsx/.module.scss`, `parseArray.ts`, `benchmarkSorts.ts`, `createBenchmarkWorker.ts`, `sortList.ts`, `routeId.ts`, `vite-env.d.ts`, `vite.config.mts`, `eslint.config.mjs`, `jest.config.cjs`, `jest/*.cjs`, `src/__fixtures__/*`, 11 файлів `*.test.ts(x)`. Змінено: `sorts.ts`, `benchmark.worker.ts`, `SortComponent`, `SortsTable`, `SortPage`, `Params`, `SizeForm`, 3 навбари, `Home`, `SearchPage`, `DataStructuresPage`, `KMP/BM/Binary`, `searches.ts`, `generateArray.ts`, `data_structures/test.ts`, `index.tsx`, `index.scss`, `package.json`, `README.md`. Видалено: `workerBuilder.ts`, `react-app-env.d.ts`, застарілий `yarn.lock`; `public/index.html` → `index.html`.
+- **Vite.** `base: './'` замінює `"homepage": "."`, `build.outDir: 'build'` зберігає місце збірки; `build` = `tsc --noEmit && vite build` (типи перевіряються, як у CRA). React 18.2 і React Router 6.3 закріплено на тих самих версіях, що були в lock-файлі.
+- **Воркер.** Замість `fn.toString()` у blob — модульний воркер Vite (`?worker`). У CRA-збірці старий воркер посилався на мініфіковані змінні, яких у blob немає, тож таблиця порівняння не заповнювалась. Це єдина свідома зміна поведінки «на краще»; інші (Desc у quick sort, помилка counting sort на дробах, стартова швидкість 400 мс замість 250, межа довжини 100 000) описано в REVIEW.md.
+- **Heap sort.** `sorts.ts` (обміни = кроки, max-/min-купа для Asc/Desc) і `benchmarkSorts.ts` (порівняння = кроки, як у решти алгоритмів бенчмарку).
+- **Власний масив.** `parseArray` повертає `{array}` або `{error}`: 2–100 чисел, |x| ≤ 100 (графік малює висоту стовпця у відсотках). Відсортований на вибраний напрям масив, як і раніше, не анімується.
+- **ESLint 9.** Flat config відтворює основні правила `eslint-config-react-app` + `react-hooks` (без нових правил React Compiler), щоб не з'явились нові попередження.
+- **Тести.** 158 тестів в 11 файлах; воркер, `fetch`, `useNavigate`, `Math.random` і `alert` підмінено через Jest. Тести знайшли мою регресію в п. 3 (bubble/selection без фінального кадру), її виправлено окремим комітом.
+- **Спрощено / не зроблено.**
+  - Дублювання алгоритмів між `sorts.ts` і `benchmarkSorts.ts` залишено, бо інакше змінилися б числа в таблиці.
+  - Google Fonts і запити до randomuser.me залишено.
+  - Пошук і структури даних тестами майже не покрито.
+  - Зібраний застосунок не відкривається через `file://` (модульний скрипт), лише з HTTP-сервера з будь-якого підкаталогу; маршрутизатор, як і раніше, очікує базовий шлях `/asd`.
+  - Цільові браузери — сучасні (browserslist CRA більше не діє).
+  - Графічного браузера не було: поведінку перевірено тестами, збіркою і HTTP-запитами до dev-сервера та зібраних файлів.
