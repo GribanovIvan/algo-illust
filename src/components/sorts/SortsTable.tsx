@@ -46,8 +46,12 @@ const SortsTable = () => {
           worker.current = null;
         }
       };
-      instance.onerror = () => fail('Не вдалося виконати порівняння. Спробуйте ще раз.');
-      instance.onmessageerror = () => fail('Не вдалося прочитати відповідь воркера.');
+      instance.onerror = () => {
+        if (worker.current === instance) fail('Не вдалося виконати порівняння. Спробуйте ще раз.');
+      };
+      instance.onmessageerror = () => {
+        if (worker.current === instance) fail('Не вдалося прочитати відповідь воркера.');
+      };
       instance.postMessage({ length, sorts: selected });
     } catch (error) {
       fail(error instanceof Error ? error.message : 'Не вдалося створити воркер.');

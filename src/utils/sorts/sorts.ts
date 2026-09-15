@@ -134,6 +134,20 @@ export const mergeSort: SortFunc = async (arr, isASC, render) => {
   return steps;
 };
 
+function countingKeys(counts: Map<number, number>, isASC: boolean) {
+  const values = Array.from(counts.keys());
+  if (!values.length) return values;
+  const min = Math.min(...values);
+  const max = Math.max(...values);
+  if (values.every(Number.isSafeInteger) && max - min <= 10000) {
+    const keys = Array.from({ length: max - min + 1 }, (_, index) => min + index)
+      .filter(value => counts.has(value));
+    return isASC ? keys : keys.reverse();
+  }
+  // Sparse/fractional domains need ordered keys; their complexity is O(n + k log k).
+  return values.sort((a, b) => isASC ? a - b : b - a);
+}
+
 export const countingSort: SortFunc = async (arr, isASC, render) => {
   validateArray(arr);
   const counts = new Map<number, number>();
@@ -142,7 +156,7 @@ export const countingSort: SortFunc = async (arr, isASC, render) => {
     counts.set(value, (counts.get(value) || 0) + 1);
   }
   // Sparse counts support fractions and wide ranges without allocating max-min slots.
-  const keys = Array.from(counts.keys()).sort((a, b) => isASC ? a - b : b - a);
+  const keys = countingKeys(counts, isASC);
   let index = 0;
   for (const value of keys) {
     for (let count = counts.get(value)!; count > 0; count--) {

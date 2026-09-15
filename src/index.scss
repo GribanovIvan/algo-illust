@@ -28,3 +28,8 @@ main {
 footer {
   flex: 0 1 auto;
 }
+
+[role='alert'] {
+  color: $orange-clr;
+  padding: .5rem;
+}
