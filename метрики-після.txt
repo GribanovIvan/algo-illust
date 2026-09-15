@@ -1,0 +1,474 @@
+npm notice run algo-illust@0.1.0 npx
+npm notice run 'eslint' src
+npm notice run algo-illust@0.1.0 npx
+npm notice run 'tsc' --noEmit
+npm notice run algo-illust@0.1.0 build
+npm notice run tsc --noEmit && vite build
+vite v8.3.0 building client environment for production...
+transforming...
+✓ 80 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                             1.12 kB │ gzip:  0.60 kB
+dist/assets/benchmark.worker-DHKtaNUm.js    4.19 kB
+dist/assets/index-CzfvHOdG.css             11.10 kB │ gzip:  2.79 kB
+dist/assets/index-BsB055Ht.js             229.05 kB │ gzip: 75.20 kB
+
+✓ built in 378ms
+173M	node_modules
+257K	dist
+572
+================================================
+  NLOC    CCN   token  PARAM  length  location  
+------------------------------------------------
+       1      1     13      1       1 DiceIcon@2-2@src/assets/DiceIcon.tsx
+       7      1     10      0       7 (anonymous)@2-8@src/assets/DiceIcon.tsx
+       7      1     11      0       7 HomeIcon@3-9@src/assets/HomeIcon.tsx
+       8      2     50      1       8 deleteElement@10-17@src/components/data_structures/DataStructure.tsx
+      12      1     28      0      12 (anonymous)@21-32@src/components/data_structures/DataStructure.tsx
+      11      2     73      0      31 DataStructure@5-35@src/components/data_structures/DataStructure.tsx
+       1      3     18      1       1 isStackLike@39-39@src/components/data_structures/DataStructure.tsx
+       2      2     15      0       3 (anonymous)@43-45@src/components/data_structures/DataStructure.tsx
+       2      2     13      0       3 (anonymous)@46-48@src/components/data_structures/DataStructure.tsx
+       2      3     19      0       3 (anonymous)@49-51@src/components/data_structures/DataStructure.tsx
+       1      1      1      0       1 (anonymous)@52-52@src/components/data_structures/DataStructure.tsx
+       1      1      1      0       1 (anonymous)@55-55@src/components/data_structures/DataStructure.tsx
+       1      1      1      0       1 (anonymous)@58-58@src/components/data_structures/DataStructure.tsx
+       1      1      1      0       1 (anonymous)@61-61@src/components/data_structures/DataStructure.tsx
+      12      5     59      3      12 canDelete@64-75@src/components/data_structures/DataStructure.tsx
+       1      1      8      0       1 (anonymous)@11-11@src/components/data_structures/Tree.tsx
+       4      2     19      0       4 (anonymous)@13-16@src/components/data_structures/Tree.tsx
+       5      3     41      2       5 compare@19-23@src/components/data_structures/Tree.tsx
+       7      2     47      1       7 isVowel@25-31@src/components/data_structures/Tree.tsx
+       1      1     14      0       1 (anonymous)@60-60@src/components/data_structures/Tree.tsx
+       3      1     23      0       3 (anonymous)@61-63@src/components/data_structures/Tree.tsx
+       1      1      1      0       1 (anonymous)@66-66@src/components/data_structures/Tree.tsx
+       1      1      4      0       1 (anonymous)@82-82@src/components/data_structures/Tree.tsx
+       1      1      9      0       1 (anonymous)@82-82@src/components/data_structures/Tree.tsx
+       1      1      6      0       1 (anonymous)@88-88@src/components/data_structures/Tree.tsx
+      59     13    390      0      64 insert@33-96@src/components/data_structures/Tree.tsx
+      11      1     84      0      93 Tree@6-98@src/components/data_structures/Tree.tsx
+      11      1     28      0      11 (anonymous)@27-37@src/components/navigations/DSNavBar.tsx
+      19      1    108      1      31 NavBar@10-40@src/components/navigations/DSNavBar.tsx
+      11      1     28      0      11 (anonymous)@23-33@src/components/navigations/SearchNavBar.tsx
+      15      1     68      1      27 NavBar@10-36@src/components/navigations/SearchNavBar.tsx
+      11      1     28      0      11 (anonymous)@19-29@src/components/navigations/SortNavBar.tsx
+      10      1     41      1      22 NavBar@11-32@src/components/navigations/SortNavBar.tsx
+       1      1     10      0       1 (anonymous)@9-9@src/components/searches/Binary.tsx
+       5      2     27      0       5 (anonymous)@21-25@src/components/searches/Binary.tsx
+       5      1     40      2       9 search@19-27@src/components/searches/Binary.tsx
+      15     11    110      0      15 run@28-42@src/components/searches/Binary.tsx
+       1      1      6      0       1 (anonymous)@44-44@src/components/searches/Binary.tsx
+       9      2     51      0      31 (anonymous)@15-45@src/components/searches/Binary.tsx
+       1      1      2      0       1 (anonymous)@50-50@src/components/searches/Binary.tsx
+      14      3    132      0      46 Binary@8-53@src/components/searches/Binary.tsx
+       5      2     27      0       5 (anonymous)@25-29@src/components/searches/SearchComponent.tsx
+       8      6     70      0      12 run@23-34@src/components/searches/SearchComponent.tsx
+       1      1      6      0       1 (anonymous)@36-36@src/components/searches/SearchComponent.tsx
+      11      3     67      0      22 (anonymous)@16-37@src/components/searches/SearchComponent.tsx
+       2      1     14      2       2 characterClass@39-40@src/components/searches/SearchComponent.tsx
+       1      1      2      0       1 (anonymous)@48-48@src/components/searches/SearchComponent.tsx
+       1      1      2      0       1 (anonymous)@51-51@src/components/searches/SearchComponent.tsx
+      20      9    229      0      44 Component@11-54@src/components/searches/SearchComponent.tsx
+       4      1     20      2      47 SearchComponent@10-56@src/components/searches/SearchComponent.tsx
+       1      1      5      0       1 (anonymous)@5-5@src/components/sorts/Graph.tsx
+       1      1      1      0       1 (anonymous)@11-11@src/components/sorts/Graph.tsx
+      25      6    192      3      26 Graph@4-29@src/components/sorts/Graph.tsx
+       1      1     12      0       1 (anonymous)@11-11@src/components/sorts/Params.tsx
+       3      1     18      0       3 (anonymous)@19-21@src/components/sorts/Params.tsx
+       1      1     12      0       1 (anonymous)@24-24@src/components/sorts/Params.tsx
+       3      2     16      0       3 (anonymous)@31-33@src/components/sorts/Params.tsx
+      27      1     86      3      31 Params@7-37@src/components/sorts/Params.tsx
+       6      3     35      0       6 (anonymous)@30-35@src/components/sorts/SortComponent.tsx
+      18      6    147      0      23 run@25-47@src/components/sorts/SortComponent.tsx
+       1      1     13      0       1 (anonymous)@49-49@src/components/sorts/SortComponent.tsx
+      12      2     62      0      34 (anonymous)@17-50@src/components/sorts/SortComponent.tsx
+      14      2    142      0      49 Component@9-57@src/components/sorts/SortComponent.tsx
+       4      1     17      1      52 SortComponent@8-59@src/components/sorts/SortComponent.tsx
+       1      1      4      0       1 (anonymous)@16-16@src/components/sorts/SortsTable.tsx
+       6      2     33      1       6 fail@25-30@src/components/sorts/SortsTable.tsx
+       1      1      7      0       1 (anonymous)@42-42@src/components/sorts/SortsTable.tsx
+      11      4     71      0      11 instance.onmessage@38-48@src/components/sorts/SortsTable.tsx
+       3      2     15      0       3 instance.onerror@49-51@src/components/sorts/SortsTable.tsx
+       3      2     15      0       3 instance.onmessageerror@52-54@src/components/sorts/SortsTable.tsx
+      21      4    134      0      40 (anonymous)@20-59@src/components/sorts/SortsTable.tsx
+       1      1      4      0       1 (anonymous)@62-62@src/components/sorts/SortsTable.tsx
+       1      2     17      0       1 (anonymous)@63-63@src/components/sorts/SortsTable.tsx
+       4      1     21      0       4 (anonymous)@61-64@src/components/sorts/SortsTable.tsx
+       1      1      4      0       1 (anonymous)@73-73@src/components/sorts/SortsTable.tsx
+       1      1      7      0       1 (anonymous)@75-75@src/components/sorts/SortsTable.tsx
+       1      1      4      0       1 (anonymous)@83-83@src/components/sorts/SortsTable.tsx
+      34      5    285      0      80 SortsTable@12-91@src/components/sorts/SortsTable.tsx
+      12      6     77      0      12 (anonymous)@14-25@src/components/sorts/ArrayForm.tsx
+      14      3    125      2      26 ArrayForm@10-35@src/components/sorts/ArrayForm.tsx
+      12      4     72      0      12 (anonymous)@15-26@src/components/SizeForm.tsx
+      16      2    123      3      28 SizeForm@11-38@src/components/SizeForm.tsx
+       1      2     16      0       1 setFocus@5-5@src/hooks/useFocus.ts
+       2      1      3      0       2 (anonymous)@6-7@src/hooks/useFocus.ts
+       4      1     33      0       4 useFocus@3-6@src/hooks/useFocus.ts
+       9      1     24      1      12 TerminalArrow@3-14@src/images/TerminalArrow.tsx
+      15      2     19      1      15 stringifyStats@36-50@src/pages/DataStructuresPage.tsx
+      17     11    117      1      18 checkInput@52-69@src/pages/DataStructuresPage.tsx
+       9      3     61      0       9 randomValue@71-79@src/pages/DataStructuresPage.tsx
+       8      4     57      1       9 pushElement@81-89@src/pages/DataStructuresPage.tsx
+       7      4     74      1       7 runStats@91-97@src/pages/DataStructuresPage.tsx
+       8      2     35      1       9 null@103-111@src/pages/DataStructuresPage.tsx
+      30      4    151      0     104 DataStructuresPage@31-134@src/pages/DataStructuresPage.tsx
+       3      1      7      0       3 (anonymous)@15-17@src/pages/Home.tsx
+       1      2     12      0       1 (anonymous)@21-21@src/pages/Home.tsx
+       1      2     12      0       1 (anonymous)@24-24@src/pages/Home.tsx
+       4      1     15      0       4 (anonymous)@28-31@src/pages/Home.tsx
+      11      4     55      1      15 onkeydown@19-33@src/pages/Home.tsx
+       4      1     16      0      22 (anonymous)@14-35@src/pages/Home.tsx
+       3      2     12      0       3 (anonymous)@38-40@src/pages/Home.tsx
+       3      1     22      0       6 (anonymous)@37-42@src/pages/Home.tsx
+       5      2     28      0       5 (anonymous)@52-56@src/pages/Home.tsx
+       4      2     38      1       8 handleInput@50-57@src/pages/Home.tsx
+       1      1      5      0       1 (anonymous)@70-70@src/pages/Home.tsx
+       9      2     28      0       9 (anonymous)@69-77@src/pages/Home.tsx
+      33      2    186      0      79 Home@7-85@src/pages/Home.tsx
+       1      1      4      0       1 (anonymous)@19-19@src/pages/SearchPage.tsx
+       1      1      4      0       1 (anonymous)@31-31@src/pages/SearchPage.tsx
+      14      8    111      1      14 startSearching@21-34@src/pages/SearchPage.tsx
+       1      1     12      0       1 (anonymous)@42-42@src/pages/SearchPage.tsx
+       1      1      1      0       1 (anonymous)@47-47@src/pages/SearchPage.tsx
+       1      1      4      0       1 (anonymous)@47-47@src/pages/SearchPage.tsx
+      35      4    244      0      53 SearchPage@11-63@src/pages/SearchPage.tsx
+      15      6     90      1      15 onLengthSubmit@24-38@src/pages/SortPage.tsx
+       1      1      6      0       1 (anonymous)@45-45@src/pages/SortPage.tsx
+      44      8    240      0      60 SortPage@13-72@src/pages/SortPage.tsx
+       4      1     16      0       4 constructor@42-45@src/utils/data_structures/RedBlackTree.ts
+      12      4     62      1      12 search@48-59@src/utils/data_structures/RedBlackTree.ts
+      12      4     62      1      13 searchNode@61-73@src/utils/data_structures/RedBlackTree.ts
+      24      7    146      1      27 insert@75-101@src/utils/data_structures/RedBlackTree.ts
+       3      1     14      1       3 createNewNode@102-104@src/utils/data_structures/RedBlackTree.ts
+      35     10    210      1      49 remove@106-154@src/utils/data_structures/RedBlackTree.ts
+       4      1     16      0       4 clear@156-159@src/utils/data_structures/RedBlackTree.ts
+       3      1     11      0       3 isEmpty@161-163@src/utils/data_structures/RedBlackTree.ts
+       3      1      9      0       3 getSize@165-167@src/utils/data_structures/RedBlackTree.ts
+      13      4     78      1      15 path@170-184@src/utils/data_structures/RedBlackTree.ts
+       3      1      9      0       3 getRoot@186-188@src/utils/data_structures/RedBlackTree.ts
+       8      2     76      2       8 getInOrder@190-197@src/utils/data_structures/RedBlackTree.ts
+      11      2     50      1      11 getPreorder@199-209@src/utils/data_structures/RedBlackTree.ts
+      11      2     48      1      11 getPostorder@210-220@src/utils/data_structures/RedBlackTree.ts
+       1      1      7      0       1 (anonymous)@12-12@src/utils/data_structures/circularList.ts
+       6      1     38      1       6 constructor@8-13@src/utils/data_structures/circularList.ts
+       3      1      9      0       3 get length@15-17@src/utils/data_structures/circularList.ts
+       3      1      9      0       3 get head@18-20@src/utils/data_structures/circularList.ts
+       3      1      9      0       3 get tail@21-23@src/utils/data_structures/circularList.ts
+      16      2     83      1      16 add@25-40@src/utils/data_structures/circularList.ts
+      22      6    145      1      22 remove@42-63@src/utils/data_structures/circularList.ts
+       3      1     17      1       3 contains@65-67@src/utils/data_structures/circularList.ts
+       5      1     22      0       5 clear@69-73@src/utils/data_structures/circularList.ts
+       3      1     11      0       3 isEmpty@75-77@src/utils/data_structures/circularList.ts
+      12      3     53      0      12 toArray@79-90@src/utils/data_structures/circularList.ts
+      15      5     71      0      15 findMin@92-106@src/utils/data_structures/circularList.ts
+      15      5     71      0      15 findMax@108-122@src/utils/data_structures/circularList.ts
+      15      4     62      1      15 findIndex@124-138@src/utils/data_structures/circularList.ts
+      15      4     62      1      15 find@140-154@src/utils/data_structures/circularList.ts
+      12      4     67      1      12 merge@156-167@src/utils/data_structures/circularList.ts
+       4      1     27      1       4 constructor@7-10@src/utils/data_structures/deque.ts
+       3      1      9      0       3 get length@12-14@src/utils/data_structures/deque.ts
+       3      1      9      0       3 get deque@15-17@src/utils/data_structures/deque.ts
+       4      1     21      1       4 addFront@19-22@src/utils/data_structures/deque.ts
+       4      1     21      1       4 addRear@23-26@src/utils/data_structures/deque.ts
+       7      2     31      0       7 removeFront@27-33@src/utils/data_structures/deque.ts
+       7      2     31      0       7 removeRear@34-40@src/utils/data_structures/deque.ts
+       6      2     25      0       6 peekFront@41-46@src/utils/data_structures/deque.ts
+       6      2     29      0       6 peekRear@47-52@src/utils/data_structures/deque.ts
+       4      1     17      0       4 clear@53-56@src/utils/data_structures/deque.ts
+       3      1     11      0       3 isEmpty@57-59@src/utils/data_structures/deque.ts
+      18      5    100      0      18 findMin@61-78@src/utils/data_structures/deque.ts
+      18      5    100      0      18 findMax@80-97@src/utils/data_structures/deque.ts
+      19      5    103      1      19 findIndex@99-117@src/utils/data_structures/deque.ts
+      19      5    103      1      19 find@119-137@src/utils/data_structures/deque.ts
+       7      3     47      1       7 merge@139-145@src/utils/data_structures/deque.ts
+       1      1      7      0       1 (anonymous)@12-12@src/utils/data_structures/doublyLinkedList.ts
+       6      1     38      1       6 constructor@8-13@src/utils/data_structures/doublyLinkedList.ts
+       3      1      9      0       3 get length@15-17@src/utils/data_structures/doublyLinkedList.ts
+       3      1      9      0       3 get head@18-20@src/utils/data_structures/doublyLinkedList.ts
+       3      1      9      0       3 get tail@21-23@src/utils/data_structures/doublyLinkedList.ts
+       9      2     41      0       9 toArray@25-33@src/utils/data_structures/doublyLinkedList.ts
+      16      2     75      1      16 add@35-50@src/utils/data_structures/doublyLinkedList.ts
+      28      8    144      1      28 remove@52-79@src/utils/data_structures/doublyLinkedList.ts
+      10      3     42      1      10 contains@81-90@src/utils/data_structures/doublyLinkedList.ts
+       5      1     22      0       5 clear@92-96@src/utils/data_structures/doublyLinkedList.ts
+       3      1     11      0       3 isEmpty@98-100@src/utils/data_structures/doublyLinkedList.ts
+      14      4     64      0      14 findMin@102-115@src/utils/data_structures/doublyLinkedList.ts
+      14      4     64      0      14 findMax@117-130@src/utils/data_structures/doublyLinkedList.ts
+      15      4     63      1      15 findIndex@132-146@src/utils/data_structures/doublyLinkedList.ts
+      15      4     63      1      15 find@148-162@src/utils/data_structures/doublyLinkedList.ts
+       5      3     45      1       5 merge@164-168@src/utils/data_structures/doublyLinkedList.ts
+      20      4    177      3      27 draw@6-32@src/utils/data_structures/drawingTree.ts
+      44     10    433      7      49 drawTree@34-82@src/utils/data_structures/drawingTree.ts
+      17      1    145      5      18 connectTwoCircles@85-102@src/utils/data_structures/drawingTree.ts
+       1      1      7      0       1 (anonymous)@12-12@src/utils/data_structures/linkedList.ts
+       6      1     38      1       6 constructor@8-13@src/utils/data_structures/linkedList.ts
+       3      1      9      0       3 get length@15-17@src/utils/data_structures/linkedList.ts
+       3      1      9      0       3 get head@18-20@src/utils/data_structures/linkedList.ts
+       3      1      9      0       3 get tail@21-23@src/utils/data_structures/linkedList.ts
+      14      2     63      1      14 add@25-38@src/utils/data_structures/linkedList.ts
+      22      6    112      1      22 remove@39-60@src/utils/data_structures/linkedList.ts
+      10      3     42      1      10 contains@61-70@src/utils/data_structures/linkedList.ts
+       5      1     22      0       5 clear@71-75@src/utils/data_structures/linkedList.ts
+       3      1     11      0       3 isEmpty@76-78@src/utils/data_structures/linkedList.ts
+       9      2     45      0       9 toArray@79-87@src/utils/data_structures/linkedList.ts
+       3      1     15      0       3 toString@88-90@src/utils/data_structures/linkedList.ts
+      14      4     66      0      14 findMin@92-105@src/utils/data_structures/linkedList.ts
+      14      4     66      0      14 findMax@107-120@src/utils/data_structures/linkedList.ts
+      12      3     50      1      12 findIndex@122-133@src/utils/data_structures/linkedList.ts
+      10      4     58      1      10 find@135-144@src/utils/data_structures/linkedList.ts
+       9      3     55      1       9 merge@146-154@src/utils/data_structures/linkedList.ts
+       4      1     27      1       4 constructor@7-10@src/utils/data_structures/queue.ts
+       3      1      9      0       3 get length@12-14@src/utils/data_structures/queue.ts
+       3      1      9      0       3 get queue@15-17@src/utils/data_structures/queue.ts
+       4      1     21      1       4 enqueue@19-22@src/utils/data_structures/queue.ts
+       7      2     31      0       7 dequeue@23-29@src/utils/data_structures/queue.ts
+       6      2     25      0       6 peek@30-35@src/utils/data_structures/queue.ts
+       4      1     17      0       4 clear@36-39@src/utils/data_structures/queue.ts
+       3      1     11      0       3 isEmpty@40-42@src/utils/data_structures/queue.ts
+      16      4     85      0      17 findMin@44-60@src/utils/data_structures/queue.ts
+      16      4     85      0      17 findMax@62-78@src/utils/data_structures/queue.ts
+      17      5     95      1      18 findIndex@80-97@src/utils/data_structures/queue.ts
+      18      4     95      1      19 find@99-117@src/utils/data_structures/queue.ts
+      14      5    101      1      15 merge@119-133@src/utils/data_structures/queue.ts
+       4      1     29      1       4 constructor@7-10@src/utils/data_structures/stack.ts
+       3      1      9      0       3 get length@12-14@src/utils/data_structures/stack.ts
+       3      1      9      0       3 get stack@15-17@src/utils/data_structures/stack.ts
+       4      1     21      1       4 push@19-22@src/utils/data_structures/stack.ts
+       7      2     31      0       7 pop@23-29@src/utils/data_structures/stack.ts
+       6      2     29      0       6 peek@30-35@src/utils/data_structures/stack.ts
+       4      1     17      0       4 clear@36-39@src/utils/data_structures/stack.ts
+       3      1     11      0       3 isEmpty@40-42@src/utils/data_structures/stack.ts
+      18      5    100      0      19 findMin@44-62@src/utils/data_structures/stack.ts
+      18      5    100      0      19 findMax@64-82@src/utils/data_structures/stack.ts
+      19      5    103      1      21 findIndex@84-104@src/utils/data_structures/stack.ts
+      18      7    111      1      19 find@106-124@src/utils/data_structures/stack.ts
+       7      3     47      1       7 merge@126-132@src/utils/data_structures/stack.ts
+      18      5    163      3      18 testDS@7-24@src/utils/data_structures/test.ts
+       1      1      9      0       1 (anonymous)@5-5@src/utils/searches/generateArray.ts
+       1      1      4      0       1 (anonymous)@7-7@src/utils/searches/generateArray.ts
+       1      1     12      0       1 (anonymous)@7-7@src/utils/searches/generateArray.ts
+       7      1     59      0       7 generateArray8@3-9@src/utils/searches/generateArray.ts
+       1      2     19      0       1 (anonymous)@12-12@src/utils/searches/generateArray.ts
+       1      2     11      0       1 (anonymous)@14-14@src/utils/searches/generateArray.ts
+       6      1     64      2       6 processArray12@11-16@src/utils/searches/generateArray.ts
+      37      6    307      2      40 getString@1-40@src/utils/searches/generateString.ts
+       1      1     24      3       1 binarySearch@6-6@src/utils/searches/searches.ts
+      29      6    172      0      30 (anonymous)@6-35@src/utils/searches/searches.ts
+       1      1     22      3       1 kmpSearch@37-37@src/utils/searches/searches.ts
+       1      1      4      0       1 (anonymous)@51-51@src/utils/searches/searches.ts
+      27      6    209      0      27 (anonymous)@37-63@src/utils/searches/searches.ts
+      11      3     90      1      13 buildBadMatchTable@65-77@src/utils/searches/searches.ts
+       1      1     22      3       1 bmSearch@79-79@src/utils/searches/searches.ts
+       1      1      4      0       1 (anonymous)@95-95@src/utils/searches/searches.ts
+      30      6    222      0      31 (anonymous)@79-109@src/utils/searches/searches.ts
+      17      4    104      1      17 getLps@111-127@src/utils/searches/searches.ts
+       1      1     11      1       1 onmessage@4-4@src/utils/sorts/benchmark.worker.ts
+       1      1      8      1       1 postMessage@5-5@src/utils/sorts/benchmark.worker.ts
+       1      1      7      0       1 (anonymous)@10-10@src/utils/sorts/benchmark.worker.ts
+       7      3     41      0       7 scope.onmessage@8-14@src/utils/sorts/benchmark.worker.ts
+       1      1     26      1       1 pick@7-7@src/utils/sorts/generateArray.ts
+       1      1      8      0       1 getName@8-8@src/utils/sorts/generateArray.ts
+       1      1      8      0       1 getCity@9-9@src/utils/sorts/generateArray.ts
+       1      1      7      0       1 (anonymous)@60-60@src/utils/sorts/generateArray.ts
+      95     20    792      2      95 generateArray@11-105@src/utils/sorts/generateArray.ts
+       4      2     30      1       5 sortValue@4-8@src/utils/sorts/sorts.ts
+       3      2     44      3       3 before@8-10@src/utils/sorts/sorts.ts
+       8      4     48      1       8 validateArray@12-19@src/utils/sorts/sorts.ts
+      18      6    152      3      18 bubbleSort@21-38@src/utils/sorts/sorts.ts
+      17      7    164      3      17 selectionSort@40-56@src/utils/sorts/sorts.ts
+      15      7    179      3      15 shellSort@58-72@src/utils/sorts/sorts.ts
+      18      6    161      2      18 partition@77-94@src/utils/sorts/sorts.ts
+      15      6    136      3      33 quickSort@74-106@src/utils/sorts/sorts.ts
+       1      1      4      0       1 (anonymous)@128-128@src/utils/sorts/sorts.ts
+      28      9    264      3      28 mergeSort@108-135@src/utils/sorts/sorts.ts
+       1      1      4      0       1 (anonymous)@143-143@src/utils/sorts/sorts.ts
+       1      1      7      0       1 (anonymous)@144-144@src/utils/sorts/sorts.ts
+       1      2     10      0       1 (anonymous)@148-148@src/utils/sorts/sorts.ts
+      12      5    136      2      13 countingKeys@137-149@src/utils/sorts/sorts.ts
+      19      8    164      3      20 countingSort@151-170@src/utils/sorts/sorts.ts
+       5      2     62      2       5 swap@175-179@src/utils/sorts/sorts.ts
+       9      5     93      2       9 siftDown@180-188@src/utils/sorts/sorts.ts
+      15      4    121      3      27 heapSort@172-198@src/utils/sorts/sorts.ts
+       5      4     44      2       5 validateLength@4-8@src/utils/sorts/parseArray.ts
+       8      3     54      0       8 (anonymous)@15-22@src/utils/sorts/parseArray.ts
+       8      3     77      1      15 parseArray@10-24@src/utils/sorts/parseArray.ts
+       1      1     15      2       1 benchmark@10-10@src/utils/sorts/benchmark.ts
+       1      1      6      0       1 (anonymous)@13-13@src/utils/sorts/benchmark.ts
+       1      1      9      0       1 (anonymous)@13-13@src/utils/sorts/benchmark.ts
+       1      1      6      0       1 (anonymous)@23-23@src/utils/sorts/benchmark.ts
+       2      1      4      0       2 (anonymous)@16-17@src/utils/types/ds.types.ts
+       2      1      3      0       2 (anonymous)@18-19@src/utils/types/ds.types.ts
+       1      1      5      0       1 (anonymous)@27-27@src/utils/types/sort.types.ts
+       1      1      5      0       1 (anonymous)@33-33@src/utils/types/sort.types.ts
+       2      1      4      0       2 (anonymous)@37-38@src/utils/types/sort.types.ts
+       2      1      4      0       2 (anonymous)@38-39@src/utils/types/sort.types.ts
+       2      1      4      0       2 (anonymous)@39-40@src/utils/types/sort.types.ts
+       1      1      2      0       1 (anonymous)@1-1@src/utils/findLastIndex.ts
+       9      4     79      2      10 isSorted@4-13@src/utils/isSorted.ts
+      16      9    151      3      16 generateRandomArray@1-16@src/utils/randomArrays.ts
+       3      1     27      0       3 createBenchmarkWorker@1-3@src/utils/workerBuilder.ts
+       1      1      7      0       1 get cancelled@8-8@src/utils/animation.ts
+       1      1      7      0       1 get waiting@9-9@src/utils/animation.ts
+       4      1     22      0       4 (anonymous)@13-16@src/utils/animation.ts
+       6      2     50      0       9 wait@10-18@src/utils/animation.ts
+       4      1     21      0       4 cancel@19-22@src/utils/animation.ts
+      12      1     62      1      23 createAnimation@2-24@src/utils/animation.ts
+       6      4     62      1       6 getRouterBase@3-8@src/utils/routerBase.ts
+       1      1      8      0       1 (anonymous)@26-26@src/App.tsx
+       1      1      8      0       1 (anonymous)@27-27@src/App.tsx
+       1      1      8      0       1 (anonymous)@28-28@src/App.tsx
+       1      1      8      0       1 (anonymous)@29-29@src/App.tsx
+       1      1      8      0       1 (anonymous)@30-30@src/App.tsx
+       1      1      8      0       1 (anonymous)@31-31@src/App.tsx
+       1      1      8      0       1 (anonymous)@33-33@src/App.tsx
+      41      1    224      0      44 App@25-68@src/App.tsx
+53 file analyzed.
+==============================================================
+NLOC    Avg.NLOC  AvgCCN  Avg.token  function_cnt    file
+--------------------------------------------------------------
+      8       4.0     1.0       11.5         2     src/assets/DiceIcon.tsx
+      9       7.0     1.0       11.0         1     src/assets/HomeIcon.tsx
+     62       4.5     2.0       23.2        12     src/components/data_structures/DataStructure.tsx
+     88       7.9     2.3       53.8        12     src/components/data_structures/Tree.tsx
+     37      15.0     1.0       68.0         2     src/components/navigations/DSNavBar.tsx
+     33      13.0     1.0       48.0         2     src/components/navigations/SearchNavBar.tsx
+     29      10.5     1.0       34.5         2     src/components/navigations/SortNavBar.tsx
+      3       0.0     0.0        0.0         0     src/components/searches/BM.tsx
+     51       6.4     2.8       47.2         8     src/components/searches/Binary.tsx
+      3       0.0     0.0        0.0         0     src/components/searches/KMP.tsx
+     53       5.9     2.8       48.6         9     src/components/searches/SearchComponent.tsx
+     27       9.0     2.7       66.0         3     src/components/sorts/Graph.tsx
+     37       7.0     1.2       28.8         5     src/components/sorts/Params.tsx
+     57       9.2     2.5       69.3         6     src/components/sorts/SortComponent.tsx
+     88       6.4     2.0       44.4        14     src/components/sorts/SortsTable.tsx
+     32      13.0     4.5      101.0         2     src/components/sorts/ArrayForm.tsx
+     35      14.0     3.0       97.5         2     src/components/SizeForm.tsx
+      7       2.3     1.3       17.3         3     src/hooks/useFocus.ts
+     10       9.0     1.0       24.0         1     src/images/TerminalArrow.tsx
+    124      13.4     4.3       73.4         7     src/pages/DataStructuresPage.tsx
+     76       6.3     1.8       33.5        13     src/pages/Home.tsx
+     57       7.7     2.4       54.3         7     src/pages/SearchPage.tsx
+     69      20.0     5.0      112.0         3     src/pages/SortPage.tsx
+    386      10.4     2.9       57.6        14     src/utils/data_structures/RedBlackTree.ts
+    154       9.3     2.6       46.0        16     src/utils/data_structures/circularList.ts
+    137       8.2     2.4       42.8        16     src/utils/data_structures/deque.ts
+    155       9.4     2.6       44.1        16     src/utils/data_structures/doublyLinkedList.ts
+     85      27.0     5.0      251.7         3     src/utils/data_structures/drawingTree.ts
+    146       8.3     2.3       39.8        17     src/utils/data_structures/linkedList.ts
+    120       8.8     2.5       47.0        13     src/utils/data_structures/queue.ts
+    119       8.8     2.7       47.5        13     src/utils/data_structures/stack.ts
+     23      18.0     5.0      163.0         1     src/utils/data_structures/test.ts
+     14       2.6     1.3       25.4         7     src/utils/searches/generateArray.ts
+     38      37.0     6.0      307.0         1     src/utils/searches/generateString.ts
+    117      11.9     3.0       87.3        10     src/utils/searches/searches.ts
+     12       2.5     1.5       16.8         4     src/utils/sorts/benchmark.worker.ts
+    103      19.8     4.8      168.2         5     src/utils/sorts/generateArray.ts
+    183      10.6     4.3       98.8        18     src/utils/sorts/sorts.ts
+     22       7.0     3.3       58.3         3     src/utils/sorts/parseArray.ts
+     15       0.0     0.0        0.0         0     src/utils/sorts/registry.ts
+     24       1.0     1.0        9.0         4     src/utils/sorts/benchmark.ts
+     54       2.0     1.0        3.5         2     src/utils/types/ds.types.ts
+     14       0.0     0.0        0.0         0     src/utils/types/search.types.ts
+     43       1.6     1.0        4.4         5     src/utils/types/sort.types.ts
+      8       1.0     1.0        2.0         1     src/utils/findLastIndex.ts
+     11       9.0     4.0       79.0         1     src/utils/isSorted.ts
+     17      16.0     9.0      151.0         1     src/utils/randomArrays.ts
+      3       3.0     1.0       27.0         1     src/utils/workerBuilder.ts
+     24       4.7     1.2       28.2         6     src/utils/animation.ts
+      7       6.0     4.0       62.0         1     src/utils/routerBase.ts
+     64       6.0     1.0       35.0         8     src/App.tsx
+      9       0.0     0.0        0.0         0     src/index.tsx
+      0       0.0     0.0        0.0         0     src/vite-env.d.ts
+
+===========================================================================================================
+!!!! Warnings (cyclomatic_complexity > 15 or length > 1000 or nloc > 1000000 or parameter_count > 100) !!!!
+================================================
+  NLOC    CCN   token  PARAM  length  location  
+------------------------------------------------
+      95     20    792      2      95 generateArray@11-105@src/utils/sorts/generateArray.ts
+==========================================================================================
+Total nloc   Avg.NLOC  AvgCCN  Avg.token   Fun Cnt  Warning cnt   Fun Rt   nloc Rt
+------------------------------------------------------------------------------------------
+      3102       8.5     2.5       54.1      303            1      0.00    0.04
+npm notice run algo-illust@0.1.0 test
+npm notice run jest --runInBand --coverage
+--------------------------------|---------|----------|---------|---------|-------------------------------------------------------------------------------------
+File                            | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s                                                                   
+--------------------------------|---------|----------|---------|---------|-------------------------------------------------------------------------------------
+All files                       |   81.56 |    67.88 |   80.36 |   82.18 |                                                                                     
+ src                            |   88.23 |      100 |     100 |      80 |                                                                                     
+  App.tsx                       |     100 |      100 |     100 |     100 |                                                                                     
+  index.tsx                     |       0 |      100 |     100 |       0 | 5-9                                                                                 
+ src/assets                     |     100 |      100 |     100 |     100 |                                                                                     
+  DiceIcon.tsx                  |     100 |      100 |     100 |     100 |                                                                                     
+  HomeIcon.tsx                  |     100 |      100 |     100 |     100 |                                                                                     
+ src/components                 |    92.3 |       75 |     100 |     100 |                                                                                     
+  SizeForm.tsx                  |    92.3 |       75 |     100 |     100 | 17-24                                                                               
+ src/components/data_structures |   40.96 |    19.35 |      32 |   42.66 |                                                                                     
+  DataStructure.tsx             |   34.48 |    13.51 |   15.38 |   32.14 | 11-15,22-30,43-61,65-73                                                             
+  Tree.tsx                      |   44.44 |       28 |      50 |   48.93 | 20-30,42,47-49,54-68,90                                                             
+ src/components/navigations     |     100 |      100 |     100 |     100 |                                                                                     
+  DSNavBar.tsx                  |     100 |      100 |     100 |     100 |                                                                                     
+  SearchNavBar.tsx              |     100 |      100 |     100 |     100 |                                                                                     
+  SortNavBar.tsx                |     100 |      100 |     100 |     100 |                                                                                     
+ src/components/searches        |   85.71 |       50 |     100 |   94.82 |                                                                                     
+  BM.tsx                        |       0 |        0 |       0 |       0 |                                                                                     
+  Binary.tsx                    |   77.77 |    34.61 |     100 |      90 | 26,36-37                                                                            
+  KMP.tsx                       |       0 |        0 |       0 |       0 |                                                                                     
+  SearchComponent.tsx           |   94.11 |    65.38 |     100 |     100 | 18,26-32,46-47                                                                      
+ src/components/sorts           |   96.82 |    80.28 |   90.62 |   97.24 |                                                                                     
+  ArrayForm.tsx                 |     100 |     90.9 |     100 |     100 | 23                                                                                  
+  Graph.tsx                     |     100 |       75 |     100 |     100 | 8-9,13,20-22                                                                        
+  Params.tsx                    |   66.66 |      100 |      60 |   66.66 | 17,31                                                                               
+  SortComponent.tsx             |     100 |     87.5 |     100 |     100 | 36-43                                                                               
+  SortsTable.tsx                |   96.55 |    72.72 |   93.75 |   97.95 | 71                                                                                  
+ src/hooks                      |      20 |        0 |       0 |      25 |                                                                                     
+  useFocus.ts                   |      20 |        0 |       0 |      25 | 4-6                                                                                 
+ src/images                     |      50 |      100 |       0 |      50 |                                                                                     
+  TerminalArrow.tsx             |      50 |      100 |       0 |      50 | 4                                                                                   
+ src/pages                      |   46.92 |    42.15 |    25.8 |   48.33 |                                                                                     
+  DataStructuresPage.tsx        |   27.27 |    12.19 |    12.5 |    27.9 | 37-38,53-68,72-78,82-87,92-96,107-115                                               
+  Home.tsx                      |    2.94 |        0 |       0 |    3.33 | 8-75                                                                                
+  SearchPage.tsx                |   88.88 |    93.33 |   57.14 |   91.66 | 42-48                                                                               
+  SortPage.tsx                  |      96 |     92.3 |     100 |     100 | 25,34                                                                               
+ src/utils                      |   95.55 |    84.61 |     100 |     100 |                                                                                     
+  animation.ts                  |   93.33 |       50 |     100 |     100 | 11                                                                                  
+  findLastIndex.ts              |     100 |      100 |     100 |     100 |                                                                                     
+  isSorted.ts                   |   85.71 |       75 |     100 |     100 | 8                                                                                   
+  randomArrays.ts               |     100 |    91.66 |     100 |     100 | 1                                                                                   
+  routerBase.ts                 |     100 |    83.33 |     100 |     100 | 7                                                                                   
+  workerBuilder.ts              |     100 |      100 |     100 |     100 |                                                                                     
+ src/utils/data_structures      |   79.17 |    71.31 |    88.8 |   79.71 |                                                                                     
+  RedBlackTree.ts               |   56.12 |    59.63 |      70 |   56.96 | 51-56,62-72,103-158,166,187,200-219,280-304,318-338,377-395,400-407,424-427,433-434 
+  circularList.ts               |      92 |    86.48 |     100 |   91.39 | 98,158-166                                                                          
+  deque.ts                      |   88.75 |    77.77 |   93.75 |    88.6 | 16,43,49,90,101,121,141-144                                                         
+  doublyLinkedList.ts           |   95.78 |    85.71 |     100 |    95.6 | 54,110,134,150                                                                      
+  drawingTree.ts                |   55.17 |    45.83 |   66.66 |   58.18 | 45,59,62-68,72-74,78-101                                                            
+  linkedList.ts                 |   97.72 |     93.1 |   94.11 |   97.61 | 41,89                                                                               
+  queue.ts                      |   93.15 |       84 |    92.3 |   93.05 | 16,32,73,82,101                                                                     
+  stack.ts                      |   91.42 |    88.46 |    92.3 |    91.3 | 16,32,86,128-131                                                                    
+  test.ts                       |     100 |       50 |     100 |     100 | 15-17                                                                               
+ src/utils/searches             |   94.02 |    78.37 |   81.25 |   95.16 |                                                                                     
+  generateArray.ts              |    62.5 |        0 |   57.14 |   63.63 | 12-15                                                                               
+  generateString.ts             |   95.65 |    77.77 |     100 |   95.65 | 37                                                                                  
+  searches.ts                   |   98.94 |    91.66 |     100 |   98.88 | 31                                                                                  
+ src/utils/sorts                |   99.64 |     93.7 |   97.95 |     100 |                                                                                     
+  benchmark.ts                  |     100 |      100 |     100 |     100 |                                                                                     
+  benchmark.worker.ts           |     100 |       50 |     100 |     100 | 12                                                                                  
+  generateArray.ts              |    98.5 |    73.07 |   95.45 |     100 | 21-99                                                                               
+  parseArray.ts                 |     100 |      100 |     100 |     100 |                                                                                     
+  registry.ts                   |     100 |      100 |     100 |     100 |                                                                                     
+  sorts.ts                      |     100 |      100 |     100 |     100 |                                                                                     
+ src/utils/types                |     100 |      100 |     100 |     100 |                                                                                     
+  ds.types.ts                   |     100 |      100 |     100 |     100 |                                                                                     
+  search.types.ts               |       0 |        0 |       0 |       0 |                                                                                     
+  sort.types.ts                 |       0 |        0 |       0 |       0 |                                                                                     
+--------------------------------|---------|----------|---------|---------|-------------------------------------------------------------------------------------
+
+Test Suites: 10 passed, 10 total
+Tests:       264 passed, 264 total
+Snapshots:   0 total
+Time:        2.537 s
+Ran all test suites.
