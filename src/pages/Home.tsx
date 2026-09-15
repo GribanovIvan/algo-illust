@@ -12,11 +12,11 @@ const Home = () => {
   const header = "Let's get started!";
 
   useEffect(() => {
-    setTimeout(() => {
+    const titleTimer = setTimeout(() => {
       setShowTittle(false);
     }, 1700);
 
-    onkeydown = (e) => {
+    const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowDown') {
         setSelectedItem(selectedItem => selectedItem + 1 > 2 ? 0 : selectedItem + 1);
       }
@@ -31,13 +31,20 @@ const Home = () => {
         });
       }
     };
+    window.addEventListener('keydown', onKeyDown);
+
+    return () => {
+      clearTimeout(titleTimer);
+      window.removeEventListener('keydown', onKeyDown);
+    };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {   
-    setTimeout(() => {
+    const focusTimer = setTimeout(() => {
       if (inputFocus.current) setInputFocus();
     }, 1000 * (header.length / 2 + 1));
+    return () => clearTimeout(focusTimer);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showTittle]);
 

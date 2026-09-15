@@ -3,17 +3,21 @@ import generateRandomArray from "../randomArrays";
 
 // This functions are needed for my university. You can use just random numbers (by choosing "rand" for var)
 
-const getName = async () => {
+const getRandomUser = async () => {
   const response = await fetch("https://randomuser.me/api/");
+  if (!response.ok) {
+    throw new Error(`randomuser.me responded with ${response.status}`);
+  }
   const { results } = await response.json();
-  return results[0].name.first;
+  if (!Array.isArray(results) || !results[0]?.name || !results[0]?.location) {
+    throw new Error("Unexpected response from randomuser.me");
+  }
+  return results[0];
 };
 
-const getCity = async () => {
-  const response = await fetch("https://randomuser.me/api/");
-  const { results } = await response.json();
-  return results[0].location.city;
-};
+const getName = async () => (await getRandomUser()).name.first;
+
+const getCity = async () => (await getRandomUser()).location.city;
 
 const generateArray = async (length: number, variant: number) => {
   console.log("Generating array...");
@@ -59,11 +63,11 @@ const generateArray = async (length: number, variant: number) => {
           (Math.floor(Math.random() * 10) % 2 === 0 ? 1 : -1)
       );
       console.log("Array: ", array);
-      const firstNegative = array.findIndex((el) => el < 0) || 0;
-      const lastNegative = findLastIndex(array, (el) => el < 0) || 1;
+      const firstNegative = array.findIndex((el) => el < 0);
+      const lastNegative = findLastIndex(array, (el) => el < 0);
       console.log("First negative: ", firstNegative);
       console.log("Last negative: ", lastNegative);
-      const resultArray = array.slice(firstNegative + 1, lastNegative); 
+      const resultArray = firstNegative === -1 ? [] : array.slice(firstNegative + 1, lastNegative);
       console.log("Sliced array: ", resultArray);
       return resultArray;
     case 10:
@@ -96,9 +100,9 @@ const generateArray = async (length: number, variant: number) => {
       const cities = (await Promise.all(
         Array(length).fill(0).map(getCity)
       )) as string[];
-      cities.filter((item) => item.length < 8);
-      console.log("Cities: ", cities);
-      return cities;
+      const shortCities = cities.filter((item) => item.length < 8);
+      console.log("Cities: ", shortCities);
+      return shortCities;
     case 15:
       const matrix = Array.from({ length: length }, () => generateRandomArray(length, 100));
       console.log("Matrix: ", matrix);

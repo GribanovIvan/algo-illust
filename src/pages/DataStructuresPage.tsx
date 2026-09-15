@@ -14,7 +14,8 @@ import {
   CircularListDS,
 } from "../utils/types/ds.types";
 import testDS from "../utils/data_structures/test";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
+import routeId from "../utils/routeId";
 
 const MAX_RANDOM = 100;
 
@@ -30,9 +31,7 @@ const dsClasses: DSClassMap = {
 
 const DataStructuresPage = () => {
   const [array, setArray] = React.useState<DSArray>([]);
-  const [type, setType] = React.useState<DSTypeId>(
-    window.location.href.split("/").pop() as DSTypeId
-  );
+  const type = routeId(useLocation().pathname) as DSTypeId;
   const [stats, setStats] = React.useState<DSStats | null>(null);
 
   const stringifyStats = (stats: DSStats) => {
@@ -101,7 +100,7 @@ const DataStructuresPage = () => {
   return (
     <>
       <header>
-        <DSNavBar type={type} setType={setType} />
+        <DSNavBar type={type} />
         {type === "tree" ? null : (
           <span>
             <input

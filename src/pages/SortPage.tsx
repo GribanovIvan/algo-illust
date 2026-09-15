@@ -1,19 +1,20 @@
 import NavBar from "../components/navigations/SortNavBar";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { HighlightedElements, SortArray, SortTypeId } from "../utils/types/sort.types";
 import styles from "./SortPage.module.scss";
 import generateArray from "../utils/sorts/generateArray";
-import Params from "../components/sorts/Params";
+import Params, { DEFAULT_DELAY } from "../components/sorts/Params";
 import SizeForm from "../components/SizeForm";
 import ArrayForm from "../components/sorts/ArrayForm";
+import routeId from "../utils/routeId";
 
 
 const SortPage = () => {
   const [array, setArray] = useState<SortArray>([]);
   const [swappingElements, setSwappingElements] = useState<HighlightedElements>({});
-  const [illustDelay, setIllustDelay] = useState<number>(250);
-  const [sortType, setSortType] = useState<SortTypeId>(window.location.href.split("/").pop() as SortTypeId);
+  const [illustDelay, setIllustDelay] = useState<number>(DEFAULT_DELAY);
+  const sortType = routeId(useLocation().pathname) as SortTypeId;
   const [isASC, setIsASC] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(false);
   const [isSorting, setIsSorting] = useState<boolean>(false);
@@ -22,9 +23,13 @@ const SortPage = () => {
   const onLengthSubmit = async (length: number) => {
     if (!isSorting) {
       setLoading(true);
-      const array = await generateArray(length, variant);
-      setLoading(false);
-      setArray(array as SortArray);
+      try {
+        setArray(await generateArray(length, variant) as SortArray);
+      } catch (e) {
+        alert(`Failed to generate array: ${e instanceof Error ? e.message : e}`);
+      } finally {
+        setLoading(false);
+      }
     } else {
       alert("Please wait for the current sorting to finish.");
     }
@@ -41,7 +46,7 @@ const SortPage = () => {
   return (
     <>
       <header>
-        <NavBar type={sortType} setType={setSortType} />
+        <NavBar type={sortType} />
         <span>
           <button
             className={`${styles.sortWay} ${!isASC && styles.checked}`}

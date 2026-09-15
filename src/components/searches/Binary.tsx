@@ -52,7 +52,7 @@ const Binary = () => {
   const search = async (array: number[], value: number) => {
     setIsSearching(true);
     const startTime = performance.now();
-    const [found, stepsSpent] = await binarySearch(array, 0, render);
+    const [found, stepsSpent] = await binarySearch(array, value, render);
     const sortTime = performance.now() - startTime - stepsSpent * 100;
     console.log("Sort time", sortTime);
     // console.log(found, stepsSpent, sortTime);

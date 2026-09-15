@@ -34,7 +34,6 @@ export const binarySearch = async (arr: SearchArray, target: number | string, re
 
 export const kmpSearch = async (str: string, target: string, render: Function): Promise<[number | null, number]> => {
   const lps = getLps(target);
-  console.log(lps); 
   let i = 0;
   let j = 0;
   let steps = 0;
@@ -67,8 +66,6 @@ const buildBadMatchTable = (str: string) => {
   const strLength = str.length
   for (let i = 0; i < strLength - 1; i++) {
     tableObj[str[i]] = Math.max(strLength - 1 - i, 1);
-    console.log(tableObj);
-    
   }
   if (tableObj[str[strLength - 1]] === undefined) {
     tableObj[str[strLength - 1]] = strLength
@@ -82,14 +79,16 @@ export const bmSearch = async (str: string, target: string, render: Function): P
   let offset = 0;
   const maxOffset = str.length - target.length;
   const lastTargetIndex = target.length - 1;
+  let steps = 0;
   while (offset <= maxOffset) {
     let scanIndex = lastTargetIndex;
+    steps++;
     while (target[scanIndex] === str[scanIndex + offset]) {
       await render({red: {searchIn: offset + scanIndex, searchFor: scanIndex}});
       if (scanIndex === 0) {
         const found = offset;
         await render({found: Array.from({length: target.length}, (_, index) => index + found)});
-        return [found, 0]
+        return [found, steps]
       }
       scanIndex--;
     }
@@ -101,7 +100,7 @@ export const bmSearch = async (str: string, target: string, render: Function): P
     }
     await render({orange: {searchIn: offset, searchFor: scanIndex}});
   }
-  return [null, 0]
+  return [null, steps]
 }
 
 const getLps = (target: string): number[] => {

@@ -1,52 +1,58 @@
-import { useEffect, useState } from 'react'
-import { SortStats, SortType, SortTypeId } from '../../utils/types/sort.types';
+import { useEffect, useRef, useState } from 'react'
+import { SortStats, SortTypeId } from '../../utils/types/sort.types';
 import styles from './CompareSorts.module.scss';
 import SizeForm from '../SizeForm';
-import WorkerBuilder from '../../utils/workerBuilder';
-import Worker from '../../utils/sorts/benchmark.worker'; 
+import createBenchmarkWorker from '../../utils/sorts/createBenchmarkWorker';
+import { SORTS as sorts } from '../../utils/sorts/sortList';
 
 const INITIAL_LENGTH = 10;
-const sorts: SortType[] = [
-  {id: 'bubble', name: 'Bubble Sort'},
-  {id: 'selection', name: 'Selection Sort'},
-  {id: 'shell', name: 'Shell Sort'},
-  {id: 'merge', name: 'Merge Sort'},
-  {id: 'quick', name: 'Quick Sort'},
-  {id: 'counting', name: 'Counting Sort'},
-  {id: 'heap', name: 'Heap Sort'}
-];
 
 const SortsTable = () => {
   const [stats, setStats] = useState<SortStats[]>([]);
   const [isSorting, setIsSorting] = useState<boolean>(false);
   const [sortsToRun, setSortsToRun] = useState<SortTypeId[]>(sorts.map(sort => sort.id));
   const [arrayLength, setArrayLength] = useState<number>(INITIAL_LENGTH);
+  const worker = useRef<Worker | null>(null);
+  const expectedStats = useRef<number>(0);
+
+  const stopWorker = () => {
+    worker.current?.terminate();
+    worker.current = null;
+  };
 
   useEffect(() => {
     startSorting();
+    return stopWorker;
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const startSorting = async (length?: number) => {
+  useEffect(() => {
+    if (isSorting && stats.length === expectedStats.current) {
+      stopWorker();
+      setIsSorting(false);
+    }
+  }, [stats, isSorting]);
+
+  const startSorting = (length?: number) => {
     if (isSorting) {
       alert("Please wait for the current sorting to finish.");
       return;
     }
+    const size = length || arrayLength;
     setIsSorting(true);
-    setArrayLength(length || arrayLength);
+    setArrayLength(size);
     setStats([]);
-    const instance = new WorkerBuilder(Worker as any);
-    instance.onmessage = (message) => {
-      if (message) {
-        setStats((prevStats) => {
-          if (prevStats.length === sortsToRun.length - 1) {
-            setIsSorting(false);
-          }
-          return [...prevStats, message.data as SortStats];
-        });
-      }
+    expectedStats.current = sortsToRun.length;
+    stopWorker();
+    worker.current = createBenchmarkWorker();
+    worker.current.onmessage = (message: MessageEvent<SortStats>) => {
+      setStats((prevStats) => [...prevStats, message.data]);
     };
-    instance.postMessage({length, sorts: sortsToRun});
+    worker.current.onerror = () => {
+      stopWorker();
+      setIsSorting(false);
+    };
+    worker.current.postMessage({length: size, sorts: sortsToRun});
   };
 
   return (

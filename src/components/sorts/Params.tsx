@@ -1,3 +1,5 @@
+export const DEFAULT_DELAY = 3600 / 9;
+
 type ParamsProps = {
     setIllustDelay: (delay: number) => void;
     setVariant: (variant: number) => void;
@@ -8,8 +10,9 @@ const Params = ({setIllustDelay, setVariant}: ParamsProps) => {
     <>
       <label htmlFor="illustSpeed">Speed:</label>
         <select
+          id="illustSpeed"
           name="illustSpeed"
-          defaultValue={3600 / 9}
+          defaultValue={DEFAULT_DELAY}
           title="Animation speed"
           onChange={(e) => setIllustDelay(parseInt(e.target.value))}
         >
@@ -18,8 +21,9 @@ const Params = ({setIllustDelay, setVariant}: ParamsProps) => {
           ))}
           <option value={40}>extreme</option>
         </select>
-        <label htmlFor="illustSpeed">Var:</label>
+        <label htmlFor="variant">Var:</label>
         <select
+          id="variant"
           name="variant"
           defaultValue={0}
           onChange={(e) => setVariant(parseInt(e.target.value))}

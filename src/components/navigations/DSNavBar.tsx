@@ -5,10 +5,9 @@ import styles from './NavBar.module.scss';
 
 type NavBarProps = {
   type: DSTypeId;
-  setType: (type: DSTypeId) => void;
 }
 
-const NavBar = ({type, setType}: NavBarProps) => {
+const NavBar = ({type}: NavBarProps) => {
 
   const dataStructs: DSType[] = [
     {id: 'stack', name: 'Stack'},
@@ -30,7 +29,6 @@ const NavBar = ({type, setType}: NavBarProps) => {
             key={sort.id}
             to={'/ds/' + sort.id}
             className={`${type === sort.id && styles.textSelected}`}
-            onClick={() => setType(sort.id)}
             title={sort.name}
           >
             <div className={`${type === sort.id && styles.selected}`}></div>

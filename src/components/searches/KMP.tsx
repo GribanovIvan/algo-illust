@@ -32,19 +32,20 @@ const KMP = () => {
     return new Promise((resolve) => setTimeout(resolve, isLarge ? 300 : 500));
   };
 
-  const startSearching = (): Promise<number> | undefined => {
+  const startSearching = async () => {
     const genertedText = generateString(array, variant);
     setArray(genertedText);
 
     setIsSearching(true);
-    return new Promise(async () => {
+    try {
       const startTime = performance.now();
       const [found, stepsSpent] = await kmpSearch(genertedText, searchFor, render);
       const sortTime = performance.now() - startTime - stepsSpent * 100;
       console.log(found, stepsSpent, sortTime);
       alert(`${found !== null ? "Found at position " + (found + 1) : "Not found"}`);
+    } finally {
       setIsSearching(false);
-    });
+    }
   };
 
   return (
