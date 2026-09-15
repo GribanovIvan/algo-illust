@@ -23,6 +23,7 @@ export const bubbleSort: SortFunc = async (arr,  isASC, render) => {
       }
     }
   } while (checked);
+  if (render) await render([...arr]);
   return steps;
 };
 
@@ -45,6 +46,7 @@ export const selectionSort: SortFunc = async (arr, isASC, render) => {
       steps++;
     }
   }
+  if (render) await render([...arr]);
   return steps;
 };
 
@@ -97,6 +99,7 @@ export const countingSort: SortFunc = async (arr, isASC, render) => {
     throw new Error("Counting sort works only with integers");
   }
   const numbers = arr as number[];
+  if (numbers.length === 0) return 0;
   let steps = 0;
   const len = numbers.length;
   const max = numbers.reduce((a, b) => Math.max(a, b), -Infinity);
