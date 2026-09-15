@@ -272,7 +272,7 @@ const startSorting = () => {
 
 };
 
-if (typeof self !== "undefined" && typeof window === "undefined") {
+if (typeof globalThis !== "undefined" && typeof window === "undefined") {
   startSorting();
 }
 

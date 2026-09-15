@@ -21,7 +21,6 @@ const SortsTable = () => {
   const [isSorting, setIsSorting] = useState<boolean>(false);
   const [sortsToRun, setSortsToRun] = useState<SortTypeId[]>(sorts.map(sort => sort.id));
   const [arrayLength, setArrayLength] = useState<number>(INITIAL_LENGTH);
-  const workerRef = useState<Worker | null>(null)[0];
   const activeWorker = useState<{ current: Worker | null }>({ current: null })[0];
 
   useEffect(() => {

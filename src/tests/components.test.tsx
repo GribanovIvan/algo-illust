@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, act } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import SortNavBar from "../components/navigations/SortNavBar";
 import SizeForm from "../components/SizeForm";
