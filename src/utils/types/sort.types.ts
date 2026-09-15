@@ -5,6 +5,7 @@ export type SortTypeId =
   | "quick"
   | "merge"
   | "counting"
+  | "heap"
   | "compare";
 
 export type SortType = {

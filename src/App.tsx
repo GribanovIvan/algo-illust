@@ -9,6 +9,7 @@ import {
   countingSort,
   quickSort,
   mergeSort,
+  heapSort,
 } from "./utils/sorts/sorts";
 import Home from "./pages/Home";
 import SortsTable from "./components/sorts/SortsTable";
@@ -28,6 +29,8 @@ function App() {
   const QuickSort = useMemo(() => SortComponent(quickSort), []);
   const CountingSort = useMemo(() => SortComponent(countingSort), []);
 
+  const HeapSort = useMemo(() => SortComponent(heapSort), []);
+
   return (
     <>
       <BrowserRouter basename="/asd">
@@ -39,6 +42,7 @@ function App() {
             <Route path="shell" element={<ShellSort />} />
             <Route path="merge" element={<MergeSort />} />
             <Route path="quick" element={<QuickSort />} />
+            <Route path="heap" element={<HeapSort />} />
             <Route path="counting" element={<CountingSort />} />
           </Route>
           <Route path="sort/compare" element={<SortsTable />} />

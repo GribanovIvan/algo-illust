@@ -16,6 +16,7 @@ const NavBar = ({type, setType}: NavBarProps) => {
     {id: 'shell', name: 'Shell Sort'},
     {id: 'merge', name: 'Merge Sort'},
     {id: 'quick', name: 'Quick Sort'},
+    {id: 'heap', name: 'Heap Sort'},
     {id: 'counting', name: 'Counting Sort'},
     {id: 'compare', name: 'Comparison'}
   ];

@@ -1,59 +1,59 @@
-import { useEffect, useState } from "react";
-import { useOutletContext } from "react-router-dom";
-import Graph from "./Graph";
-import styles from "./SortComponent.module.scss";
-import isSorted from "../../utils/isSorted";
-import { SortArray, SortFunc, HighlightedElements, OutletContextSort } from "../../utils/types/sort.types";
+import { useEffect, useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
+import Graph from './Graph';
+import styles from './SortComponent.module.scss';
+import { SortArray, SortFunc, HighlightedElements, OutletContextSort } from '../../utils/types/sort.types';
+import createAnimation from '../../utils/animation';
 
 const SortComponent = (sort: SortFunc) => {
   const Component = function () {
-    const [timeTaken, setTimeTaken] = useState<number>(0);
-    const [steps, setSteps] = useState<number>(0);
-    const [
-      arrayState,
-      isSortingState,
-      swappingElementsState,
-      isASC,
-      delay
-    ]: OutletContextSort = useOutletContext();
-    const [isSorting, setIsSorting] = isSortingState;
-    const [array, setArray] = arrayState;
-    const [swappingElements, setSwappingElements] = swappingElementsState;
+    const [timeTaken, setTimeTaken] = useState(0);
+    const [steps, setSteps] = useState(0);
+    const [error, setError] = useState('');
+    const [[array], [, setIsSorting], , isASC, delay]: OutletContextSort = useOutletContext();
+    const [display, setDisplay] = useState<SortArray>(array);
+    const [highlighted, setHighlighted] = useState<HighlightedElements>({});
 
     useEffect(() => {
-      if (!isSorting && array.length > 0 && array.length < 600 && !isSorted(array, isASC)) {
-        startSorting();
-      }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [array]);
+      const animation = createAnimation(delay);
+      setDisplay(array);
+      setHighlighted({});
+      setError('');
+      setSteps(0);
+      setTimeTaken(0);
+      if (!array.length) return;
+      const run = async () => {
+        setIsSorting(true);
+        const result = [...array];
+        const start = performance.now();
+        try {
+          const spent = await sort(result, isASC, async (frame, elements) => {
+            if (animation.cancelled) throw new Error('Animation cancelled');
+            setDisplay(frame);
+            setHighlighted(elements || {});
+            await animation.wait();
+          });
+          if (!animation.cancelled) {
+            setDisplay(result);
+            setSteps(spent);
+            setTimeTaken(Math.round(Math.max(0, performance.now() - start - animation.waiting) * 100) / 100);
+            setHighlighted({ sorted: true });
+          }
+        } catch (error) {
+          if (!animation.cancelled) setError(error instanceof Error ? error.message : 'Помилка сортування.');
+        } finally {
+          if (!animation.cancelled) setIsSorting(false);
+        }
+      };
+      void run();
+      return () => { animation.cancel(); setIsSorting(false); };
+    }, [array, isASC, delay, setIsSorting]);
 
-    const renderChanges = (arr: SortArray, toSwap?: HighlightedElements) => {
-      setArray(arr);
-      setSwappingElements(toSwap || {});
-      return new Promise((resolve) => setTimeout(resolve, delay));
-    };
-
-    const startSorting = (): Promise<SortArray> | undefined => {
-      setIsSorting(true);
-      return new Promise(async () => {
-        const startTime = performance.now();
-        const stepsSpent = await sort([...array], isASC, renderChanges);
-        const sortTime = performance.now() - startTime - stepsSpent * delay;
-        setSteps(stepsSpent);
-        setTimeTaken(Math.round(sortTime * 100) / 100);
-        setSwappingElements({ sorted: true });
-        setIsSorting(false);
-      });
-    };
-
-    return (
-      <>
-        <main className={styles.container}>
-          <Graph array={array} swaps={swappingElements} />
-        </main>
-        <footer className={styles.status}>Steps: {steps}. Time taken {timeTaken}ms.</footer>
-      </>
-    );
+    return <>
+      {error && <p role="alert">{error}</p>}
+      <main className={styles.container}><Graph array={display} swaps={highlighted} /></main>
+      <footer className={styles.status}>Steps: {steps}. Time taken {timeTaken}ms.</footer>
+    </>;
   };
   return Component;
 };
