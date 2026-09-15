@@ -11,9 +11,6 @@ const getCity = () => pick(cities);
 const generateArray = async (length: number, variant: number) => {
   let array: number[] = generateRandomArray(length, 100);
   switch (variant) {
-    case 0: {
-      return array;
-    }
     case 1: {
       array = Array.from(
         { length },
@@ -24,9 +21,6 @@ const generateArray = async (length: number, variant: number) => {
       const arrayWithoutMaxMin = array.filter((el) => el !== max && el !== min);
       return arrayWithoutMaxMin;
     }
-    case 2: {
-      return array;
-    }
     case 3: {
       array = Array.from(
         { length },
@@ -35,9 +29,6 @@ const generateArray = async (length: number, variant: number) => {
       const arrayEven = array.filter(el => ((el * 10 % 10 === 0) ? el : el * 10 % 2) === 0);
       const arrayWithSqrt = arrayEven.map((el) => Math.round(Math.sqrt(Math.abs(el - 10)) * 10) / 10) ;
       return arrayWithSqrt;
-    }
-    case 4: {
-      return array;
     }
     case 8: {
       const names = (await Promise.all(
@@ -54,7 +45,7 @@ const generateArray = async (length: number, variant: number) => {
       );
       const firstNegative = array.findIndex((el) => el < 0);
       const lastNegative = findLastIndex(array, (el) => el < 0);
-      const resultArray = array.slice(firstNegative + 1, lastNegative); 
+      const resultArray = firstNegative < 0 ? [] : array.slice(firstNegative + 1, lastNegative); 
       return resultArray;
     }
     case 10: {
@@ -64,8 +55,9 @@ const generateArray = async (length: number, variant: number) => {
         .concat(secondArray.filter((num) => num % 2 === 0));
       return result;
     }
-    case 11: {
-      let matrix_ = Array.from({ length: length }, () => generateRandomArray(length, 100));
+    case 11:
+    case 15: {
+      const matrix_ = Array.from({ length: length }, () => generateRandomArray(length, 100));
       return matrix_;
     }
     case 12: {
@@ -88,10 +80,6 @@ const generateArray = async (length: number, variant: number) => {
         Array(length).fill(0).map(getCity)
       )) as string[];
       return cities.filter((item) => item.length < 8);
-    }
-    case 15: {
-      const matrix = Array.from({ length: length }, () => generateRandomArray(length, 100));
-      return matrix;
     }
     case 16: {
       array = Array.from(

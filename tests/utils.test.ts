@@ -56,3 +56,7 @@ test('worker factory uses a module URL and module type', () => {
     expect(MockWorker.mock.calls[0][0].pathname).toMatch(/benchmark\.worker\.ts$/);
   } finally { globalThis.Worker = original; }
 });
+
+test("variant 9 has no interval when there are no negative elements", async () => {
+  expect(await generateArray(4, 9)).toEqual([]);
+});
