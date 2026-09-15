@@ -9,7 +9,8 @@ const startSorting = () => {
   | "shell"
   | "quick"
   | "merge"
-  | "counting";
+  | "counting"
+  | "heap";
 
   const sorts = {
     bubble: bubbleSort,
@@ -17,7 +18,8 @@ const startSorting = () => {
     shell: shellSort,
     merge: mergeSort,
     quick: quickSort,
-    counting: countingSort
+    counting: countingSort,
+    heap: heapSort
   }
 
   onmessage = async (message) => {
@@ -171,6 +173,31 @@ const startSorting = () => {
     const end = performance.now();
     const sorted = isSorted(arr);
     return {sortId: "counting", steps: STEPS, name: "Counting Sort", time: Math.floor((end - start) * 100) / 100, sorted};
+  }
+
+  function heapSort(arr: number[]) {
+    STEPS = 0;
+    const start = performance.now();
+    const siftDown = (root: number, size: number) => {
+      while (2 * root + 1 < size) {
+        let target = 2 * root + 1;
+        STEPS++;
+        if (target + 1 < size && arr[target + 1] > arr[target]) target++;
+        if (arr[root] >= arr[target]) return;
+        [arr[root], arr[target]] = [arr[target], arr[root]];
+        root = target;
+      }
+    };
+    for (let i = Math.floor(arr.length / 2) - 1; i >= 0; i--) {
+      siftDown(i, arr.length);
+    }
+    for (let end = arr.length - 1; end > 0; end--) {
+      [arr[0], arr[end]] = [arr[end], arr[0]];
+      siftDown(0, end);
+    }
+    const end = performance.now();
+    const sorted = isSorted(arr);
+    return {sortId: "heap", steps: STEPS, name: "Heap Sort", time: Math.floor((end - start) * 100) / 100, sorted};
   }
 
   function quickSortRecursive(arr: number[]): any {

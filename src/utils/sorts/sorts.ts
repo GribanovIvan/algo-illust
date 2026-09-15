@@ -249,3 +249,34 @@ async function merge (
   if (render) await render([...arr], {green: indexes, orange: [left, right]});
   // console.log(arr);
 }
+
+export const heapSort: SortFunc = async (arr, isASC, render) => {
+  let steps = 0;
+  // max-heap for ascending order, min-heap for descending
+  const outOfOrder = (parent: number, child: number) =>
+    isASC ? arr[child] > arr[parent] : arr[child] < arr[parent];
+
+  const siftDown = async (root: number, size: number) => {
+    while (2 * root + 1 < size) {
+      let target = 2 * root + 1;
+      if (target + 1 < size && outOfOrder(target, target + 1)) target++;
+      if (!outOfOrder(root, target)) return;
+      if (render) await render([...arr], {green: [root, target]});
+      [arr[root], arr[target]] = [arr[target], arr[root]];
+      steps++;
+      root = target;
+    }
+  };
+
+  for (let i = Math.floor(arr.length / 2) - 1; i >= 0; i--) {
+    await siftDown(i, arr.length);
+  }
+  for (let end = arr.length - 1; end > 0; end--) {
+    if (render) await render([...arr], {green: [0], orange: [end]});
+    [arr[0], arr[end]] = [arr[end], arr[0]];
+    steps++;
+    await siftDown(0, end);
+  }
+  if (render) await render([...arr]);
+  return steps;
+};

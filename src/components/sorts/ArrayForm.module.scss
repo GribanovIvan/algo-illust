@@ -1,0 +1,10 @@
+@use '../../styles/variables' as *;
+
+.arrayInput {
+  width: 14rem;
+}
+
+.error {
+  align-self: center;
+  color: $orange-clr;
+}

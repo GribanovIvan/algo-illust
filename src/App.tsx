@@ -9,6 +9,7 @@ import {
   countingSort,
   quickSort,
   mergeSort,
+  heapSort,
 } from "./utils/sorts/sorts";
 import Home from "./pages/Home";
 import SortsTable from "./components/sorts/SortsTable";
@@ -27,6 +28,7 @@ function App() {
   const MergeSort = useMemo(() => SortComponent(mergeSort), []);
   const QuickSort = useMemo(() => SortComponent(quickSort), []);
   const CountingSort = useMemo(() => SortComponent(countingSort), []);
+  const HeapSort = useMemo(() => SortComponent(heapSort), []);
 
   return (
     <>
@@ -40,6 +42,7 @@ function App() {
             <Route path="merge" element={<MergeSort />} />
             <Route path="quick" element={<QuickSort />} />
             <Route path="counting" element={<CountingSort />} />
+            <Route path="heap" element={<HeapSort />} />
           </Route>
           <Route path="sort/compare" element={<SortsTable />} />
           <Route path="ds/" element={<DataStructuresPage/>} >
