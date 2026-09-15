@@ -1,73 +1,55 @@
-import React, { useEffect, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
-import generateRandomArray from '../../utils/randomArrays';
 import { generateArray8, processArray12 } from '../../utils/searches/generateArray';
 import { binarySearch } from '../../utils/searches/searches';
+import createAnimation from '../../utils/animation';
 import styles from './Search.module.scss';
 
-
 const Binary = () => {
-  const [[array, setArray], variant]: [[number[], (arr: number[]) => void], number] = useOutletContext();
-  const [isSearching, setIsSearching] = React.useState<boolean>(false);
-  const [active, setActive] = React.useState<number>(0);
-  const isLarge = useMemo(() => array.length > 30, [array.length]);
+  const [[array], variant]: [[number[], (arr: number[]) => void], number] = useOutletContext();
+  const [display, setDisplay] = useState(array);
+  const [active, setActive] = useState(-1);
+  const [error, setError] = useState('');
+  const isLarge = display.length > 30;
 
   useEffect(() => {
-    if (!isSearching && array.length > 0 && array.length < 600) {
-      startSearching();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [array]);
-
-
-  const render = (index: number) => {
-    setActive(index);
-    return new Promise((resolve) => setTimeout(resolve, isLarge ? 300 : 1000));
-  };
-
-  const startSearching = async () => {
-    if (variant === 8) {
-      console.log("VARIANT 8");
-      const matrix = generateArray8();
-      let found = null, i = 0;
-      for(i = 0; i < matrix.length; i++) {
-        setArray(matrix[i]);
-        found = await search(matrix[i], 0);
-        if (found !== null) break;
+    const animation = createAnimation(array.length > 30 ? 300 : 1000);
+    setError('');
+    setActive(-1);
+    const search = async (row: number[], value: number) => {
+      setDisplay(row);
+      const [found] = await binarySearch(row, value, async index => {
+        if (animation.cancelled) throw new Error('Animation cancelled');
+        setActive(index);
+        await animation.wait();
+      });
+      return found;
+    };
+    const run = async () => {
+      try {
+        if (variant === 8) {
+          for (const row of generateArray8()) {
+            if (animation.cancelled) return;
+            if (await search(row, 0) !== null) break;
+          }
+        } else {
+          const found = await search(array, 0);
+          if (!animation.cancelled && variant === 12) processArray12(array, found || []);
+        }
+      } catch (error) {
+        if (!animation.cancelled) setError(error instanceof Error ? error.message : 'Помилка пошуку.');
       }
-      console.log(found === null ? "Not found" : ("Found on position: " +  found[0] + " " + i));
-    } else if (variant === 12) {
-      console.log("VARIANT 12");
-      console.log(array);
-      const found = await search(array, 0);
-      console.log(found === null ? "Not found" : ("Found on positions: " +  found));
-      processArray12(array, found === null ? [] : found);
-    } else {
-      setArray(generateRandomArray().sort((a, b) => a - b));
-      await search(array, 0);
-    }
-    
-  };
+    };
+    void run();
+    return () => animation.cancel();
+  }, [array, variant]);
 
-  const search = async (array: number[], value: number) => {
-    setIsSearching(true);
-    const startTime = performance.now();
-    const [found, stepsSpent] = await binarySearch(array, 0, render);
-    const sortTime = performance.now() - startTime - stepsSpent * 100;
-    console.log("Sort time", sortTime);
-    // console.log(found, stepsSpent, sortTime);
-    // alert(`${found !== null ? "Found at position " + (found + 1) : "Not found"}`);
-    setIsSearching(false);
-    return found;
-  }
-
-  return (
-    <div className={`${styles['search-array']}  ${isLarge ? styles['large'] : ""}`}>
-      {array.map((item, index) => (
-        <div key={index} className={`${index === active ? styles.active : ''}`}>{item}</div>
-      ))}
+  return <>
+    {error && <p role="alert">{error}</p>}
+    <div className={`${styles['search-array']} ${isLarge ? styles.large : ''}`}>
+      {display.map((item, index) => <div key={index} className={index === active ? styles.active : ''}>{item}</div>)}
     </div>
-  )
-}
+  </>;
+};
 
-export default Binary
+export default Binary;

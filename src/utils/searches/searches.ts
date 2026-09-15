@@ -1,7 +1,9 @@
+import { HighlightedElements } from "../types/search.types";
+
 type SearchArray = string | number[];
 type TableObjectType = {[key: string]: number};
 
-export const binarySearch = async (arr: SearchArray, target: number | string, render: Function): Promise<[number[] | null, number]> => {
+export const binarySearch = async (arr: SearchArray, target: number | string, render: (index: number) => Promise<unknown>): Promise<[number[] | null, number]> => {
   let start = 0;
   let end = arr.length - 1;
   let steps = 0;
@@ -32,9 +34,9 @@ export const binarySearch = async (arr: SearchArray, target: number | string, re
   return [null, steps];
 };
 
-export const kmpSearch = async (str: string, target: string, render: Function): Promise<[number | null, number]> => {
-  const lps = getLps(target);
-  console.log(lps); 
+export const kmpSearch = async (str: string, target: string, render: (elements: HighlightedElements) => Promise<unknown>): Promise<[number | null, number]> => {
+  if (!target.length) return [0, 0];
+  const lps = getLps(target); 
   let i = 0;
   let j = 0;
   let steps = 0;
@@ -52,8 +54,6 @@ export const kmpSearch = async (str: string, target: string, render: Function): 
     } else if (j > 0) {
       await render({orange: {searchIn: i, searchFor: j}});
       j = lps[j - 1];
-      i -= j;
-      j =  0;
     } else {
       await render({orange: {searchIn: i, searchFor: j}});
       i++;
@@ -67,7 +67,7 @@ const buildBadMatchTable = (str: string) => {
   const strLength = str.length
   for (let i = 0; i < strLength - 1; i++) {
     tableObj[str[i]] = Math.max(strLength - 1 - i, 1);
-    console.log(tableObj);
+
     
   }
   if (tableObj[str[strLength - 1]] === undefined) {
@@ -76,7 +76,9 @@ const buildBadMatchTable = (str: string) => {
   return tableObj;
 }
 
-export const bmSearch = async (str: string, target: string, render: Function): Promise<[number | null, number]> => {
+export const bmSearch = async (str: string, target: string, render: (elements: HighlightedElements) => Promise<unknown>): Promise<[number | null, number]> => {
+  if (!target.length) return [0, 0];
+  let steps = 0;
   const badMatchTable: TableObjectType = buildBadMatchTable(target);
 
   let offset = 0;
@@ -84,12 +86,14 @@ export const bmSearch = async (str: string, target: string, render: Function): P
   const lastTargetIndex = target.length - 1;
   while (offset <= maxOffset) {
     let scanIndex = lastTargetIndex;
+    steps++;
     while (target[scanIndex] === str[scanIndex + offset]) {
+      steps++;
       await render({red: {searchIn: offset + scanIndex, searchFor: scanIndex}});
       if (scanIndex === 0) {
         const found = offset;
         await render({found: Array.from({length: target.length}, (_, index) => index + found)});
-        return [found, 0]
+        return [found, steps]
       }
       scanIndex--;
     }
@@ -101,7 +105,7 @@ export const bmSearch = async (str: string, target: string, render: Function): P
     }
     await render({orange: {searchIn: offset, searchFor: scanIndex}});
   }
-  return [null, 0]
+  return [null, steps]
 }
 
 const getLps = (target: string): number[] => {

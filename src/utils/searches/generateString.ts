@@ -1,11 +1,12 @@
 const getString = (text: string, varient: number) => {
   switch (varient) {
-    case 12:
+    case 12: {
       const loremLines = text.split('\n');
       [loremLines[0], loremLines[loremLines.length - 1]] = [loremLines[loremLines.length - 1], loremLines[0]];
       const loremString = loremLines.join('\n');
       return loremString;
-    case 8:
+    }
+    case 8: {
       const pattern = /([a-zA-Z]{\d})|(\([a-zA-Z]*\){\d})/g;
       const matches = text.match(pattern);
       console.log(matches);
@@ -31,8 +32,10 @@ const getString = (text: string, varient: number) => {
         console.log(text);
       }
       return text;
-    default:
+    }
+    default: {
       return text;
+    }
   }
 }
 

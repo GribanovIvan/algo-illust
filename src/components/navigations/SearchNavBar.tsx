@@ -5,10 +5,9 @@ import styles from './NavBar.module.scss';
 
 type NavBarProps = {
   type: SearchTypeId;
-  setType: (type: SearchTypeId) => void;
 }
 
-const NavBar = ({type, setType}: NavBarProps) => {
+const NavBar = ({type}: NavBarProps) => {
   
   const searches: SearchType[] = [
     {id: 'binary', name: 'Binary Search'},
@@ -26,7 +25,6 @@ const NavBar = ({type, setType}: NavBarProps) => {
             key={search.id}
             to={'/search/' + search.id}
             className={`${type === search.id && styles.textSelected}`}
-            onClick={() => setType(search.id)}
             title={search.name}
           >
             <div className={`${type === search.id && styles.selected}`}></div>

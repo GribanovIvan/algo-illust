@@ -1,4 +1,5 @@
 import { useId, useState } from 'react';
+import styles from './ArrayForm.module.scss';
 import parseArray from '../../utils/sorts/parseArray';
 
 type ArrayFormProps = {
@@ -10,7 +11,7 @@ const ArrayForm = ({ onArraySubmit, disabled = false }: ArrayFormProps) => {
   const id = useId();
   const [error, setError] = useState('');
   return (
-    <form onSubmit={event => {
+    <form className={styles.form} onSubmit={event => {
       event.preventDefault();
       if (disabled) return;
       try {
@@ -23,7 +24,7 @@ const ArrayForm = ({ onArraySubmit, disabled = false }: ArrayFormProps) => {
       }
     }}>
       <label htmlFor={id}>Власний масив (2–200 чисел):</label>
-      <input id={id} name="array" placeholder="3, -1, 2.5" maxLength={10000}
+      <textarea rows={2} id={id} name="array" placeholder="3, -1, 2.5" maxLength={10000}
         disabled={disabled} aria-invalid={!!error} aria-describedby={error ? `${id}-error` : undefined} />
       <button type="submit" disabled={disabled}>Сортувати масив</button>
       {error && <span id={`${id}-error`} role="alert">{error}</span>}

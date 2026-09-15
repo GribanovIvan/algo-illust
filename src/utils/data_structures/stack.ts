@@ -124,6 +124,7 @@ export default class Stack {
   }
 
   merge(stack: Stack) {
+    if (stack === this) throw new Error("Cannot merge a structure with itself");
     while (!stack.isEmpty()) {
       this.push(stack.pop());
     }

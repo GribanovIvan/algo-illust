@@ -1,3 +1,4 @@
+import { routerBase } from "./utils/routerBase";
 import SortPage from "./pages/SortPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SortComponent from "./components/sorts/SortComponent";
@@ -33,7 +34,7 @@ function App() {
 
   return (
     <>
-      <BrowserRouter basename="/asd">
+      <BrowserRouter basename={routerBase} future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="sort/" element={<SortPage />}>

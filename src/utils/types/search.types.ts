@@ -8,7 +8,7 @@ export type SearchType = {
   name: string;
 };
 
-export type OutletContextSearch = [string, string, number];
+export type OutletContextSearch = [string, string, number, number];
 
 export type HighlightedElements = {
   orange?: {searchIn: number; searchFor: number};

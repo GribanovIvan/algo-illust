@@ -117,6 +117,7 @@ export default class Queue {
   }
 
   merge(queue: Queue) {
+    if (queue === this) throw new Error("Cannot merge a structure with itself");
     const reversedQueue = new Queue([]);
 
     while (!queue.isEmpty()) {

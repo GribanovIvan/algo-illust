@@ -189,8 +189,8 @@ class BST {
 
   getInOrder(node: RBTNode, t: Array<BRTreeArrayElement>): Array<BRTreeArrayElement> {
     if (node != null) {
-      t.push({ value: node.element, red: node.red });
       this.getInOrder(node.left, t);
+      t.push({ value: node.element, red: node.red });
       this.getInOrder(node.right, t);
       return t;
     } else return [];
@@ -222,6 +222,10 @@ class BST {
 
 export class RBTree extends BST {
   static RBTree: BST;
+
+  remove(value: TreeNodeValue) {
+    return this.delete(value);
+  }
 
   createNewNode(value: TreeNodeValue): RBTreeNode {
     return new RBTreeNode(value);

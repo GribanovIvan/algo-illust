@@ -137,6 +137,7 @@ export default class Deque {
   }
 
   merge(deque: Deque) {
+    if (deque === this) throw new Error("Cannot merge a structure with itself");
     while (!deque.isEmpty()) {
       this.addRear(deque.removeFront());
     }

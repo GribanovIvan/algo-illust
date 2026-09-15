@@ -68,6 +68,7 @@ export default class DoublyLinkedList {
             currentNode.next.previous = previousNode;
           }
         }
+        if (currentNode === this._tail) this._tail = previousNode;
         this._length--;
         return currentNode.value;
       }
@@ -161,20 +162,8 @@ export default class DoublyLinkedList {
   }
 
   merge(list: DoublyLinkedList) {
-    if (list.length === 0) {
-      return this;
-    }
-    if (this._length === 0) {
-      this._head = list.head;
-      this._tail = list.tail;
-      this._length = list.length;
-      return this;
-    }
-    this._tail.next = list.head;
-    list.head.previous = this._tail;
-    this._tail = list.tail;
-    this._length += list.length;
+    if (list === this) throw new Error("Cannot merge a list with itself");
+    for (const value of list.toArray()) this.add(value);
     return this.toArray();
   }
-
 }
