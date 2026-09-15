@@ -2,6 +2,7 @@ export type SortTypeId =
   | "bubble"
   | "selection"
   | "shell"
+  | "heap"
   | "quick"
   | "merge"
   | "counting"

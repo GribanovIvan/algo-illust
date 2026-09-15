@@ -6,6 +6,7 @@ import styles from "./SortPage.module.scss";
 import generateArray from "../utils/sorts/generateArray";
 import Params from "../components/sorts/Params";
 import SizeForm from "../components/SizeForm";
+import CustomArrayForm from "../components/sorts/CustomArrayForm";
 
 
 const SortPage = () => {
@@ -29,6 +30,15 @@ const SortPage = () => {
     }
   };
 
+  const onCustomArraySubmit = (customArray: number[]) => {
+    if (!isSorting) {
+      setSwappingElements({});
+      setArray([...customArray]);
+    } else {
+      alert("Please wait for the current sorting to finish.");
+    }
+  };
+
   return (
     <>
       <header>
@@ -46,6 +56,9 @@ const SortPage = () => {
       </header>
       <span className='centerX'>
           <SizeForm onLengthSubmit={onLengthSubmit} />
+      </span>
+      <span className='centerX'>
+          <CustomArrayForm onCustomArraySubmit={onCustomArraySubmit} disabled={isSorting} />
       </span>
       {loading ?
         <span className={styles.status}>Fetching data...</span> 

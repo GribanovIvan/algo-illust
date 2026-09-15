@@ -6,6 +6,7 @@ import {
   bubbleSort,
   selectionSort,
   shellSort,
+  heapSort,
   countingSort,
   quickSort,
   mergeSort,
@@ -24,6 +25,7 @@ function App() {
   const BubbleSort = useMemo(() => SortComponent(bubbleSort), []);
   const SelectionSort = useMemo(() => SortComponent(selectionSort), []);
   const ShellSort = useMemo(() => SortComponent(shellSort), []);
+  const HeapSort = useMemo(() => SortComponent(heapSort), []);
   const MergeSort = useMemo(() => SortComponent(mergeSort), []);
   const QuickSort = useMemo(() => SortComponent(quickSort), []);
   const CountingSort = useMemo(() => SortComponent(countingSort), []);
@@ -37,6 +39,7 @@ function App() {
             <Route path="bubble" element={<BubbleSort />} />
             <Route path="selection" element={<SelectionSort />} />
             <Route path="shell" element={<ShellSort />} />
+            <Route path="heap" element={<HeapSort />} />
             <Route path="merge" element={<MergeSort />} />
             <Route path="quick" element={<QuickSort />} />
             <Route path="counting" element={<CountingSort />} />

@@ -7,6 +7,7 @@ const startSorting = () => {
   | "bubble"
   | "selection"
   | "shell"
+  | "heap"
   | "quick"
   | "merge"
   | "counting";
@@ -15,6 +16,7 @@ const startSorting = () => {
     bubble: bubbleSort,
     selection: selectionSort,
     shell: shellSort,
+    heap: heapSort,
     merge: mergeSort,
     quick: quickSort,
     counting: countingSort
@@ -115,6 +117,50 @@ const startSorting = () => {
     const end = performance.now();
     const sorted = isSorted(arr);
     return {sortId: "shell", steps, name: "Shell Sort", time: Math.floor((end - start) * 100) / 100, sorted};
+  }
+
+  function heapSort(arr: number[]) {
+    let steps = 0;
+    const start = performance.now();
+    const len = arr.length;
+
+    function siftDown(n: number, i: number) {
+      let largest = i;
+      const left = 2 * i + 1;
+      const right = 2 * i + 2;
+      if (left < n) {
+        steps++;
+        if (arr[left] > arr[largest]) largest = left;
+      }
+      if (right < n) {
+        steps++;
+        if (arr[right] > arr[largest]) largest = right;
+      }
+      if (largest !== i) {
+        steps++;
+        [arr[i], arr[largest]] = [arr[largest], arr[i]];
+        siftDown(n, largest);
+      }
+    }
+
+    for (let i = Math.floor(len / 2) - 1; i >= 0; i--) {
+      siftDown(len, i);
+    }
+    for (let i = len - 1; i > 0; i--) {
+      steps++;
+      [arr[0], arr[i]] = [arr[i], arr[0]];
+      siftDown(i, 0);
+    }
+
+    const end = performance.now();
+    const sorted = isSorted(arr);
+    return {
+      sortId: "heap" as SortTypeId,
+      steps,
+      name: "Heap Sort",
+      time: Math.floor((end - start) * 100) / 100,
+      sorted
+    };
   }
 
   function mergeSort(arr: number[]) {

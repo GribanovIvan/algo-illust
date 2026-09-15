@@ -249,3 +249,65 @@ async function merge (
   if (render) await render([...arr], {green: indexes, orange: [left, right]});
   // console.log(arr);
 }
+
+export const heapSort: SortFunc = async (arr, isASC, render) => {
+  console.log("heapSort started");
+  const len = arr.length;
+  if (len <= 1) {
+    if (render) await render([...arr]);
+    return 0;
+  }
+  let steps = 0;
+
+  const compare = (a: any, b: any): boolean => {
+    const valA = Array.isArray(a) ? a[0] : a;
+    const valB = Array.isArray(b) ? b[0] : b;
+    return isASC ? valA > valB : valA < valB;
+  };
+
+  const heapify = async (n: number, i: number) => {
+    let extreme = i;
+    const left = 2 * i + 1;
+    const right = 2 * i + 2;
+
+    if (left < n) {
+      steps++;
+      if (render) await render([...arr], { green: [left, extreme] });
+      if (compare(arr[left], arr[extreme])) {
+        extreme = left;
+      }
+    }
+
+    if (right < n) {
+      steps++;
+      if (render) await render([...arr], { green: [right, extreme] });
+      if (compare(arr[right], arr[extreme])) {
+        extreme = right;
+      }
+    }
+
+    if (extreme !== i) {
+      steps++;
+      [arr[i], arr[extreme]] = [arr[extreme], arr[i]];
+      if (render) await render([...arr], { orange: [i, extreme] });
+      await heapify(n, extreme);
+    }
+  };
+
+  // Build heap
+  for (let i = Math.floor(len / 2) - 1; i >= 0; i--) {
+    await heapify(len, i);
+  }
+
+  // Extract elements from heap one by one
+  for (let i = len - 1; i > 0; i--) {
+    steps++;
+    [arr[0], arr[i]] = [arr[i], arr[0]];
+    if (render) await render([...arr], { orange: [0, i] });
+    await heapify(i, 0);
+  }
+
+  if (render) await render([...arr]);
+  return steps;
+};
+

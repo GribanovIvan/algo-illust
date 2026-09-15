@@ -10,6 +10,7 @@ const sorts: SortType[] = [
   {id: 'bubble', name: 'Bubble Sort'},
   {id: 'selection', name: 'Selection Sort'},
   {id: 'shell', name: 'Shell Sort'},
+  {id: 'heap', name: 'Heap Sort'},
   {id: 'merge', name: 'Merge Sort'},
   {id: 'quick', name: 'Quick Sort'},
   {id: 'counting', name: 'Counting Sort'}

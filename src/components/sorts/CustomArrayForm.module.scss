@@ -1,0 +1,71 @@
+@use '../../styles/variables' as *;
+
+.customForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+
+  .inputRow {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    label {
+      color: $primary-clr;
+      font-size: 0.95rem;
+    }
+
+    input[type="text"] {
+      border-radius: 0.6rem;
+      padding: 0.5rem 0.75rem;
+      width: 18rem;
+      max-width: 90vw;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background-color: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      outline: none;
+      transition: border-color 0.2s;
+
+      &:focus {
+        border-color: $secondary-clr;
+      }
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+      border-radius: 0.6rem;
+      background-color: $secondary-clr;
+      color: $primary-clr;
+      border: 0.15rem solid $primary-clr;
+      cursor: pointer;
+      font-weight: 500;
+      transition: 0.1s ease-in-out;
+
+      &:hover:not(:disabled) {
+        transform: scale(1.05);
+        background-color: $primary-clr;
+        color: $secondary-clr;
+      }
+
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  .errorMessage {
+    color: #ff6b6b;
+    font-size: 0.85rem;
+    background-color: rgba(255, 107, 107, 0.12);
+    border: 1px solid rgba(255, 107, 107, 0.35);
+    border-radius: 0.4rem;
+    padding: 0.35rem 0.75rem;
+    text-align: center;
+    max-width: 32rem;
+  }
+}
