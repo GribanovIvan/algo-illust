@@ -264,13 +264,14 @@ export class RBTree extends BST {
     i: number
   ) {
     // w is the grandparent of u
+    if (i < 2 || !v) return;
     let w = path[i - 2];
+    if (!w) return;
     let parentOfw = w === this.root ? null : path[i - 3];
-    if (v === null || w === null) return;
 
     // Get v's sibling named x
     let x = (w.left === v ? w.right : w.left);
-    if (u === null) return;
+    if (!u) return;
     if (x == null || x.isBlack()) {
       // Case 1: v's sibling x is black
       if (w.left === v && v.left === u) {

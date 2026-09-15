@@ -68,6 +68,9 @@ export default class DoublyLinkedList {
             currentNode.next.previous = previousNode;
           }
         }
+        if (currentNode === this._tail) {
+          this._tail = previousNode;
+        }
         this._length--;
         return currentNode.value;
       }

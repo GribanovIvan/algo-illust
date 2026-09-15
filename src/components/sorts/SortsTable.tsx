@@ -21,9 +21,14 @@ const SortsTable = () => {
   const [isSorting, setIsSorting] = useState<boolean>(false);
   const [sortsToRun, setSortsToRun] = useState<SortTypeId[]>(sorts.map(sort => sort.id));
   const [arrayLength, setArrayLength] = useState<number>(INITIAL_LENGTH);
+  const workerRef = useState<Worker | null>(null)[0];
+  const activeWorker = useState<{ current: Worker | null }>({ current: null })[0];
 
   useEffect(() => {
     startSorting();
+    return () => {
+      activeWorker.current?.terminate();
+    };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -32,10 +37,15 @@ const SortsTable = () => {
       alert("Please wait for the current sorting to finish.");
       return;
     }
+    if (activeWorker.current) {
+      activeWorker.current.terminate();
+    }
     setIsSorting(true);
-    setArrayLength(length || arrayLength);
+    const targetLength = length ?? arrayLength;
+    setArrayLength(targetLength);
     setStats([]);
-    const instance = new WorkerBuilder(Worker as any);
+    const instance = WorkerBuilder.create(Worker as any);
+    activeWorker.current = instance;
     instance.onmessage = (message) => {
       if (message) {
         setStats((prevStats) => {
@@ -46,7 +56,7 @@ const SortsTable = () => {
         });
       }
     };
-    instance.postMessage({length, sorts: sortsToRun});
+    instance.postMessage({length: targetLength, sorts: sortsToRun});
   };
 
   return (

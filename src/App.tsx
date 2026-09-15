@@ -32,7 +32,7 @@ function App() {
 
   return (
     <>
-      <BrowserRouter basename="/asd">
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="sort/" element={<SortPage />}>

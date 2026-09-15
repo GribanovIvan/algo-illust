@@ -7,23 +7,21 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.11.51",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-flip-toolkit": "^7.0.14",
     "react-router-dom": "^6.3.0",
-    "react-scripts": "5.0.1",
     "typescript": "^4.7.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "jest --ci --watchAll=false"
   },
   "eslintConfig": {
     "extends": [
@@ -44,6 +42,16 @@
     ]
   },
   "devDependencies": {
-    "sass": "^1.54.5"
+    "@types/jest": "^30.0.0",
+    "@types/node": "^22.20.2",
+    "@vitejs/plugin-react": "^6.1.1",
+    "eslint": "^8.57.1",
+    "eslint-config-react-app": "^7.0.1",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^30.5.1",
+    "jest-environment-jsdom": "^30.5.1",
+    "sass": "^1.54.5",
+    "ts-jest": "^29.4.12",
+    "vite": "^8.3.0"
   }
 }

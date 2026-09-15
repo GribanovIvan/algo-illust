@@ -272,4 +272,8 @@ const startSorting = () => {
 
 };
 
+if (typeof self !== "undefined" && typeof window === "undefined") {
+  startSorting();
+}
+
 export default startSorting;

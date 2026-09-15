@@ -12,9 +12,9 @@ function testDS(array: DSArray, toFind: DSArrayElement, DSType: DSClass) {
   return {
     length: ds.length,
     min: ds.findMin(),
-    elBeforeMin: ds.find((ds.findIndex(ds.findMin()) || 0) - 1),
+    elBeforeMin: ds.find((ds.findIndex(ds.findMin()) ?? 0) - 1),
     max: ds.findMax(),
-    elAfterMax: ds.find((ds.findIndex(ds.findMax()) || ds.length) + 1),
+    elAfterMax: ds.find((ds.findIndex(ds.findMax()) ?? ds.length) + 1),
     searchValue: toFind,
     foundIndex: ds.findIndex(toFind),
     secondFromStart: ds.find(1),

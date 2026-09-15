@@ -40,19 +40,22 @@ export default class CircularList {
   }
 
   remove(value: any) {
-    if (this._length === 0) {
+    if (this._length === 0 || !this._head) {
       return null;
     }
     let currentNode = this._head;
     let previousNode = null;
-    while (currentNode) {
+    for (let count = 0; count < this._length; count++) {
       if (currentNode.value === value) {
-        if (previousNode === null) {
+        if (this._length === 1) {
+          this._head = null;
+          this._tail = null;
+        } else if (currentNode === this._head) {
           this._head = currentNode.next;
           this._tail.next = this._head;
         } else {
           previousNode.next = currentNode.next;
-          if (currentNode.next === null) {
+          if (currentNode === this._tail) {
             this._tail = previousNode;
             this._tail.next = this._head;
           }
@@ -67,8 +70,9 @@ export default class CircularList {
   }
 
   contains(value: any) {
+    if (!this._head || this._length === 0) return false;
     let currentNode = this._head;
-    while (currentNode) {
+    for (let count = 0; count < this._length; count++) {
       if (currentNode.value === value) {
         return true;
       }
