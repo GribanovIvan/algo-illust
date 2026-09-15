@@ -1,18 +1,44 @@
-# Algorithms and data structures visualizer 
+# Algorithms and data structures visualizer
 
-![image](https://github.com/cupoftea4/algo-illust/assets/90093980/a4d07d11-3351-44f0-b0d6-d57ddcad0377)
-![image_2023-05-18_14-26-14](https://github.com/cupoftea4/algo-illust/assets/90093980/680c5bc0-f291-4179-82be-26e0ee51a7d4)
+React/TypeScript-застосунок для анімації сортувань, пошуку та структур даних.
 
+## Запуск і перевірки
 
-## Available Scripts
+Потрібен Node.js 22.23.2 або сумісний новіший Node 22 та npm; усі залежності локальні.
 
-In the project directory, you can run:
+```sh
+npm ci
+npm start
+npx eslint src
+npx tsc --noEmit
+npm run build
+npm test
+npm run test:coverage
+npx tsc --noEmit -p tsconfig.test.json
+node scripts/verify-build.mjs
+```
 
-### `npm start`
+Vite відкриває сервер розробки на http://localhost:5173. `npm test` завершується самостійно й не потребує серверів або попередньої збірки. Остання команда перевіряє вже зібраний `dist`: посилання на ресурси та фактичний воркер в окремому потоці Node із адаптером повідомлень. Кеші npm і Jest зберігаються в теці проєкту.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Сортування
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Власний масив: 2–200 скінченних чисел через кому або пробіл; підтримуються від’ємні, дробові та експоненційний запис. Ввід перевіряється до запуску; порожні елементи між комами — помилка.
+- Усі сім алгоритмів, включно з heap sort, підтримують Asc/Desc та кадри анімації. Під час виконання параметри заблоковані; перехід на інший алгоритм скасовує попередню анімацію.
+- Крок — обмін для bubble/selection/shell/quick/heap, одне злиття для merge, запис елемента для counting. Таблиця використовує ті самі реалізації у вебворкері, масив спільний для порівняння, його копія окрема для кожного алгоритму. Межа порівняння — 5000 елементів.
+- Counting sort рахує частоти; для компактного цілого діапазону перебирає ключі за O(n + R). Для дробових/широко рознесених значень упорядковує k унікальних ключів за O(n + k log k), витрачаючи O(k) пам’яті. Це свідоме розширення домену вхідних чисел.
+- Час сортування виключає фактичний час очікування кадрів; це приблизна тривалість JavaScript-роботи, а не мікробенчмарк CPU.
+- Варіанти з іменами/містами використовують локальні словники, тому застосунок не залежить від зовнішнього API.
 
+## Розгортання
+
+`npm run build` створює `dist`; `npm run preview` дозволяє локально перевірити збірку. Копіюйте **вміст** `dist` у каталог статичного сервера, наприклад `/asd/` або `/course/demo/`. Використано [відносну base Vite](https://vite.dev/guide/build.html#relative-base), окремий [модульний воркер](https://vite.dev/guide/features.html#web-workers), SCSS-модулі.
+
+Збережено маршрути `/sort/{bubble,selection,shell,quick,merge,counting,compare}`, `/search/{binary,kmp,bm,hash}`, `/ds/{stack,queue,deque,linked-list,doubly-linked,circular-linked,tree}`; додано `/sort/heap`. Базові `/sort/`, `/search/`, `/ds/` відкривають відповідно bubble, binary, stack. BrowserRouter визначає каталог за URL JS-модуля. Сервер має перенаправляти невідомі шляхи цього каталогу на його `index.html`; HTML встановлює base для ресурсів при відкритті вкладеного маршруту. Не використовуйте `sort`, `search` або `ds` як сегменти самого каталогу розгортання: bootstrap трактує їх як початок маршруту.
+
+## Рев’ю й експеримент
+
+[REVIEW.md](REVIEW.md) містить дефекти з рядками початкового коміту `3fac554`, наслідками й поясненнями змін. [SUMMARY.md](SUMMARY.md) — стислий звіт. Сирий вивід команд: [до](метрики-до.txt), [після](метрики-після.txt); після міграції `du` вимірює `dist` замість `build`. Початковий `npm ci` потребував повторення з локальним кешем через заборону запису в `/home/ivan/.npm`.
+
+Тести використовують [Jest](https://jestjs.io/docs/getting-started) і React Testing Library, фікстури в `tests/fixtures`, Jest mock-об’єкти, підроблені таймери й три групи вхідних даних. `collectCoverageFrom` охоплює **всі** `src/**/*.{ts,tsx}`, включно з невикликаними модулями та `src/utils/data_structures/test.ts`. Виключено лише декларації `.d.ts` без виконуваних рядків; SCSS не є виконуваним JavaScript. Самі тести й фікстури розташовані поза `src`. Поріг покриття рядків — 20%.
+
+Графічного браузера в середовищі немає: піксельну відповідність і поведінку справжнього браузерного Worker не перевірено наскрізним браузерним тестом.

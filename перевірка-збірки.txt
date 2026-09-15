@@ -1,0 +1,7 @@
+Relative assets verified: /
+Relative assets verified: /asd/
+Relative assets verified: /course/demo/
+Relative assets verified: /course/demo/sort/heap
+Relative assets verified: /asd/search/kmp
+Relative assets verified: /asd/ds/stack
+Built worker verified: 7 algorithms, including heap; all results sorted.
