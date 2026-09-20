@@ -55,12 +55,19 @@ describe('SortsTable', () => {
     expect(screen.getByRole('heading')).toHaveTextContent('Size: 2');
   });
 
-  test('refuses to start while the previous comparison is running', () => {
+  test('disables the form while the previous comparison is running', () => {
     const alert = jest.spyOn(window, 'alert').mockImplementation(() => undefined);
     render(<SortsTable />);
+
+    expect(screen.getByLabelText('Array Length:')).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'Run' })).toBeDisabled();
     fireEvent.click(screen.getByRole('button', { name: 'Run' }));
-    expect(alert).toHaveBeenCalledWith('Please wait for the current sorting to finish.');
     expect(mockedCreateWorker).toHaveBeenCalledTimes(1);
+    expect(alert).not.toHaveBeenCalled();
+
+    sendStats();
+    expect(screen.getByLabelText('Array Length:')).toBeEnabled();
+    expect(screen.getByRole('button', { name: 'Run' })).toBeEnabled();
     alert.mockRestore();
   });
 

@@ -33,11 +33,9 @@ const SortsTable = () => {
     }
   }, [stats, isSorting]);
 
+  // the form is disabled while the comparison runs, so this is only a safety net
   const startSorting = (length?: number) => {
-    if (isSorting) {
-      alert("Please wait for the current sorting to finish.");
-      return;
-    }
+    if (isSorting) return;
     const size = length || arrayLength;
     setIsSorting(true);
     setArrayLength(size);
@@ -72,7 +70,7 @@ const SortsTable = () => {
             </option>
           ))}
         </select>
-        <SizeForm onLengthSubmit={startSorting} />
+        <SizeForm onLengthSubmit={startSorting} disabled={isSorting} />
       </div>
       <div className={styles.container}>
         <h2>Size: {arrayLength}</h2>
