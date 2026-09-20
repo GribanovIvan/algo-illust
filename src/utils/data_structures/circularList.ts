@@ -47,14 +47,20 @@ export default class CircularList {
     let previousNode = null;
     while (currentNode) {
       if (currentNode.value === value) {
+        if (this._length === 1) {
+          this._head = null;
+          this._tail = null;
+          this._length = 0;
+          return currentNode.value;
+        }
         if (previousNode === null) {
           this._head = currentNode.next;
           this._tail.next = this._head;
         } else {
           previousNode.next = currentNode.next;
-          if (currentNode.next === null) {
+          // the tail never has a null next, so it is recognized by the node itself
+          if (currentNode === this._tail) {
             this._tail = previousNode;
-            this._tail.next = this._head;
           }
         }
         this._length--;
@@ -62,6 +68,9 @@ export default class CircularList {
       }
       previousNode = currentNode;
       currentNode = currentNode.next;
+      if (currentNode === this._head) {
+        break;
+      }
     }
     return null;
   }
@@ -73,6 +82,10 @@ export default class CircularList {
         return true;
       }
       currentNode = currentNode.next;
+      // the list is looped, so the search stops on the full circle
+      if (currentNode === this._head) {
+        break;
+      }
     }
     return false;
   }

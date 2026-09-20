@@ -49,6 +49,10 @@ export default class LinkedList {
         } else {
           previousNode.next = currentNode.next;
         }
+        // without this the tail keeps pointing at the detached node and the next add() is lost
+        if (currentNode === this._tail) {
+          this._tail = previousNode;
+        }
         this._length--;
         return currentNode.value;
       }
