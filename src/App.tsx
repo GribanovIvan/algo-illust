@@ -1,5 +1,5 @@
 import SortPage from "./pages/SortPage";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import SortComponent from "./components/sorts/SortComponent";
 import { useMemo } from "react";
 import {
@@ -36,6 +36,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="sort/" element={<SortPage />}>
+            <Route index element={<Navigate to="bubble" replace />} />
             <Route path="bubble" element={<BubbleSort />} />
             <Route path="selection" element={<SelectionSort />} />
             <Route path="shell" element={<ShellSort />} />
@@ -46,6 +47,7 @@ function App() {
           </Route>
           <Route path="sort/compare" element={<SortsTable />} />
           <Route path="ds/" element={<DataStructuresPage/>} >
+            <Route index element={<Navigate to="stack" replace />} />
             <Route path="stack" element={<DataStructure/>} />
             <Route path="queue" element={<DataStructure/>} />
             <Route path="linked-list" element={<DataStructure/>} />
@@ -55,6 +57,7 @@ function App() {
             <Route path="tree" element={<Tree/>} />
           </Route>
           <Route path="search/" element={<SearchPage/>} >
+            <Route index element={<Navigate to="binary" replace />} />
             <Route path="binary" element={<Binary/>} />
             <Route path="kmp" element={<KMP/>} />
             <Route path="bm" element={<BM/>} />

@@ -1,5 +1,5 @@
 import NavBar from "../components/navigations/SortNavBar";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { HighlightedElements, SortArray, SortTypeId } from "../utils/types/sort.types";
 import styles from "./SortPage.module.scss";
@@ -8,12 +8,37 @@ import Params from "../components/sorts/Params";
 import SizeForm from "../components/SizeForm";
 import CustomArrayForm from "../components/sorts/CustomArrayForm";
 
+const validSortTypes: SortTypeId[] = [
+  "bubble",
+  "selection",
+  "shell",
+  "heap",
+  "merge",
+  "quick",
+  "counting",
+  "compare",
+];
 
 const SortPage = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const pathSegments = location.pathname.split("/").filter(Boolean);
+  const lastSegment = pathSegments[pathSegments.length - 1];
+  const sortType: SortTypeId = validSortTypes.includes(lastSegment as SortTypeId)
+    ? (lastSegment as SortTypeId)
+    : "bubble";
+
+  const setSortType = (newType: SortTypeId) => {
+    if (newType === "compare") {
+      navigate("/sort/compare");
+    } else {
+      navigate(`/sort/${newType}`);
+    }
+  };
+
   const [array, setArray] = useState<SortArray>([]);
   const [swappingElements, setSwappingElements] = useState<HighlightedElements>({});
   const [illustDelay, setIllustDelay] = useState<number>(250);
-  const [sortType, setSortType] = useState<SortTypeId>(window.location.href.split("/").pop() as SortTypeId);
   const [isASC, setIsASC] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(false);
   const [isSorting, setIsSorting] = useState<boolean>(false);

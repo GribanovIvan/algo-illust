@@ -2,8 +2,17 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <script>
+      (function () {
+        var p = window.location.pathname;
+        var b = p.startsWith('/asd') ? '/asd/' : '/';
+        var base = document.createElement('base');
+        base.href = b;
+        document.head.appendChild(base);
+      })();
+    </script>
     <link rel="icon" href="./favicon.ico" />
-    <link rel="stylesheet" href="/root.css">
+    <link rel="stylesheet" href="./root.css">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta

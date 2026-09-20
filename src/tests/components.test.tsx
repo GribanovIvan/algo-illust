@@ -9,6 +9,7 @@ import SearchPage from "../pages/SearchPage";
 import Binary from "../components/searches/Binary";
 import KMP from "../components/searches/KMP";
 import WorkerBuilder from "../utils/workerBuilder";
+import App from "../App";
 
 // Mock dependencies with Jest mock objects as required
 jest.mock("../utils/workerBuilder", () => {
@@ -151,5 +152,28 @@ describe("React Components & Integration Tests", () => {
     fireEvent.click(binaryLink);
 
     expect(screen.getByLabelText(/Array Length:/i)).toBeInTheDocument();
+  });
+
+  test("direct opening of /sort renders SortPage with BubbleSort without blank page", () => {
+    window.history.pushState({}, "", "/sort");
+    const { unmount } = render(<App />);
+    expect(screen.getByText(/Bubble Sort/i)).toBeInTheDocument();
+    expect(screen.getByText(/Asc/i)).toBeInTheDocument();
+    unmount();
+  });
+
+  test("direct opening of /search renders SearchPage with Binary Search without blank page", () => {
+    window.history.pushState({}, "", "/search");
+    const { unmount } = render(<App />);
+    expect(screen.getByText(/Binary Search/i)).toBeInTheDocument();
+    expect(screen.getByText(/Var 8/i)).toBeInTheDocument();
+    unmount();
+  });
+
+  test("direct opening of /ds renders DataStructuresPage without blank page", () => {
+    window.history.pushState({}, "", "/ds");
+    const { unmount } = render(<App />);
+    expect(screen.getByText(/Stack/i)).toBeInTheDocument();
+    unmount();
   });
 });

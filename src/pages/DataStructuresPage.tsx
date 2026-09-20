@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import DiceIcon from "../assets/DiceIcon";
 import DSNavBar from "../components/navigations/DSNavBar";
 import { DSArray, DSClassMap, DSStats } from "../utils/types/ds.types";
@@ -18,6 +19,16 @@ import { Outlet } from "react-router-dom";
 
 const MAX_RANDOM = 100;
 
+const validDSTypes: DSTypeId[] = [
+  "stack",
+  "queue",
+  "linked-list",
+  "doubly-linked",
+  "circular-linked",
+  "deque",
+  "tree",
+];
+
 const dsClasses: DSClassMap = {
   stack: StackDS,
   queue: QueueDS,
@@ -29,10 +40,19 @@ const dsClasses: DSClassMap = {
 };
 
 const DataStructuresPage = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const pathSegments = location.pathname.split("/").filter(Boolean);
+  const lastSegment = pathSegments[pathSegments.length - 1];
+  const type: DSTypeId = validDSTypes.includes(lastSegment as DSTypeId)
+    ? (lastSegment as DSTypeId)
+    : "stack";
+
+  const setType = (newType: DSTypeId) => {
+    navigate(`/ds/${newType}`);
+  };
+
   const [array, setArray] = React.useState<DSArray>([]);
-  const [type, setType] = React.useState<DSTypeId>(
-    window.location.href.split("/").pop() as DSTypeId
-  );
   const [stats, setStats] = React.useState<DSStats | null>(null);
 
   const stringifyStats = (stats: DSStats) => {
