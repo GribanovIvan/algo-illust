@@ -9,7 +9,7 @@ import SearchPage from "../pages/SearchPage";
 import Binary from "../components/searches/Binary";
 import KMP from "../components/searches/KMP";
 import WorkerBuilder from "../utils/workerBuilder";
-import App from "../App";
+import App, { getRouterBasename } from "../App";
 
 // Mock dependencies with Jest mock objects as required
 jest.mock("../utils/workerBuilder", () => {
@@ -175,5 +175,45 @@ describe("React Components & Integration Tests", () => {
     const { unmount } = render(<App />);
     expect(screen.getByText(/Stack/i)).toBeInTheDocument();
     unmount();
+  });
+
+  describe("Router prefix and basename resolution (/asd/ and root)", () => {
+    test("getRouterBasename correctly detects /asd prefix and root", () => {
+      window.history.pushState({}, "", "/asd/");
+      expect(getRouterBasename()).toBe("/asd");
+
+      window.history.pushState({}, "", "/asd/sort/bubble");
+      expect(getRouterBasename()).toBe("/asd");
+
+      window.history.pushState({}, "", "/");
+      expect(getRouterBasename()).toBe("");
+
+      window.history.pushState({}, "", "/sort/bubble");
+      expect(getRouterBasename()).toBe("");
+    });
+
+    test("opening application at prefixed path /asd/ renders Home page instead of 404", () => {
+      window.history.pushState({}, "", "/asd/");
+      const { unmount } = render(<App />);
+      expect(screen.queryByText("404")).not.toBeInTheDocument();
+      expect(screen.getByText(/Algorithms Visualizer/i)).toBeInTheDocument();
+      unmount();
+    });
+
+    test("opening application at prefixed path /asd/sort/bubble renders BubbleSort", () => {
+      window.history.pushState({}, "", "/asd/sort/bubble");
+      const { unmount } = render(<App />);
+      expect(screen.queryByText("404")).not.toBeInTheDocument();
+      expect(screen.getByText(/Bubble Sort/i)).toBeInTheDocument();
+      unmount();
+    });
+
+    test("opening root / renders Home page", () => {
+      window.history.pushState({}, "", "/");
+      const { unmount } = render(<App />);
+      expect(screen.queryByText("404")).not.toBeInTheDocument();
+      expect(screen.getByText(/Algorithms Visualizer/i)).toBeInTheDocument();
+      unmount();
+    });
   });
 });

@@ -21,6 +21,15 @@ import KMP from "./components/searches/KMP";
 import BM from "./components/searches/BM";
 import Binary from "./components/searches/Binary";
 
+export const getRouterBasename = (): string => {
+  if (typeof window === "undefined") return "";
+  const pathname = window.location.pathname;
+  if (pathname.startsWith("/asd")) {
+    return "/asd";
+  }
+  return "";
+};
+
 function App() {
   const BubbleSort = useMemo(() => SortComponent(bubbleSort), []);
   const SelectionSort = useMemo(() => SortComponent(selectionSort), []);
@@ -32,7 +41,7 @@ function App() {
 
   return (
     <>
-      <BrowserRouter>
+      <BrowserRouter basename={getRouterBasename()}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="sort/" element={<SortPage />}>
