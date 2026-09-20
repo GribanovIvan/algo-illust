@@ -15,9 +15,9 @@ computing gzip size...
 build/index.html                             0.70 kB │ gzip:  0.38 kB
 build/assets/benchmark.worker-xnY9PR7Q.js    2.83 kB
 build/assets/index-DZeZ1Vxt.css             11.16 kB │ gzip:  2.81 kB
-build/assets/index-D-YjHdbW.js             200.46 kB │ gzip: 64.62 kB
+build/assets/index-CSupHfPu.js             200.41 kB │ gzip: 64.62 kB
 
-✓ built in 467ms
+✓ built in 387ms
 $ npx jest --coverage --watchAll=false 2>&1 | tail -20
   generateArray.ts              |    43.1 |       50 |    37.5 |   39.17 | 29-51,56-57,73-98,106-128                                                                                                                                                              
   parseArray.ts                 |     100 |      100 |     100 |     100 |                                                                                                                                                                                        
@@ -28,14 +28,14 @@ $ npx jest --coverage --watchAll=false 2>&1 | tail -20
 --------------------------------|---------|----------|---------|---------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 =============================== Coverage summary ===============================
-Statements   : 63.05% ( 1512/2398 )
-Branches     : 36.83% ( 477/1295 )
+Statements   : 62.99% ( 1510/2397 )
+Branches     : 36.75% ( 476/1295 )
 Functions    : 59.22% ( 215/363 )
-Lines        : 61.82% ( 1278/2067 )
+Lines        : 61.79% ( 1276/2065 )
 ================================================================================
 
 Test Suites: 14 passed, 14 total
 Tests:       184 passed, 184 total
 Snapshots:   0 total
-Time:        6.125 s
+Time:        3.457 s
 Ran all test suites.

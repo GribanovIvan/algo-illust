@@ -1,6 +1,6 @@
 # SUMMARY — ітерація 2
 
-Гілка `lab`, чотири нові коміти поверх `301f13e`. Метрики — у `метрики-ітерація-2.txt`.
+Гілка `lab`, п'ять комітів із виправленнями поверх `301f13e`. Метрики — у `метрики-ітерація-2.txt`.
 
 ## 1. Порожня сторінка в корені сайту (базовий шлях)
 
@@ -14,8 +14,8 @@
 
 ## 3. `alert` під час анімації
 
-- **Змінено.** `src/components/SizeForm.tsx` і `src/components/sorts/ArrayForm.tsx`: необов'язковий проп `disabled` вимикає поле й кнопку запуску, підказка кнопки в цьому стані пояснює причину («Please wait for the current sorting to finish»). `src/pages/SortPage.tsx`: обидві форми отримують `disabled={isSorting}`, два виклики `alert("Please wait...")` прибрано разом із гілками `else`. Помилку генерації масиву теж перенесено з `alert` у стан `error` і показано на сторінці (`role="alert"`, той самий стиль `styles.status`).
-- **Перевірено.** `src/pages/SortPage.test.tsx`: «disables both forms while sorting and enables them afterwards» (чотири елементи форм до і після анімації), «shows the generation error on the page instead of a modal window» (`window.alert` під шпигуном — не викликається), «sorts the generated array and clears the previous error». `src/components/SizeForm.test.tsx` і `ArrayForm.test.tsx` — «blocks the input and the button while disabled».
+- **Змінено.** `src/components/SizeForm.tsx` і `src/components/sorts/ArrayForm.tsx`: необов'язковий проп `disabled` вимикає поле й кнопку запуску, підказка кнопки в цьому стані пояснює причину («Please wait for the current sorting to finish»). `src/pages/SortPage.tsx`: обидві форми отримують `disabled={isSorting}`, два виклики `alert("Please wait...")` прибрано разом із гілками `else`. Помилку генерації масиву теж перенесено з `alert` у стан `error` і показано на сторінці (`role="alert"`, той самий стиль `styles.status`). Окремим комітом те саме зроблено для сторінки порівняння сортувань — `src/components/sorts/SortsTable.tsx` вимикає форму, поки воркер рахує бенчмарк, замість `alert("Please wait...")`.
+- **Перевірено.** `src/pages/SortPage.test.tsx`: «disables both forms while sorting and enables them afterwards» (чотири елементи форм до і після анімації), «shows the generation error on the page instead of a modal window» (`window.alert` під шпигуном — не викликається), «sorts the generated array and clears the previous error». `src/components/SizeForm.test.tsx` і `ArrayForm.test.tsx` — «blocks the input and the button while disabled». `SortsTable.test.tsx`: «disables the form while the previous comparison is running» (замість колишньої перевірки виклику `alert`).
 
 ## 4. Дефекти бібліотеки структур даних
 
@@ -34,13 +34,13 @@
 | ESLint | 0 попереджень | 0 попереджень |
 | `tsc --noEmit` | без помилок | без помилок |
 | Тести | 158 в 11 файлах | 184 в 14 файлах |
-| Покриття рядків | 39.91% | 61.82% |
-| Покриття інструкцій | 42.10% | 63.05% |
+| Покриття рядків | 39.91% | 61.79% |
+| Покриття інструкцій | 42.10% | 62.99% |
 
 ## Чого не зроблено / компроміси
 
 - **Адреси з хешем.** Повернути «красиві» шляхи (`/asd/sort/bubble`) без хеша не вдалося: для цього потрібен SPA-fallback на стороні сервера, а простий статичний сервер на такий запит віддає 404 — із застосунку це не виправляється. Тому вибрано хеш: він одночасно закриває пункти 1 і 2 без будь-яких налаштувань сервера. Ціна — вигляд адреси.
 - **Графічного браузера не було.** Перевірка — модульні тести, `npm run build` і разові HTTP-запити до зібраних файлів із кореня і з підкаталогу; візуально оформлення не звіряв, лише за наявністю правил у зібраному CSS.
-- **Решта `alert`/`console.log`.** У застосунку більше немає `alert`, але діагностичні `console.log` у `src/utils/searches/generateArray.ts` і `src/utils/sorts/generateArray.ts` лишились — вони з вихідного коду і в перелік дефектів не входили.
+- **Решта `alert` і `console.log`.** Прибрано всі `alert`, що блокували форми під час роботи (сторінки сортувань і порівняння). Лишились успадковані з вихідного коду сповіщення, які не блокують анімацію й не входили в перелік дефектів: результат пошуку в `KMP.tsx` і `BM.tsx`, повідомлення про дублікат ключа в `Tree.tsx`, валідація вводу в `DataStructuresPage.tsx`, а також діагностичні `console.log` у `src/utils/searches/generateArray.ts` і `src/utils/sorts/generateArray.ts`.
 - **Покриття UI пошуку та структур даних.** `DataStructuresPage`, `Tree`, `Binary/KMP/BM`, `drawingTree.ts`, `RedBlackTree.ts` як і раніше майже не покриті тестами; списки тепер покриті, решта структур — на рівні попередньої ітерації.
-- **Комітів чотири, а не п'ять**: пункти 1 і 2 мають спільну причину й одне виправлення, тому вони в одному коміті.
+- **Розбивка на коміти.** Пункти 1 і 2 мають спільну причину й одне виправлення, тому вони в одному коміті; натомість пункт 3 розбито на два (сторінка сортувань і сторінка порівняння).
