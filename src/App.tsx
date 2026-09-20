@@ -1,5 +1,5 @@
 import SortPage from "./pages/SortPage";
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SortComponent from "./components/sorts/SortComponent";
 import { useMemo } from "react";
 import {
@@ -20,6 +20,7 @@ import SearchPage from "./pages/SearchPage";
 import KMP from "./components/searches/KMP";
 import BM from "./components/searches/BM";
 import Binary from "./components/searches/Binary";
+import basePath from "./utils/basePath";
 
 function App() {
   const BubbleSort = useMemo(() => SortComponent(bubbleSort), []);
@@ -32,8 +33,8 @@ function App() {
 
   return (
     <>
-      {/* the hash keeps the base path runtime-defined: the build works both in the site root and under any prefix */}
-      <HashRouter>
+      {/* the base path is read at runtime, so the build works both in the site root and under any prefix */}
+      <BrowserRouter basename={basePath()}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="sort/" element={<SortPage />}>
@@ -63,7 +64,7 @@ function App() {
           </Route>
           <Route path="*" element={<h1 style={{color: "white"}}>404</h1>} />
         </Routes>
-      </HashRouter>
+      </BrowserRouter>
     </>
   );
 }

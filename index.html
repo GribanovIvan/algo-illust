@@ -2,6 +2,18 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <script>
+      // The app is not tied to a folder: the base is the address without the client route,
+      // so a directly opened nested page asks for the assets below from the right place.
+      (function () {
+        var path = window.location.pathname;
+        var route = path.match(/\/(sort|search|ds)(\/|$)/);
+        var base = route ? path.slice(0, route.index + 1) : path.replace(/[^/]*$/, "");
+        var element = document.createElement("base");
+        element.setAttribute("href", base);
+        document.head.appendChild(element);
+      })();
+    </script>
     <link rel="icon" href="/favicon.ico" />
     <link rel="stylesheet" href="/root.css">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
