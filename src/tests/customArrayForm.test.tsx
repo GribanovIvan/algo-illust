@@ -130,5 +130,15 @@ describe("CustomArrayForm & Validation Unit Tests", () => {
       expect(screen.getByLabelText(/Custom Array:/i)).toBeDisabled();
       expect(screen.getByRole("button", { name: /Sort Custom/i })).toBeDisabled();
     });
+
+    test("3.8 rejects Infinity and -Infinity inputs with error message", () => {
+      const posInfRes = parseCustomArray("1, 2, Infinity, 4");
+      expect(posInfRes.data).toBeUndefined();
+      expect(posInfRes.error).toMatch(/Некоректне значення "Infinity"/i);
+
+      const negInfRes = parseCustomArray("-Infinity, 5, 10");
+      expect(negInfRes.data).toBeUndefined();
+      expect(negInfRes.error).toMatch(/Некоректне значення "-Infinity"/i);
+    });
   });
 });

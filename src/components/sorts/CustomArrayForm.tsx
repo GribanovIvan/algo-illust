@@ -21,7 +21,7 @@ export const parseCustomArray = (
   const numbers: number[] = [];
   for (const token of tokens) {
     const num = Number(token);
-    if (isNaN(num) || token.trim() === "") {
+    if (!Number.isFinite(num) || token.trim() === "") {
       return {
         error: `Некоректне значення "${token}": дозволені лише дійсні числа.`,
       };
