@@ -1,5 +1,5 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom';
+import React from 'react';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import SearchNavBar from '../components/navigations/SearchNavBar';
 import SizeForm from '../components/SizeForm';
 import generateRandomArray from '../utils/randomArrays';
@@ -9,7 +9,18 @@ import styles from './SearchPage.module.scss';
 const MAX = 15; 
 
 const SearchPage = () => {
-  const [type, setType] = React.useState<SearchTypeId>(window.location.href.split("/").pop() as SearchTypeId);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const pathSegments = location.pathname.split("/").filter(Boolean);
+  const lastSegment = pathSegments[pathSegments.length - 1];
+  const type: SearchTypeId = (lastSegment === 'kmp' || lastSegment === 'bm')
+    ? lastSegment
+    : 'binary';
+
+  const setType = (newType: SearchTypeId) => {
+    navigate(`/search/${newType}`);
+  };
+
   const [text, setText] = React.useState<string>("Some text");
   const [searchValue, setSearchValue] = React.useState<string>("");
   const [variant, setVariant] = React.useState<number>(8);

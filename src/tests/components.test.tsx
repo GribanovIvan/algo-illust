@@ -5,6 +5,9 @@ import SortNavBar from "../components/navigations/SortNavBar";
 import SizeForm from "../components/SizeForm";
 import SortsTable from "../components/sorts/SortsTable";
 import SortComponent from "../components/sorts/SortComponent";
+import SearchPage from "../pages/SearchPage";
+import Binary from "../components/searches/Binary";
+import KMP from "../components/searches/KMP";
 import WorkerBuilder from "../utils/workerBuilder";
 
 // Mock dependencies with Jest mock objects as required
@@ -113,5 +116,40 @@ describe("React Components & Integration Tests", () => {
     const timeTaken = parseFloat(match![1]);
     // The two 25ms delays (total 50ms) are subtracted, so time taken is small
     expect(timeTaken).toBeLessThan(40);
+  });
+
+  test("SearchPage dynamically syncs type with route preventing e.map error on Binary navigation", () => {
+    render(
+      <MemoryRouter initialEntries={["/search/kmp", "/search/binary"]} initialIndex={1}>
+        <Routes>
+          <Route path="/search" element={<SearchPage />}>
+            <Route path="binary" element={<Binary />} />
+            <Route path="kmp" element={<KMP />} />
+          </Route>
+        </Routes>
+      </MemoryRouter>
+    );
+
+    expect(screen.getByLabelText(/Array Length:/i)).toBeInTheDocument();
+    expect(screen.getByText(/Binary Search/i)).toBeInTheDocument();
+  });
+
+  test("SearchPage navigates from kmp to binary without e.map failure", () => {
+    render(
+      <MemoryRouter initialEntries={["/search/kmp"]}>
+        <Routes>
+          <Route path="/search" element={<SearchPage />}>
+            <Route path="binary" element={<Binary />} />
+            <Route path="kmp" element={<KMP />} />
+          </Route>
+        </Routes>
+      </MemoryRouter>
+    );
+
+    expect(screen.getByPlaceholderText(/Search in.../i)).toBeInTheDocument();
+    const binaryLink = screen.getByText(/Binary Search/i);
+    fireEvent.click(binaryLink);
+
+    expect(screen.getByLabelText(/Array Length:/i)).toBeInTheDocument();
   });
 });
