@@ -4,7 +4,7 @@ import DSNavBar from "../components/navigations/DSNavBar";
 import { DSArray, DSClassMap, DSStats } from "../utils/types/ds.types";
 import { DSTypeId } from "../utils/types/ds.types";
 import styles from "./DataStructuresPage.module.scss";
-import "../components/Form.module.scss";
+import "../components/Form.scss";
 import {
   StackDS,
   QueueDS,

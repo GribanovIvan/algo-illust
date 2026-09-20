@@ -38,13 +38,18 @@ describe("React Components & Integration Tests", () => {
     expect(setTypeMock).toHaveBeenCalledWith("heap");
   });
 
-  test("SizeForm submits array length accurately", () => {
+  test("SizeForm submits array length accurately and renders form elements", () => {
     const onLengthSubmitMock = jest.fn();
     render(<SizeForm onLengthSubmit={onLengthSubmitMock} />);
 
+    expect(screen.getByLabelText(/Array Length:/i)).toBeInTheDocument();
     const lengthInput = screen.getByPlaceholderText(/length/i);
+    expect(lengthInput).toHaveAttribute("type", "number");
+    const submitBtn = screen.getByTitle(/Start/i);
+    expect(submitBtn).toHaveAttribute("type", "submit");
+
     fireEvent.change(lengthInput, { target: { value: "35" } });
-    fireEvent.click(screen.getByTitle(/Start/i));
+    fireEvent.click(submitBtn);
 
     expect(onLengthSubmitMock).toHaveBeenCalledWith(35);
   });

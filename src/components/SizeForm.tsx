@@ -1,4 +1,4 @@
-import './Form.module.scss';
+import './Form.scss';
 
 const SizeForm = ({onLengthSubmit}: {onLengthSubmit:  (length: number) => void}) => {
   // TODO: make function to extract number from input
@@ -15,6 +15,7 @@ const SizeForm = ({onLengthSubmit}: {onLengthSubmit:  (length: number) => void})
         <label htmlFor="arrayLength">Array Length:</label>
         <input
           name="arrayLength"
+          id="arrayLength"
           placeholder="length"
           type={"number"}
           defaultValue="10"
