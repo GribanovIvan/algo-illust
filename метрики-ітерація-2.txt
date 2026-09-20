@@ -9,12 +9,63 @@ transforming...
 ✓ 73 modules transformed.
 rendering chunks...
 computing gzip size...
-dist/index.html                             0.97 kB │ gzip:  0.51 kB
+dist/index.html                             1.53 kB │ gzip:  0.71 kB
 dist/assets/benchmark.worker-CbIyNrOz.js    3.31 kB
 dist/assets/index-BhdSoxdF.css             12.30 kB │ gzip:  2.99 kB
-dist/assets/index-gPx8lKiM.js             206.01 kB │ gzip: 66.35 kB
+dist/assets/index-CSb2CNuw.js             206.72 kB │ gzip: 66.60 kB
 
-✓ built in 574ms
+✓ built in 540ms
+npm notice run algo-illust@0.1.0 npx
+npm notice run 'jest' --coverage --watchAll=false
+--------------------------------|---------|----------|---------|---------|-----------------------------------------------
+File                            | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s                             
+--------------------------------|---------|----------|---------|---------|-----------------------------------------------
+All files                       |   49.33 |    35.58 |   44.41 |   49.85 |                                               
+ src                            |   95.08 |       72 |     100 |   96.15 |                                               
+  App.tsx                       |   95.08 |       72 |     100 |   96.15 | 36,46                                         
+ src/assets                     |     100 |      100 |     100 |     100 |                                               
+  DiceIcon.tsx                  |     100 |      100 |     100 |     100 |                                               
+  HomeIcon.tsx                  |     100 |      100 |     100 |     100 |                                               
+ src/components                 |     100 |       50 |     100 |     100 |                                               
+  SizeForm.tsx                  |     100 |       50 |     100 |     100 | 8                                             
+ src/components/data_structures |      20 |     4.83 |       8 |   20.73 |                                               
+  DataStructure.tsx             |   40.62 |      8.1 |   15.38 |    38.7 | 11-15,22-30,43-61,65-73                       
+  Tree.tsx                      |    8.62 |        0 |       0 |     9.8 | 7-91                                          
+ src/components/navigations     |   96.29 |      100 |   88.88 |   96.29 |                                               
+  DSNavBar.tsx                  |   88.88 |      100 |   66.66 |   88.88 | 33                                            
+  SearchNavBar.tsx              |     100 |      100 |     100 |     100 |                                               
+  SortNavBar.tsx                |     100 |      100 |     100 |     100 |                                               
+ src/components/searches        |    49.6 |    19.54 |   41.37 |      50 |                                               
+  BM.tsx                        |   18.91 |        0 |       0 |      20 | 10-62                                         
+  Binary.tsx                    |   68.62 |    43.47 |   88.88 |   69.56 | 36-47,56-61                                   
+  KMP.tsx                       |   54.05 |    21.87 |      40 |   54.28 | 19,26,31-32,36-46,54-63                       
+ src/components/sorts           |   84.66 |    63.52 |      75 |   87.41 |                                               
+  CustomArrayForm.tsx           |   94.59 |    86.95 |     100 |   97.14 | 18                                            
+  Graph.tsx                     |     100 |       65 |     100 |     100 | 7-8,12,17-21                                  
+  Params.tsx                    |   71.42 |      100 |      60 |   71.42 | 14,25                                         
+  SortComponent.tsx             |   90.74 |       60 |     100 |   94.23 | 80-82                                         
+  SortsTable.tsx                |   69.56 |       35 |      50 |   72.09 | 36-37,40,49-54,65-68,94                       
+ src/hooks                      |   85.71 |        0 |      50 |     100 |                                               
+  useFocus.ts                   |   85.71 |        0 |      50 |     100 | 5                                             
+ src/images                     |      75 |      100 |       0 |      75 |                                               
+  TerminalArrow.tsx             |      75 |      100 |       0 |      75 | 4                                             
+ src/pages                      |   57.37 |    22.58 |   25.71 |   59.19 |                                               
+  DataStructuresPage.tsx        |    45.9 |    11.62 |   11.11 |   46.66 | 52,59-60,75-90,94-100,104-109,114-118,129-137 
+  Home.tsx                      |   56.25 |     9.09 |   28.57 |    61.9 | 25,29-34,48-52,56-59,83-85                    
+  SearchPage.tsx                |   69.69 |    66.66 |   42.85 |   70.96 | 31-37,46-52                                   
+  SortPage.tsx                  |   65.85 |     37.5 |      20 |   65.85 | 32-35,48-54,59-63,74                          
+ src/utils                      |   48.78 |    47.82 |   28.57 |   47.22 |                                               
+  findLastIndex.ts              |   16.66 |        0 |       0 |   16.66 | 2-7                                           
+  isSorted.ts                   |    42.1 |       50 |     100 |   43.75 | 5-19                                          
+  randomArrays.ts               |     100 |       80 |     100 |     100 | 1                                             
+  workerBuilder.ts              |       0 |        0 |       0 |       0 | 1-17                                          
+ src/utils/data_structures      |   36.41 |    23.86 |   53.27 |   36.89 |                                               
+  RedBlackTree.ts               |   23.52 |    13.69 |   41.37 |   24.78 | 52,62-72,103-166,187-219,267-503              
+  circularList.ts               |   38.23 |     31.7 |      50 |   36.73 | 22,44,53-60,85-168                            
+  deque.ts                      |   24.05 |       24 |   43.75 |   24.05 | 13-16,43,49,54-143                            
+  doublyLinkedList.ts           |   40.77 |    27.02 |   56.25 |   40.19 | 54,61-63,68,80,91-180                         
+  drawingTree.ts                |    5.08 |        0 |       0 |    5.35 | 7-101                                         
+  linkedList.ts                 |   45.97 |    33.33 |   52.94 |   45.88 | 41,48,61,71-79,91-154                         
   queue.ts                      |   41.66 |    26.08 |   61.53 |   41.66 | 16,37-38,46,55,63-116,126                     
   stack.ts                      |   92.75 |    83.33 |    92.3 |   92.75 | 37-38,66,75,86                                
   test.ts                       |     100 |       50 |     100 |     100 | 15-17                                         
@@ -30,8 +81,8 @@ dist/assets/index-gPx8lKiM.js             206.01 kB │ gzip: 66.35 kB
   ds.types.ts                   |     100 |      100 |     100 |     100 |                                               
 --------------------------------|---------|----------|---------|---------|-----------------------------------------------
 
-Test Suites: 5 passed, 5 total
-Tests:       68 passed, 68 total
+Test Suites: 6 passed, 6 total
+Tests:       73 passed, 73 total
 Snapshots:   0 total
-Time:        1.727 s
+Time:        2.168 s
 Ran all test suites.
