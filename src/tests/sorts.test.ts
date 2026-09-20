@@ -173,5 +173,12 @@ describe("Sorting Algorithms Unit Tests", () => {
       expect(isSorted([3, 2, 1], true)).toBe(false);
       expect(isSorted([3, 2, 1], false)).toBe(true);
     });
+
+    test("3.6 countingSort throws Error for floating-point / fractional numbers", async () => {
+      const floatArray = [1.5, 2.7, 3.2];
+      await expect(countingSort(floatArray, true)).rejects.toThrow(
+        "Counting sort only works with integers"
+      );
+    });
   });
 });

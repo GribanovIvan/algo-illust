@@ -195,6 +195,15 @@ const startSorting = () => {
   function countingSort(arr: number[]) {
     STEPS = 0;
     const start = performance.now();
+    if (arr.some((num) => !Number.isInteger(num))) {
+      return {
+        sortId: "counting" as SortTypeId,
+        steps: 0,
+        name: "Counting Sort",
+        time: 0,
+        sorted: false,
+      };
+    }
     const min = 0;
     let max = 0;
     for (let i = 0; i < arr.length; i++) {

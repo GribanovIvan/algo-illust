@@ -14,6 +14,7 @@ const SortComponent = (sort: SortFunc) => {
   const Component = function () {
     const [timeTaken, setTimeTaken] = useState<number>(0);
     const [steps, setSteps] = useState<number>(0);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const isMounted = useRef(true);
 
     const [
@@ -48,6 +49,7 @@ const SortComponent = (sort: SortFunc) => {
 
     const startSorting = async () => {
       setIsSorting(true);
+      setErrorMessage(null);
       try {
         let totalDelayTime = 0;
         const renderChanges = (arr: SortArray, toSwap?: HighlightedElements) => {
@@ -74,8 +76,11 @@ const SortComponent = (sort: SortFunc) => {
         setSteps(stepsSpent);
         setTimeTaken(Math.round(sortTime * 100) / 100);
         setSwappingElements({ sorted: true });
-      } catch (err) {
+      } catch (err: any) {
         console.error("Sorting error:", err);
+        if (isMounted.current) {
+          setErrorMessage(err?.message || "An error occurred during sorting");
+        }
       } finally {
         if (isMounted.current) {
           setIsSorting(false);
@@ -89,7 +94,13 @@ const SortComponent = (sort: SortFunc) => {
           <Graph array={array} swaps={swappingElements} />
         </main>
         <footer className={styles.status}>
-          Steps: {steps}. Time taken {timeTaken}ms.
+          {errorMessage ? (
+            <span role="alert" style={{ color: "#ff6b6b" }}>
+              {errorMessage}
+            </span>
+          ) : (
+            `Steps: ${steps}. Time taken ${timeTaken}ms.`
+          )}
         </footer>
       </>
     );

@@ -109,6 +109,9 @@ export const countingSort: SortFunc = async (arr, isASC, render) => {
   }
   let steps = 0;
   const numArr = arr as number[];
+  if (numArr.some((num) => !Number.isInteger(num))) {
+    throw new Error("Counting sort only works with integers");
+  }
   const max = Math.max(...numArr);
   const min = Math.min(...numArr);
   if (max - min > 100000) {
