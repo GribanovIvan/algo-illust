@@ -1,0 +1,41 @@
+$ npx eslint src 2>&1 | tail -20
+npm notice run algo-illust@0.1.0 npx
+npm notice run 'eslint' src
+$ npx tsc --noEmit 2>&1 | tail -20
+npm notice run algo-illust@0.1.0 npx
+npm notice run 'tsc' --noEmit
+$ npm run build 2>&1 | tail -15
+npm notice run algo-illust@0.1.0 build
+npm notice run tsc --noEmit && vite build
+vite v8.3.0 building client environment for production...
+transforming...
+✓ 76 modules transformed.
+rendering chunks...
+computing gzip size...
+build/index.html                             0.70 kB │ gzip:  0.38 kB
+build/assets/benchmark.worker-xnY9PR7Q.js    2.83 kB
+build/assets/index-DZeZ1Vxt.css             11.16 kB │ gzip:  2.81 kB
+build/assets/index-D-YjHdbW.js             200.46 kB │ gzip: 64.62 kB
+
+✓ built in 467ms
+$ npx jest --coverage --watchAll=false 2>&1 | tail -20
+  generateArray.ts              |    43.1 |       50 |    37.5 |   39.17 | 29-51,56-57,73-98,106-128                                                                                                                                                              
+  parseArray.ts                 |     100 |      100 |     100 |     100 |                                                                                                                                                                                        
+  sortList.ts                   |     100 |      100 |     100 |     100 |                                                                                                                                                                                        
+  sorts.ts                      |   93.58 |    97.54 |     100 |   91.25 | 134-152                                                                                                                                                                                
+ src/utils/types                |     100 |      100 |     100 |     100 |                                                                                                                                                                                        
+  ds.types.ts                   |     100 |      100 |     100 |     100 |                                                                                                                                                                                        
+--------------------------------|---------|----------|---------|---------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+=============================== Coverage summary ===============================
+Statements   : 63.05% ( 1512/2398 )
+Branches     : 36.83% ( 477/1295 )
+Functions    : 59.22% ( 215/363 )
+Lines        : 61.82% ( 1278/2067 )
+================================================================================
+
+Test Suites: 14 passed, 14 total
+Tests:       184 passed, 184 total
+Snapshots:   0 total
+Time:        6.125 s
+Ran all test suites.
