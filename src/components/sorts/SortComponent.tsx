@@ -46,22 +46,30 @@ const SortComponent = (sort: SortFunc) => {
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [array]);
 
-    const renderChanges = (arr: SortArray, toSwap?: HighlightedElements) => {
-      if (!isMounted.current) return Promise.resolve();
-      setArray(arr);
-      setSwappingElements(toSwap || {});
-      return new Promise((resolve) => setTimeout(resolve, delay));
-    };
-
     const startSorting = async () => {
       setIsSorting(true);
       try {
+        let totalDelayTime = 0;
+        const renderChanges = (arr: SortArray, toSwap?: HighlightedElements) => {
+          if (!isMounted.current) return Promise.resolve();
+          setArray(arr);
+          setSwappingElements(toSwap || {});
+          const delayStart = performance.now();
+          return new Promise<void>((resolve) => {
+            setTimeout(() => {
+              totalDelayTime += performance.now() - delayStart;
+              resolve();
+            }, delay);
+          });
+        };
+
         const startTime = performance.now();
         const stepsSpent = await sort([...array], isASC, renderChanges);
         if (!isMounted.current) return;
+        const totalElapsed = performance.now() - startTime;
         const sortTime = Math.max(
           0,
-          performance.now() - startTime - stepsSpent * delay
+          totalElapsed - totalDelayTime
         );
         setSteps(stepsSpent);
         setTimeTaken(Math.round(sortTime * 100) / 100);
