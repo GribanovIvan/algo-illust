@@ -9,15 +9,15 @@ npm notice run algo-illust@0.1.0 build
 npm notice run tsc --noEmit && vite build
 vite v8.3.0 building client environment for production...
 transforming...
-✓ 76 modules transformed.
+✓ 77 modules transformed.
 rendering chunks...
 computing gzip size...
-build/index.html                             0.70 kB │ gzip:  0.38 kB
+build/index.html                             1.31 kB │ gzip:  0.68 kB
 build/assets/benchmark.worker-xnY9PR7Q.js    2.83 kB
 build/assets/index-DZeZ1Vxt.css             11.16 kB │ gzip:  2.81 kB
-build/assets/index-CSupHfPu.js             200.41 kB │ gzip: 64.62 kB
+build/assets/index-DW8YsHPp.js             200.16 kB │ gzip: 64.54 kB
 
-✓ built in 387ms
+✓ built in 576ms
 $ npx jest --coverage --watchAll=false 2>&1 | tail -20
   generateArray.ts              |    43.1 |       50 |    37.5 |   39.17 | 29-51,56-57,73-98,106-128                                                                                                                                                              
   parseArray.ts                 |     100 |      100 |     100 |     100 |                                                                                                                                                                                        
@@ -28,14 +28,14 @@ $ npx jest --coverage --watchAll=false 2>&1 | tail -20
 --------------------------------|---------|----------|---------|---------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 =============================== Coverage summary ===============================
-Statements   : 62.99% ( 1510/2397 )
+Statements   : 63.05% ( 1514/2401 )
 Branches     : 36.75% ( 476/1295 )
-Functions    : 59.22% ( 215/363 )
-Lines        : 61.79% ( 1276/2065 )
+Functions    : 59.34% ( 216/364 )
+Lines        : 61.84% ( 1279/2068 )
 ================================================================================
 
-Test Suites: 14 passed, 14 total
-Tests:       184 passed, 184 total
+Test Suites: 15 passed, 15 total
+Tests:       202 passed, 202 total
 Snapshots:   0 total
-Time:        3.457 s
+Time:        3.344 s
 Ran all test suites.
