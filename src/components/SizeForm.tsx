@@ -1,4 +1,4 @@
-import './Form.module.scss';
+import './Form.scss';
 
 export const MIN_LENGTH = 2;
 // larger arrays freeze the tab while being generated
