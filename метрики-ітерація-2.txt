@@ -1,0 +1,37 @@
+npm notice run algo-illust@0.1.0 npx
+npm notice run 'eslint' src
+npm notice run algo-illust@0.1.0 npx
+npm notice run 'tsc' --noEmit
+npm notice run algo-illust@0.1.0 build
+npm notice run vite build
+vite v8.3.0 building client environment for production...
+transforming...
+✓ 73 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                             0.97 kB │ gzip:  0.51 kB
+dist/assets/benchmark.worker-CbIyNrOz.js    3.31 kB
+dist/assets/index-BhdSoxdF.css             12.30 kB │ gzip:  2.99 kB
+dist/assets/index-gPx8lKiM.js             206.01 kB │ gzip: 66.35 kB
+
+✓ built in 574ms
+  queue.ts                      |   41.66 |    26.08 |   61.53 |   41.66 | 16,37-38,46,55,63-116,126                     
+  stack.ts                      |   92.75 |    83.33 |    92.3 |   92.75 | 37-38,66,75,86                                
+  test.ts                       |     100 |       50 |     100 |     100 | 15-17                                         
+ src/utils/searches             |   70.62 |    63.26 |   68.75 |   69.69 |                                               
+  generateArray.ts              |   68.42 |        0 |   57.14 |   66.66 | 12-15                                         
+  generateString.ts             |    8.33 |        0 |       0 |    8.33 | 2-35                                          
+  searches.ts                   |      86 |    86.11 |     100 |   85.41 | 21-23,27-29,47,70-71,134,143-145,147          
+ src/utils/sorts                |   44.82 |    52.33 |   21.05 |   44.77 |                                               
+  benchmark.worker.ts           |    2.22 |     6.52 |       0 |    2.45 | 4-278,285                                     
+  generateArray.ts              |      10 |        0 |       0 |   12.85 | 8-17,22-31,38-97,102-107                      
+  sorts.ts                      |   91.37 |    80.32 |   94.11 |    90.9 | 104-105,152-170,220                           
+ src/utils/types                |     100 |      100 |     100 |     100 |                                               
+  ds.types.ts                   |     100 |      100 |     100 |     100 |                                               
+--------------------------------|---------|----------|---------|---------|-----------------------------------------------
+
+Test Suites: 5 passed, 5 total
+Tests:       68 passed, 68 total
+Snapshots:   0 total
+Time:        1.727 s
+Ran all test suites.
