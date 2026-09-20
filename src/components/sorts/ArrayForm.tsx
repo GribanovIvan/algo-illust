@@ -2,7 +2,12 @@ import { useState } from 'react';
 import parseArray from '../../utils/sorts/parseArray';
 import styles from './ArrayForm.module.scss';
 
-const ArrayForm = ({onArraySubmit}: {onArraySubmit: (array: number[]) => void}) => {
+type ArrayFormProps = {
+  onArraySubmit: (array: number[]) => void;
+  disabled?: boolean;
+}
+
+const ArrayForm = ({onArraySubmit, disabled = false}: ArrayFormProps) => {
   const [error, setError] = useState<string>('');
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -24,9 +29,15 @@ const ArrayForm = ({onArraySubmit}: {onArraySubmit: (array: number[]) => void}) 
           placeholder="5, 3 8 1"
           type="text"
           aria-invalid={error !== ''}
+          disabled={disabled}
         />
       </span>
-      <input type="submit" value="Sort" title="Sort own array" />
+      <input
+        type="submit"
+        value="Sort"
+        title={disabled ? "Please wait for the current sorting to finish" : "Sort own array"}
+        disabled={disabled}
+      />
       {error && <span role="alert" className={styles.error}>{error}</span>}
     </form>
   )

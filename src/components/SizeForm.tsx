@@ -4,7 +4,12 @@ export const MIN_LENGTH = 2;
 // larger arrays freeze the tab while being generated
 export const MAX_LENGTH = 100000;
 
-const SizeForm = ({onLengthSubmit}: {onLengthSubmit:  (length: number) => void}) => {
+type SizeFormProps = {
+  onLengthSubmit: (length: number) => void;
+  disabled?: boolean;
+}
+
+const SizeForm = ({onLengthSubmit, disabled = false}: SizeFormProps) => {
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -24,9 +29,15 @@ const SizeForm = ({onLengthSubmit}: {onLengthSubmit:  (length: number) => void})
           defaultValue="10"
           min={MIN_LENGTH}
           max={MAX_LENGTH}
+          disabled={disabled}
         />
       </span>
-      <input type="submit" value="Run" title="Start" />
+      <input
+        type="submit"
+        value="Run"
+        title={disabled ? "Please wait for the current sorting to finish" : "Start"}
+        disabled={disabled}
+      />
     </form>
   )
 }

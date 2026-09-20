@@ -25,6 +25,14 @@ describe('ArrayForm', () => {
     expect(screen.getByLabelText('Own array:')).toHaveAttribute('aria-invalid', 'true');
   });
 
+  test('blocks the input and the button while disabled', () => {
+    render(<ArrayForm onArraySubmit={jest.fn()} disabled />);
+    expect(screen.getByLabelText('Own array:')).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'Sort' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'Sort' }))
+      .toHaveAttribute('title', 'Please wait for the current sorting to finish');
+  });
+
   test('clears the error after a valid submit', () => {
     render(<ArrayForm onArraySubmit={jest.fn()} />);
     submit('');

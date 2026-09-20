@@ -18,29 +18,24 @@ const SortPage = () => {
   const [isASC, setIsASC] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(false);
   const [isSorting, setIsSorting] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
   const [variant, setVariant] = useState<number>(0);
 
+  // the forms are disabled while sorting, so the handlers never run at that time
   const onLengthSubmit = async (length: number) => {
-    if (!isSorting) {
-      setLoading(true);
-      try {
-        setArray(await generateArray(length, variant) as SortArray);
-      } catch (e) {
-        alert(`Failed to generate array: ${e instanceof Error ? e.message : e}`);
-      } finally {
-        setLoading(false);
-      }
-    } else {
-      alert("Please wait for the current sorting to finish.");
+    setLoading(true);
+    setError("");
+    try {
+      setArray(await generateArray(length, variant) as SortArray);
+    } catch (e) {
+      setError(`Failed to generate array: ${e instanceof Error ? e.message : e}`);
+    } finally {
+      setLoading(false);
     }
   };
 
   const onArraySubmit = (array: number[]) => {
-    if (!isSorting) {
-      setArray(array);
-    } else {
-      alert("Please wait for the current sorting to finish.");
-    }
+    setArray(array);
   };
 
   return (
@@ -59,9 +54,10 @@ const SortPage = () => {
         </span>
       </header>
       <span className='centerX'>
-          <SizeForm onLengthSubmit={onLengthSubmit} />
-          <ArrayForm onArraySubmit={onArraySubmit} />
+          <SizeForm onLengthSubmit={onLengthSubmit} disabled={isSorting} />
+          <ArrayForm onArraySubmit={onArraySubmit} disabled={isSorting} />
       </span>
+      {error && <span role="alert" className={styles.status}>{error}</span>}
       {loading ?
         <span className={styles.status}>Fetching data...</span> 
       : <Outlet context={[
