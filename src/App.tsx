@@ -1,5 +1,5 @@
 import SortPage from "./pages/SortPage";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import SortComponent from "./components/sorts/SortComponent";
 import { useMemo } from "react";
 import {
@@ -32,7 +32,8 @@ function App() {
 
   return (
     <>
-      <BrowserRouter basename="/asd">
+      {/* the hash keeps the base path runtime-defined: the build works both in the site root and under any prefix */}
+      <HashRouter>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="sort/" element={<SortPage />}>
@@ -62,7 +63,7 @@ function App() {
           </Route>
           <Route path="*" element={<h1 style={{color: "white"}}>404</h1>} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </>
   );
 }

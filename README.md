@@ -11,11 +11,12 @@ In the project directory, you can run:
 ### `npm start`
 
 Runs the app in the development mode (Vite).\
-Open [http://localhost:3000/asd/](http://localhost:3000/asd/) to view it in the browser.
+Open [http://localhost:3000/](http://localhost:3000/) to view it in the browser.
 
 ### `npm run build`
 
-Type-checks the project and builds it into the `build` folder with relative asset paths.
+Type-checks the project and builds it into the `build` folder with relative asset paths,
+so it can be served both from the site root and from any subfolder.
 
 ### `npm test`
 
