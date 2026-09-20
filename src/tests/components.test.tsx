@@ -177,13 +177,60 @@ describe("React Components & Integration Tests", () => {
     unmount();
   });
 
-  describe("Router prefix and basename resolution (/asd/ and root)", () => {
-    test("getRouterBasename correctly detects /asd prefix and root", () => {
+  describe("Router prefix and basename resolution (arbitrary prefixes and root)", () => {
+    afterEach(() => {
+      // eslint-disable-next-line testing-library/no-node-access
+      document.querySelectorAll("base, script[data-test]").forEach((el) => el.remove());
+    });
+
+    test("getRouterBasename detects prefix from <base> tag dynamically", () => {
+      const baseEl = document.createElement("base");
+      document.head.appendChild(baseEl);
+
+      baseEl.setAttribute("href", "/qwe/");
+      expect(getRouterBasename()).toBe("/qwe");
+
+      baseEl.setAttribute("href", "/algo/");
+      expect(getRouterBasename()).toBe("/algo");
+
+      baseEl.setAttribute("href", "/asd/");
+      expect(getRouterBasename()).toBe("/asd");
+
+      baseEl.setAttribute("href", "/");
+      expect(getRouterBasename()).toBe("");
+
+      baseEl.remove();
+    });
+
+    test("getRouterBasename detects prefix from bundle script module URL", () => {
+      const script = document.createElement("script");
+      script.setAttribute("data-test", "true");
+      script.src = "http://localhost:3000/algo/assets/index-test.js";
+      document.head.appendChild(script);
+
+      expect(getRouterBasename()).toBe("/algo");
+
+      script.src = "http://localhost:3000/custom/nested/assets/index-test.js";
+      expect(getRouterBasename()).toBe("/custom/nested");
+
+      script.src = "http://localhost:3000/assets/index-test.js";
+      expect(getRouterBasename()).toBe("");
+
+      script.remove();
+    });
+
+    test("getRouterBasename correctly detects arbitrary prefixes and root from pathname", () => {
       window.history.pushState({}, "", "/asd/");
       expect(getRouterBasename()).toBe("/asd");
 
       window.history.pushState({}, "", "/asd/sort/bubble");
       expect(getRouterBasename()).toBe("/asd");
+
+      window.history.pushState({}, "", "/qwe/");
+      expect(getRouterBasename()).toBe("/qwe");
+
+      window.history.pushState({}, "", "/qwe/sort/bubble");
+      expect(getRouterBasename()).toBe("/qwe");
 
       window.history.pushState({}, "", "/");
       expect(getRouterBasename()).toBe("");
@@ -200,8 +247,24 @@ describe("React Components & Integration Tests", () => {
       unmount();
     });
 
+    test("opening application at arbitrary prefixed path /qwe/ renders Home page instead of 404", () => {
+      window.history.pushState({}, "", "/qwe/");
+      const { unmount } = render(<App />);
+      expect(screen.queryByText("404")).not.toBeInTheDocument();
+      expect(screen.getByText(/Algorithms Visualizer/i)).toBeInTheDocument();
+      unmount();
+    });
+
     test("opening application at prefixed path /asd/sort/bubble renders BubbleSort", () => {
       window.history.pushState({}, "", "/asd/sort/bubble");
+      const { unmount } = render(<App />);
+      expect(screen.queryByText("404")).not.toBeInTheDocument();
+      expect(screen.getByText(/Bubble Sort/i)).toBeInTheDocument();
+      unmount();
+    });
+
+    test("opening application at arbitrary prefixed path /qwe/sort/bubble renders BubbleSort", () => {
+      window.history.pushState({}, "", "/qwe/sort/bubble");
       const { unmount } = render(<App />);
       expect(screen.queryByText("404")).not.toBeInTheDocument();
       expect(screen.getByText(/Bubble Sort/i)).toBeInTheDocument();

@@ -22,11 +22,58 @@ import BM from "./components/searches/BM";
 import Binary from "./components/searches/Binary";
 
 export const getRouterBasename = (): string => {
-  if (typeof window === "undefined") return "";
-  const pathname = window.location.pathname;
-  if (pathname.startsWith("/asd")) {
-    return "/asd";
+  if (typeof window === "undefined" || typeof document === "undefined") return "";
+
+  // 1. From <base> element
+  const baseEl = document.querySelector("base");
+  if (baseEl) {
+    const href = baseEl.getAttribute("href");
+    if (href) {
+      try {
+        const path = new URL(href, window.location.origin).pathname;
+        return path.replace(/\/+$/, "");
+      } catch {
+        return href.replace(/\/+$/, "");
+      }
+    }
   }
+
+  // 2. From document.baseURI
+  if (document.baseURI) {
+    try {
+      const baseUriPath = new URL(document.baseURI).pathname.replace(/\/+$/, "");
+      if (baseUriPath && baseUriPath !== window.location.pathname.replace(/\/+$/, "")) {
+        return baseUriPath;
+      }
+    } catch {
+      // ignore
+    }
+  }
+
+  // 3. From script src of the application bundle
+  const scripts = Array.from(document.querySelectorAll("script[src]"));
+  for (const s of scripts) {
+    const src = (s as HTMLScriptElement).src;
+    if (src && (src.includes("/assets/") || src.includes("index"))) {
+      try {
+        const scriptPath = new URL(src, window.location.origin).pathname;
+        const assetIndex = scriptPath.indexOf("/assets/");
+        if (assetIndex !== -1) {
+          return scriptPath.slice(0, assetIndex).replace(/\/+$/, "");
+        }
+      } catch {
+        // ignore
+      }
+    }
+  }
+
+  // 4. Fallback: match known top-level routes from pathname
+  const pathname = window.location.pathname;
+  const routeMatch = pathname.match(/^(.*?)(\/(sort|search|ds)(\/.*)?)?$/);
+  if (routeMatch && routeMatch[1]) {
+    return routeMatch[1].replace(/\/+$/, "");
+  }
+
   return "";
 };
 
