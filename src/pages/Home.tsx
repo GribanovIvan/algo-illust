@@ -15,7 +15,7 @@ const Home = () => {
   const [selectedItem, setSelectedItem] = React.useState(0);
   const selectedItemRef = React.useRef(selectedItem);
   selectedItemRef.current = selectedItem;
-  const [inputFocus, setInputFocus]: any = useFocus();
+  const [inputFocus, setInputFocus] = useFocus();
   const navigate = useNavigate();
   const header = "Let's get started!";
 
