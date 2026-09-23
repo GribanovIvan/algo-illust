@@ -3,8 +3,10 @@ import generateRandomArray from "../randomArrays";
 export const generateArray8 = () => {
     console.log("VARIANT 8");
     const matrix = Array.from({length: 5}, () => generateRandomArray(4, 10, true));
-    console.log("Table: ", matrix);
-    console.log("Sorted: ", matrix.map((row) => row.sort((a, b) => a - b)));
+    console.log("Table: ", matrix.map((row) => [...row]));
+    // binary search needs sorted rows, so sort them here and not as a side effect of the log
+    matrix.forEach((row) => row.sort((a, b) => a - b));
+    console.log("Sorted: ", matrix);
     return matrix;
 }
 
