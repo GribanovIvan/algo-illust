@@ -2,16 +2,34 @@ import { act, fireEvent, render, screen } from '@testing-library/react';
 import App from '../src/App';
 import createBenchmarkWorker from '../src/utils/workerBuilder';
 import { createWorkerMock } from './fixtures/worker';
+import { routerBase } from '../src/utils/routerBase';
 
 jest.mock('../src/utils/routerBase', () => ({routerBase: '/asd'}));
 jest.mock('../src/utils/workerBuilder');
 
 beforeEach(() => {
+  jest.replaceProperty(require('../src/utils/routerBase'), 'routerBase', '/asd');
   jest.useFakeTimers();
   jest.spyOn(console, 'log').mockImplementation(() => {});
   jest.mocked(createBenchmarkWorker).mockReturnValue(createWorkerMock() as unknown as Worker);
 });
 afterEach(() => jest.useRealTimers());
+
+test.each(['/', '/asd', '/qwe'])('renders direct routes and navigation under %s', async prefix => {
+  jest.replaceProperty(require('../src/utils/routerBase'), 'routerBase', prefix);
+  const base = routerBase === '/' ? '' : routerBase;
+  window.history.replaceState({}, '', `${base}/`);
+  const home = render(<App />);
+  expect(screen.getByRole('heading', {name: 'Algorithms Visualizer'})).toBeVisible();
+  home.unmount();
+  window.history.replaceState({}, '', `${base}/sort/bubble`);
+  render(<App />);
+  expect(screen.getByLabelText('Array Length:')).toBeVisible();
+  fireEvent.click(screen.getByRole('link', {name: 'Heap Sort'}));
+  expect(window.location.pathname).toBe(`${base}/sort/heap`);
+  expect(window.location.hash).toBe('');
+  await act(async () => {});
+});
 
 const routes = [
   ...['bubble', 'selection', 'shell', 'quick', 'merge', 'counting', 'heap'].map(id => [`sort/${id}`, 'Власний масив']),
