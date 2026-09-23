@@ -4,6 +4,7 @@ import DSNavBar from "../components/navigations/DSNavBar";
 import { DSArray, DSClassMap, DSStats } from "../utils/types/ds.types";
 import { DSTypeId } from "../utils/types/ds.types";
 import styles from "./DataStructuresPage.module.scss";
+import formStyles from "../components/Form.module.scss";
 import "../components/Form.module.scss";
 import {
   StackDS,
@@ -119,7 +120,7 @@ const DataStructuresPage = () => {
       </header>
       {inputError && <p role="alert" className="centerX">{inputError}</p>}
       {type === "tree" ? null : (
-        <form onSubmit={runStats} className="centerX">
+        <form onSubmit={runStats} className={`${formStyles.form} centerX`}>
           <span>
             <label htmlFor="toFind">Find:</label>
             <input id="toFind" name="toFind" placeholder="value" defaultValue="1" />

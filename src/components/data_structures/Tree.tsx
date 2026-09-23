@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import drawTree from "../../utils/data_structures/drawingTree";
 import { RBTree } from "../../utils/data_structures/RedBlackTree";
+import styles from "./Tree.module.scss";
 
 const Tree = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -44,24 +45,28 @@ const Tree = () => {
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
-      <div
-        style={{
-          display: "flex",
-          gap: "5px",
-          borderRadius: "5px",
+      <form
+        className={styles.controls}
+        onSubmit={(e) => {
+          e.preventDefault();
+          insert();
         }}
       >
-        <button onClick={() => insert()}>Insert</button>
         <input
           ref={inputRef}
           type="text"
+          aria-label={isChar ? "Letter to insert" : "Number to insert"}
+          placeholder={isChar ? "letter" : "number"}
           value={inputState}
           onChange={(e) => setInputState(e.target.value)}
         />
-        <span>Char tree</span>
-        <input type="checkbox" onChange={() => setIsChar(!isChar)} />
+        <button type="submit">Insert</button>
+        <label>
+          <input type="checkbox" onChange={() => setIsChar(!isChar)} />
+          Char tree
+        </label>
         {message && <span role="alert">{message}</span>}
-      </div>
+      </form>
 
       <div>
         <canvas ref={canvasRef} id="canvas" width="10" height="500"></canvas>

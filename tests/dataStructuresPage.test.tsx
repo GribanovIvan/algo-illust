@@ -120,3 +120,18 @@ test('the character tree accepts single letters only and reports duplicates', ()
   fireEvent.click(screen.getByRole('button', {name: 'Insert'}));
   expect(screen.getByRole('alert')).toHaveTextContent('key q is already in the tree');
 });
+
+test('the tree inserts on Enter and its controls are labelled', () => {
+  mount('tree');
+  const input = screen.getByRole('textbox', {name: 'Number to insert'});
+  fireEvent.change(input, {target: {value: '42'}});
+  fireEvent.submit(input.closest('form')!);
+  expect(context.fillText).toHaveBeenCalledWith('42', expect.any(Number), expect.any(Number));
+  fireEvent.click(screen.getByRole('checkbox', {name: 'Char tree'}));
+  expect(screen.getByRole('textbox', {name: 'Letter to insert'})).toBeInTheDocument();
+});
+
+test('the statistics field is reachable through its label', () => {
+  mount('stack');
+  expect(screen.getByRole('textbox', {name: 'Find:'})).toHaveValue('1');
+});
