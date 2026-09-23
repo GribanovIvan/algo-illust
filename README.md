@@ -28,6 +28,6 @@ Requires Node.js 22.12 or newer.
 
 ## Deployment
 
-The build is plain static files and is not tied to a folder: copy the **contents** of `dist` to the site root or to any subfolder such as `/asd/`. The server should answer unknown paths inside that folder with its `index.html`, as usual for single-page apps, so links like `/asd/sort/bubble` can be opened directly. The app works out its folder from the address, so the folder itself must not be named `sort`, `search` or `ds`.
+The build is plain static files and is not tied to a folder: copy the **contents** of `dist` to the site root or to any subfolder such as `/asd/`. The server should answer unknown paths inside that folder with its `index.html`, as usual for single-page apps, so links like `/asd/sort/bubble` can be opened directly. The app works out its folder from the address, so the folder itself must not be named `sort`, `search` or `ds`. On Netlify the included `netlify.toml` sets the build, the `dist` folder and this fallback.
 
 Variants that generate names and cities use built-in word lists and the font is bundled with the app, so it makes no requests to third-party servers and works offline once loaded.

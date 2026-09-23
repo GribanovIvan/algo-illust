@@ -1,0 +1,15 @@
+# Netlify build settings in the repository, so they follow the Vite build
+# instead of the Create React App defaults (publish folder "build").
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# single page app: unknown paths get index.html, so direct links like
+# /sort/bubble open; existing files are still served as they are
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
