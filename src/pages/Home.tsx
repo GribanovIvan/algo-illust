@@ -76,7 +76,7 @@ const Home = () => {
             <div className={styles.menu}>
               <span className={styles.terminalInput} >
                 <TerminalArrow />
-                <input type="text" onChange={handleInput} ref={inputFocus}/>
+                <input type="text" aria-label="Type a section name" onChange={handleInput} ref={inputFocus}/>
               </span>
               <div className={styles.items}>
                 {menuItems.map((item, index) => (

@@ -46,3 +46,11 @@ test('leaves no keyboard handler or timers behind after unmount', () => {
   expect(jest.getTimerCount()).toBe(0);
   expect(window.onkeydown).toBeNull();
 });
+
+test('typing a section name selects it', () => {
+  renderHome();
+  act(() => { jest.advanceTimersByTime(1700); });
+  fireEvent.change(screen.getByRole('textbox', {name: 'Type a section name'}), {target: {value: 'data'}});
+  fireEvent.keyDown(window, {key: 'Enter'});
+  expect(screen.getByRole('status')).toHaveTextContent('/ds/stack');
+});
