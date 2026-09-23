@@ -122,7 +122,7 @@ const DataStructuresPage = () => {
         <form onSubmit={runStats} className="centerX">
           <span>
             <label htmlFor="toFind">Find:</label>
-            <input name="toFind" placeholder="value" defaultValue="1" />
+            <input id="toFind" name="toFind" placeholder="value" defaultValue="1" />
           </span>
           <input type="submit" value="Start" title="Get Stats" />
         </form>
