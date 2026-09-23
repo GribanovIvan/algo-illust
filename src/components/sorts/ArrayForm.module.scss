@@ -4,22 +4,41 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  padding: .5rem;
+  gap: .5rem;
   color: $primary-clr;
 
+  label {
+    margin-right: .5rem;
+  }
+
+  // one line like the size input, but still a textarea so pasted multi-line arrays keep their separators
   textarea {
-    width: min(24rem, 80vw);
+    width: min(16rem, 60vw);
     border-radius: .6rem;
     padding: .5rem;
+    resize: none;
+    overflow: hidden;
+    white-space: nowrap;
+    font: inherit;
+    line-height: 1.2;
   }
 
   button {
-    padding: .5rem;
+    margin: 0 1rem;
+    padding: .5rem .8rem;
     border-radius: .6rem;
     border: .15rem solid $primary-clr;
-    background: $secondary-clr;
+    background-color: $secondary-clr;
     color: $primary-clr;
+    font: inherit;
     cursor: pointer;
+    transition: .1s ease-in-out;
+
+    &:hover:enabled {
+      transform: scale(1.1);
+      background-color: $primary-clr;
+      color: $secondary-clr;
+    }
   }
 
   [role='alert'] {

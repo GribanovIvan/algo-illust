@@ -58,3 +58,11 @@ header {
         gap: 1rem;
     }
 }
+
+.forms {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: .5rem 1rem;
+}

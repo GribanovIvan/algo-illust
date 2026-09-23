@@ -53,10 +53,10 @@ const SortPage = () => {
           <Params setIllustDelay={setIllustDelay} setVariant={setVariant} disabled={isSorting || loading} />
         </span>
       </header>
-      <span className='centerX'>
+      <div className={styles.forms}>
           <SizeForm onLengthSubmit={onLengthSubmit} disabled={isSorting || loading} />
-      </span>
-      <div className='centerX'><ArrayForm onArraySubmit={setArray} disabled={isSorting || loading} /></div>
+          <ArrayForm onArraySubmit={setArray} disabled={isSorting || loading} />
+      </div>
       {error && <p role="alert">{error}</p>}
       {loading ?
         <span className={styles.status}>Fetching data...</span> 

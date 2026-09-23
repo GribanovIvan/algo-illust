@@ -24,7 +24,7 @@ const ArrayForm = ({ onArraySubmit, disabled = false }: ArrayFormProps) => {
       }
     }}>
       <label htmlFor={id}>Custom array (2–200 numbers):</label>
-      <textarea rows={2} id={id} name="array" placeholder="3, -1, 2.5" maxLength={10000}
+      <textarea rows={1} id={id} name="array" placeholder="3, -1, 2.5" maxLength={10000}
         disabled={disabled} aria-invalid={!!error} aria-describedby={error ? `${id}-error` : undefined} />
       <button type="submit" disabled={disabled}>Sort array</button>
       {error && <span id={`${id}-error`} role="alert">{error}</span>}
