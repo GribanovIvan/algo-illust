@@ -1,3 +1,6 @@
+// initial animation delay: the "8" item the speed list shows as selected
+export const DEFAULT_DELAY = 3600 / 9;
+
 type ParamsProps = {
     setIllustDelay: (delay: number) => void;
     disabled?: boolean;
@@ -12,14 +15,13 @@ const Params = ({setIllustDelay, setVariant, disabled}: ParamsProps) => {
           id="illustSpeed"
           disabled={disabled}
           name="illustSpeed"
-          defaultValue={250}
+          defaultValue={DEFAULT_DELAY}
           title="Animation speed"
           onChange={(e) => setIllustDelay(parseInt(e.target.value))}
         >
           {Array.from({ length: 12 }, (_, i) => (
             <option key={i} value={3600 / (i + 2)}>{i + 1}</option>
           ))}
-          <option value={250}>default</option>
           <option value={40}>extreme</option>
         </select>
         <label htmlFor="variant">Var:</label>

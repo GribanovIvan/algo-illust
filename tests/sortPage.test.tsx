@@ -119,3 +119,14 @@ describe('Виняткові ситуації', () => {
     expect(screen.getByRole('alert')).toHaveTextContent('Sorting failed.');
   });
 });
+
+test('the animation starts at the speed the list shows as selected', async () => {
+  mount('bubble');
+  const speed = screen.getByLabelText('Speed:') as HTMLSelectElement;
+  expect(speed).toHaveDisplayValue('8');
+  expect(screen.queryByRole('option', {name: 'default'})).toBeNull();
+  const timers = jest.spyOn(global, 'setTimeout');
+  submit('2 1');
+  await act(async () => { await jest.runAllTimersAsync(); });
+  expect(timers.mock.calls.map(([, delay]) => delay)).toContain(Number(speed.value));
+});

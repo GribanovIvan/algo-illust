@@ -4,7 +4,7 @@ import { useState } from "react";
 import { HighlightedElements, SortArray, SortTypeId } from "../utils/types/sort.types";
 import styles from "./SortPage.module.scss";
 import generateArray from "../utils/sorts/generateArray";
-import Params from "../components/sorts/Params";
+import Params, { DEFAULT_DELAY } from "../components/sorts/Params";
 import ArrayForm from "../components/sorts/ArrayForm";
 import { validateLength } from "../utils/sorts/parseArray";
 import SizeForm from "../components/SizeForm";
@@ -13,7 +13,7 @@ import SizeForm from "../components/SizeForm";
 const SortPage = () => {
   const [array, setArray] = useState<SortArray>([]);
   const [swappingElements, setSwappingElements] = useState<HighlightedElements>({});
-  const [illustDelay, setIllustDelay] = useState<number>(250);
+  const [illustDelay, setIllustDelay] = useState<number>(DEFAULT_DELAY);
   const sortType = useLocation().pathname.split("/").pop() as SortTypeId;
   const [error, setError] = useState("");
   const [isASC, setIsASC] = useState<boolean>(true);
