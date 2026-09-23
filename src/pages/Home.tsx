@@ -2,6 +2,9 @@ import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import useFocus from '../hooks/useFocus';
 import TerminalArrow from '../images/TerminalArrow';
+import '@fontsource/roboto-mono/400.css';
+import '@fontsource/roboto-mono/300-italic.css';
+import '@fontsource/roboto-mono/600-italic.css';
 import styles from './Home.module.scss';
 
 const menuItems = [
