@@ -44,16 +44,18 @@ const SearchComponent = (search: Search, delay: number) => {
       (field === 'searchFor' ? !!active.found : active.found?.includes(index)) ? styles.green : '',
     ].join(' ');
 
-    return <>
+    return <div className={styles.layout}>
       {error && <p role="alert">{error}</p>}
       {result && <p role="status" className={styles.result}>{result}</p>}
-      <div className={`${styles['search-array']} ${array.length > 30 ? styles.large : ''}`}>
-        {array.split('').map((item, index) => <div key={index} className={characterClass(index, 'searchIn')}>{item}</div>)}
+      <div className={styles.arrays}>
+        <div className={`${styles['search-array']} ${array.length > 30 ? styles.large : ''}`}>
+          {array.split('').map((item, index) => <div key={index} className={characterClass(index, 'searchIn')}>{item}</div>)}
+        </div>
+        <div className={styles['search-array']}>
+          {target.split('').map((item, index) => <div key={index} className={characterClass(index, 'searchFor')}>{item}</div>)}
+        </div>
       </div>
-      <div className={styles['search-array']}>
-        {target.split('').map((item, index) => <div key={index} className={characterClass(index, 'searchFor')}>{item}</div>)}
-      </div>
-    </>;
+    </div>;
   };
   return Component;
 };
