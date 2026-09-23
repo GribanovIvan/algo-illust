@@ -13,12 +13,38 @@ test('size form attaches the CSS module to its label, input and submit container
   expect(form).toContainElement(screen.getByText('Array Length:'));
 });
 
+test.each([
+  ['', 'Enter numbers separated by commas or spaces.'],
+  ['1', 'Enter between 2 and 200 elements.'],
+  ['1 cat', '“cat” is not a valid number.'],
+  ['1 1e999', 'Numbers must be finite.'],
+  ['1'.repeat(10001), 'Input is too long (maximum 10000 characters).'],
+])('custom array validation uses English for %s', (value, message) => {
+  render(<ArrayForm onArraySubmit={jest.fn()} />);
+  fireEvent.change(screen.getByLabelText('Custom array (2–200 numbers):'), {target: {value}});
+  fireEvent.click(screen.getByRole('button', {name: 'Sort array'}));
+  expect(screen.getByRole('alert')).toHaveTextContent(message);
+});
+
+test('custom array fallback error uses English', () => {
+  render(<ArrayForm onArraySubmit={() => { throw null; }} />);
+  fireEvent.change(screen.getByLabelText('Custom array (2–200 numbers):'), {target: {value: '2 1'}});
+  fireEvent.click(screen.getByRole('button', {name: 'Sort array'}));
+  expect(screen.getByRole('alert')).toHaveTextContent('Could not read the array.');
+});
+
+test('size fallback error uses English', () => {
+  render(<SizeForm onLengthSubmit={() => { throw null; }} />);
+  fireEvent.click(screen.getByRole('button', {name: 'Run'}));
+  expect(screen.getByRole('alert')).toHaveTextContent('Invalid size.');
+});
+
 describe('Нормальні значення', () => {
   test.each(validInputs)('submits $text', ({ text, array }) => {
     const submit = jest.fn();
     render(<ArrayForm onArraySubmit={submit} />);
-    fireEvent.change(screen.getByLabelText(/Власний масив/), { target: { value: text } });
-    fireEvent.click(screen.getByRole('button', {name: 'Сортувати масив'}));
+    fireEvent.change(screen.getByLabelText(/Custom array/), { target: { value: text } });
+    fireEvent.click(screen.getByRole('button', {name: 'Sort array'}));
     expect(submit).toHaveBeenCalledWith(array);
     expect(screen.queryByRole('alert')).not.toBeInTheDocument();
   });
@@ -45,8 +71,8 @@ describe('Виняткові ситуації', () => {
   test.each(invalidInputs)('shows error without launching for %s', text => {
     const submit = jest.fn();
     render(<ArrayForm onArraySubmit={submit} />);
-    fireEvent.change(screen.getByLabelText(/Власний масив/), { target: {value: text} });
-    fireEvent.click(screen.getByRole('button', {name: 'Сортувати масив'}));
+    fireEvent.change(screen.getByLabelText(/Custom array/), { target: {value: text} });
+    fireEvent.click(screen.getByRole('button', {name: 'Sort array'}));
     expect(submit).not.toHaveBeenCalled();
     expect(screen.getByRole('alert')).not.toBeEmptyDOMElement();
   });
@@ -56,6 +82,6 @@ describe('Виняткові ситуації', () => {
     fireEvent.change(screen.getByLabelText('Array Length:'), {target: {value}});
     fireEvent.click(screen.getByRole('button', {name: 'Run'}));
     expect(submit).not.toHaveBeenCalled();
-    expect(screen.getByRole('alert')).toHaveTextContent('від 2 до 200');
+    expect(screen.getByRole('alert')).toHaveTextContent('between 2 and 200');
   });
 });

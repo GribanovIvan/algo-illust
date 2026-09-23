@@ -29,7 +29,7 @@ const SearchComponent = (search: Search, delay: number) => {
           });
           if (!animation.cancelled) alert(found === null ? 'Not found' : `Found at position ${found + 1}`);
         } catch (error) {
-          if (!animation.cancelled) setError(error instanceof Error ? error.message : 'Помилка пошуку.');
+          if (!animation.cancelled) setError(error instanceof Error ? error.message : 'Search failed.');
         }
       };
       void run();

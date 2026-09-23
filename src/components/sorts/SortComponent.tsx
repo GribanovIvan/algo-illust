@@ -40,7 +40,7 @@ const SortComponent = (sort: SortFunc) => {
             setHighlighted({ sorted: true });
           }
         } catch (error) {
-          if (!animation.cancelled) setError(error instanceof Error ? error.message : 'Помилка сортування.');
+          if (!animation.cancelled) setError(error instanceof Error ? error.message : 'Sorting failed.');
         } finally {
           if (!animation.cancelled) setIsSorting(false);
         }

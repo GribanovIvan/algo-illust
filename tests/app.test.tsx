@@ -32,7 +32,7 @@ test.each(['/', '/asd', '/qwe'])('renders direct routes and navigation under %s'
 });
 
 const routes = [
-  ...['bubble', 'selection', 'shell', 'quick', 'merge', 'counting', 'heap'].map(id => [`sort/${id}`, 'Власний масив']),
+  ...['bubble', 'selection', 'shell', 'quick', 'merge', 'counting', 'heap'].map(id => [`sort/${id}`, 'Custom array']),
   ...['stack', 'queue', 'deque', 'linked-list', 'doubly-linked', 'circular-linked'].map(id => [`ds/${id}`, 'Find:']),
   ...['kmp', 'bm'].map(id => [`search/${id}`, 'KMP Search']),
   ['sort/compare', 'Size: 10'], ['search/hash', 'hash'],

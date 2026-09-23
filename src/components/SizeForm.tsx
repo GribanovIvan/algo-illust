@@ -21,7 +21,7 @@ const SizeForm = ({ onLengthSubmit, max = MAX_ARRAY_LENGTH, disabled = false }: 
         setError('');
         onLengthSubmit(length);
       } catch (error) {
-        setError(error instanceof Error ? error.message : 'Некоректний розмір.');
+        setError(error instanceof Error ? error.message : 'Invalid size.');
       }
     }}>
       <span>

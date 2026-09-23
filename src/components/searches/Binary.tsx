@@ -37,7 +37,7 @@ const Binary = () => {
           if (!animation.cancelled && variant === 12) processArray12(array, found || []);
         }
       } catch (error) {
-        if (!animation.cancelled) setError(error instanceof Error ? error.message : 'Помилка пошуку.');
+        if (!animation.cancelled) setError(error instanceof Error ? error.message : 'Search failed.');
       }
     };
     void run();

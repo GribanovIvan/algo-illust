@@ -1,6 +1,6 @@
 const generateRandomArray = (length: number = 10, max: number = 10, withNegative: boolean = false) => {
   if (!Number.isInteger(length) || length < 0 || length > 5000 || !Number.isFinite(max) || max <= 0) {
-    throw new Error("Некоректний розмір або діапазон випадкового масиву.");
+    throw new Error("Invalid random array size or range.");
   }
   const array = [];
   if (withNegative) {

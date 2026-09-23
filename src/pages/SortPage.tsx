@@ -28,10 +28,10 @@ const SortPage = () => {
     try {
       validateLength(length);
       const generated = await generateArray(length, variant);
-      if (!generated.length) throw new Error("Цей варіант створив порожній масив. Спробуйте ще раз.");
+      if (!generated.length) throw new Error("This variant generated an empty array. Please try again.");
       setArray(generated as SortArray);
     } catch (error) {
-      setError(error instanceof Error ? error.message : "Не вдалося створити масив.");
+      setError(error instanceof Error ? error.message : "Could not generate the array.");
     } finally {
       setLoading(false);
     }

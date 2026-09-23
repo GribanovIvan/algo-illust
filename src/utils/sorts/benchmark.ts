@@ -11,7 +11,7 @@ export async function benchmark(data: BenchmarkRequest, report: (message: SortSt
   validateLength(data.length, MAX_BENCHMARK_LENGTH);
   if (!Array.isArray(data.sorts) || !data.sorts.length || data.sorts.length > sorts.length ||
       data.sorts.some(id => !sorts.some(sort => sort.id === id))) {
-    throw new Error('Виберіть коректні алгоритми для порівняння.');
+    throw new Error('Select valid algorithms to compare.');
   }
   const source = generateRandomArray(data.length, 100);
   const asc = data.isASC ?? true;

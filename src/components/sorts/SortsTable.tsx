@@ -47,14 +47,14 @@ const SortsTable = () => {
         }
       };
       instance.onerror = () => {
-        if (worker.current === instance) fail('Не вдалося виконати порівняння. Спробуйте ще раз.');
+        if (worker.current === instance) fail('Could not run the comparison. Please try again.');
       };
       instance.onmessageerror = () => {
-        if (worker.current === instance) fail('Не вдалося прочитати відповідь воркера.');
+        if (worker.current === instance) fail('Could not read the worker response.');
       };
       instance.postMessage({ length, sorts: selected });
     } catch (error) {
-      fail(error instanceof Error ? error.message : 'Не вдалося створити воркер.');
+      fail(error instanceof Error ? error.message : 'Could not create the worker.');
     }
   }, []);
 

@@ -20,13 +20,13 @@ const ArrayForm = ({ onArraySubmit, disabled = false }: ArrayFormProps) => {
         setError('');
         onArraySubmit(array);
       } catch (error) {
-        setError(error instanceof Error ? error.message : 'Не вдалося прочитати масив.');
+        setError(error instanceof Error ? error.message : 'Could not read the array.');
       }
     }}>
-      <label htmlFor={id}>Власний масив (2–200 чисел):</label>
+      <label htmlFor={id}>Custom array (2–200 numbers):</label>
       <textarea rows={2} id={id} name="array" placeholder="3, -1, 2.5" maxLength={10000}
         disabled={disabled} aria-invalid={!!error} aria-describedby={error ? `${id}-error` : undefined} />
-      <button type="submit" disabled={disabled}>Сортувати масив</button>
+      <button type="submit" disabled={disabled}>Sort array</button>
       {error && <span id={`${id}-error`} role="alert">{error}</span>}
     </form>
   );
