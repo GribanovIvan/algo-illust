@@ -13,7 +13,7 @@ function validateArray(arr: SortArray) {
   for (const item of arr) {
     const value = sortValue(item);
     if (typeof value !== 'string' && !Number.isFinite(value)) {
-      throw new Error('Масив має містити скінченні числа або рядки.');
+      throw new Error('The array must contain finite numbers or strings.');
     }
   }
 }
@@ -152,7 +152,7 @@ export const countingSort: SortFunc = async (arr, isASC, render) => {
   validateArray(arr);
   const counts = new Map<number, number>();
   for (const value of arr) {
-    if (typeof value !== 'number') throw new Error('Counting sort підтримує лише числа.');
+    if (typeof value !== 'number') throw new Error('Counting sort only supports numbers.');
     counts.set(value, (counts.get(value) || 0) + 1);
   }
   // Sparse counts support fractions and wide ranges without allocating max-min slots.

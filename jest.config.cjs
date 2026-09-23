@@ -6,7 +6,7 @@ module.exports = {
   moduleNameMapper: { '\\.(css|scss)$': 'identity-obj-proxy' },
   setupFilesAfterEnv: ['<rootDir>/tests/setup.ts'],
   collectCoverageFrom: ['src/**/*.{ts,tsx}', '!src/**/*.d.ts'],
-  coverageThreshold: { global: { lines: 20 } },
+  coverageThreshold: { global: { lines: 82.18 } },
   coverageReporters: ['text', 'json-summary', 'lcov'],
   clearMocks: true,
   restoreMocks: true,

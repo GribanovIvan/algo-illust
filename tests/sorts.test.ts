@@ -63,8 +63,8 @@ describe('Existing variants', () => {
     }
   });
   test('counting rejects nonnumeric variants', async () => {
-    await expect(sortFunctions.counting(['a', 'b'], true)).rejects.toThrow('лише числа');
-    await expect(sortFunctions.counting([[1], [2]], true)).rejects.toThrow('лише числа');
+    await expect(sortFunctions.counting(['a', 'b'], true)).rejects.toThrow('only supports numbers');
+    await expect(sortFunctions.counting([[1], [2]], true)).rejects.toThrow('only supports numbers');
   });
 });
 
@@ -79,6 +79,6 @@ describe('Array parser', () => {
   });
   describe('Виняткові ситуації', () => {
     test.each(invalidInputs)('rejects %s', text => expect(() => parseArray(text)).toThrow());
-    test('rejects excessive text length before tokenization', () => expect(() => parseArray('1'.repeat(10001))).toThrow('довгий'));
+    test('rejects excessive text length before tokenization', () => expect(() => parseArray('1'.repeat(10001))).toThrow('too long'));
   });
 });

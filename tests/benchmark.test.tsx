@@ -53,12 +53,13 @@ describe('Виняткові ситуації', () => {
     await expect(benchmark({length, sorts: ['heap']}, jest.fn())).rejects.toThrow();
   });
   test.each([[], ['unknown'], ['__proto__']])('invalid algorithm selection %j', async (...ids) => {
-    await expect(benchmark({length: 10, sorts: ids.flat()}, jest.fn())).rejects.toThrow();
+    await expect(benchmark({length: 10, sorts: ids.flat()}, jest.fn())).rejects.toThrow('Select valid algorithms to compare.');
   });
   test.each(['onerror', 'onmessageerror'] as const)('%s unlocks retry and terminates', event => {
     render(<SortsTable />);
     act(() => { worker[event]?.(); });
-    expect(screen.getByRole('alert')).not.toBeEmptyDOMElement();
+    expect(screen.getByRole('alert')).toHaveTextContent(event === 'onerror'
+      ? 'Could not run the comparison. Please try again.' : 'Could not read the worker response.');
     expect(worker.terminate).toHaveBeenCalled();
     expect(screen.getByRole('button', {name: 'Run'})).toBeEnabled();
   });
@@ -72,5 +73,10 @@ describe('Виняткові ситуації', () => {
     render(<SortsTable />);
     expect(screen.getByRole('alert')).toHaveTextContent('Worker unavailable');
     expect(screen.getByRole('button', {name: 'Run'})).toBeEnabled();
+  });
+  test('worker construction fallback uses English', () => {
+    jest.mocked(createBenchmarkWorker).mockImplementationOnce(() => { throw null; });
+    render(<SortsTable />);
+    expect(screen.getByRole('alert')).toHaveTextContent('Could not create the worker.');
   });
 });

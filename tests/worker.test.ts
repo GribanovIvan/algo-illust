@@ -14,7 +14,7 @@ test('worker protocol sends stats and serializes failures', async () => {
     expect(scope.postMessage).toHaveBeenCalledTimes(7);
     expect(scope.postMessage).toHaveBeenCalledWith(expect.objectContaining({sortId: 'heap', sorted: true}));
     await scope.onmessage!({data: {length: -1, sorts: ['heap']}});
-    expect(scope.postMessage).toHaveBeenLastCalledWith({error: expect.stringContaining('від 2 до 5000')});
+    expect(scope.postMessage).toHaveBeenLastCalledWith({error: expect.stringContaining('between 2 and 5000')});
     await scope.onmessage!({data: null});
     expect(scope.postMessage).toHaveBeenLastCalledWith({error: expect.any(String)});
   } finally {

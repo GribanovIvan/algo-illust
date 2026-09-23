@@ -24,7 +24,7 @@ const SearchPage = () => {
     const searchIn = data.get('searchIn')?.toString() || text;
     const searchFor = data.get('searchFor')?.toString() || '';
     if (!searchFor.trim() || searchIn.length > 5000 || searchFor.length > 200) {
-      setError("Введіть непорожній шаблон до 200 символів і текст до 5000 символів.");
+      setError("Enter a nonempty pattern of up to 200 characters and text of up to 5000 characters.");
       return;
     }
     setError("");

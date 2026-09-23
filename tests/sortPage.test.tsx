@@ -22,8 +22,8 @@ function mount(id = 'heap', override?: SortFunc) {
 }
 
 function submit(text: string) {
-  fireEvent.change(screen.getByLabelText(/Власний масив/), {target: {value: text}});
-  fireEvent.click(screen.getByRole('button', {name: 'Сортувати масив'}));
+  fireEvent.change(screen.getByLabelText(/Custom array/), {target: {value: text}});
+  fireEvent.click(screen.getByRole('button', {name: 'Sort array'}));
 }
 
 beforeEach(() => {
@@ -36,10 +36,10 @@ describe('Нормальні значення', () => {
   test.each(Object.keys(sortFunctions))('%s renders the custom array in either direction', async id => {
     const view = mount(id);
     submit('3, -1, 2.5');
-    expect(screen.getByRole('button', {name: 'Сортувати масив'})).toBeDisabled();
+    expect(screen.getByRole('button', {name: 'Sort array'})).toBeDisabled();
     await act(async () => { await jest.runAllTimersAsync(); });
     expect([...view.container.querySelectorAll('.arrayItem')].map(item => item.textContent)).toEqual(['-1', '2.5', '3']);
-    expect(screen.getByRole('button', {name: 'Сортувати масив'})).toBeEnabled();
+    expect(screen.getByRole('button', {name: 'Sort array'})).toBeEnabled();
     fireEvent.click(screen.getByRole('button', {name: 'Asc'}));
     await act(async () => { await jest.runAllTimersAsync(); });
     expect([...view.container.querySelectorAll('.arrayItem')].map(item => item.textContent)).toEqual(['3', '2.5', '-1']);
@@ -68,7 +68,7 @@ describe('Граничні значення', () => {
     await act(async () => { fireEvent.click(screen.getByRole('link', {name: 'Quick Sort'})); });
     await act(async () => { await jest.runAllTimersAsync(); });
     expect([...view.container.querySelectorAll('.arrayItem')].map(item => item.textContent)).toEqual(['1', '2', '3']);
-    expect(screen.getByRole('button', {name: 'Сортувати масив'})).toBeEnabled();
+    expect(screen.getByRole('button', {name: 'Sort array'})).toBeEnabled();
     expect(jest.getTimerCount()).toBe(0);
   });
   test('unmount cancels pending animation', async () => {
@@ -85,14 +85,14 @@ describe('Виняткові ситуації', () => {
     const sort = jest.fn().mockResolvedValue(0);
     mount('heap', sort);
     submit('1, broken');
-    expect(screen.getByRole('alert')).toHaveTextContent('некоректне число');
+    expect(screen.getByRole('alert')).toHaveTextContent('not a valid number');
     expect(sort).not.toHaveBeenCalled();
   });
   test('algorithm rejection is visible and unlocks controls', async () => {
     mount('heap', jest.fn().mockRejectedValue(new Error('Sort failed')));
     await act(async () => { submit('3 1'); });
     expect(screen.getByRole('alert')).toHaveTextContent('Sort failed');
-    expect(screen.getByRole('button', {name: 'Сортувати масив'})).toBeEnabled();
+    expect(screen.getByRole('button', {name: 'Sort array'})).toBeEnabled();
   });
   test('generation rejection leaves the page usable', async () => {
     jest.mocked(generateArray).mockRejectedValueOnce(new Error('Generation failed'));
@@ -105,6 +105,17 @@ describe('Виняткові ситуації', () => {
     jest.mocked(generateArray).mockResolvedValueOnce([]);
     mount();
     await act(async () => { fireEvent.click(screen.getByRole('button', {name: 'Run'})); });
-    expect(screen.getByRole('alert')).toHaveTextContent('порожній масив');
+    expect(screen.getByRole('alert')).toHaveTextContent('This variant generated an empty array. Please try again.');
+  });
+  test('generation fallback error uses English', async () => {
+    jest.mocked(generateArray).mockRejectedValueOnce(null);
+    mount();
+    await act(async () => { fireEvent.click(screen.getByRole('button', {name: 'Run'})); });
+    expect(screen.getByRole('alert')).toHaveTextContent('Could not generate the array.');
+  });
+  test('sorting fallback error uses English', async () => {
+    mount('heap', jest.fn().mockRejectedValue(null));
+    await act(async () => { submit('3 1'); });
+    expect(screen.getByRole('alert')).toHaveTextContent('Sorting failed.');
   });
 });

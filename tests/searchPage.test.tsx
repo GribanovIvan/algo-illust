@@ -51,9 +51,13 @@ test.each(['kmp', 'bm', 'binary'])('%s cancels timers on unmount', async id => {
   expect(window.alert).not.toHaveBeenCalled();
 });
 
-test('blank target is rejected before starting a search', () => {
+test.each([
+  ['', 'abc'], ['a'.repeat(201), 'abc'], ['a', 'a'.repeat(5001)],
+])('invalid search input is rejected with English guidance', (pattern, text) => {
   mount('bm');
-  submit('');
-  expect(screen.getByRole('alert')).toHaveTextContent('непорожній шаблон');
+  fireEvent.change(screen.getByPlaceholderText('Search in...'), {target: {value: text}});
+  fireEvent.change(screen.getByPlaceholderText('Search for...'), {target: {value: pattern}});
+  fireEvent.click(screen.getByRole('button', {name: 'Run'}));
+  expect(screen.getByRole('alert')).toHaveTextContent('Enter a nonempty pattern of up to 200 characters and text of up to 5000 characters.');
   expect(jest.getTimerCount()).toBe(0);
 });

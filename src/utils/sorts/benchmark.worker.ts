@@ -9,6 +9,6 @@ scope.onmessage = async message => {
   try {
     await benchmark(message.data, stats => scope.postMessage(stats));
   } catch (error) {
-    scope.postMessage({ error: error instanceof Error ? error.message : 'Помилка порівняння.' });
+    scope.postMessage({ error: error instanceof Error ? error.message : 'Comparison failed.' });
   }
 };
