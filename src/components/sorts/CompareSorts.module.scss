@@ -1,6 +1,21 @@
 @use "../../styles/variables" as *;
 @use "../../styles/mixins" as *;
 
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1rem;
+  color: $primary-clr;
+
+  select {
+    @include control;
+    cursor: pointer;
+  }
+}
+
 .container {
   @include flex-center;
   flex-direction: column;

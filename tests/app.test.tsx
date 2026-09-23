@@ -86,3 +86,13 @@ test('tree route still draws after insertion', () => {
   expect(context.arc).toHaveBeenCalled();
   expect(context.fillText).toHaveBeenCalledWith('10', expect.any(Number), expect.any(Number));
 });
+
+test('the comparison page has the sort navigation and a labelled algorithm list', async () => {
+  window.history.replaceState({}, '', '/asd/sort/compare');
+  render(<App />);
+  expect(screen.getByRole('link', {name: 'Comparison'})).toHaveAttribute('href', '/asd/sort/compare');
+  expect(screen.getByRole('combobox', {name: 'Algorithms:'})).toHaveValue('all');
+  fireEvent.click(screen.getByRole('link', {name: 'Bubble Sort'}));
+  expect(window.location.pathname).toBe('/asd/sort/bubble');
+  await act(async () => {});
+});

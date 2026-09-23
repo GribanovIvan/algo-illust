@@ -13,7 +13,7 @@ import {
   heapSort,
 } from "./utils/sorts/sorts";
 import Home from "./pages/Home";
-import SortsTable from "./components/sorts/SortsTable";
+import ComparePage from "./pages/ComparePage";
 import DataStructuresPage from "./pages/DataStructuresPage";
 import DataStructure from "./components/data_structures/DataStructure";
 import Tree from "./components/data_structures/Tree";
@@ -47,7 +47,7 @@ function App() {
             <Route path="heap" element={<HeapSort />} />
             <Route path="counting" element={<CountingSort />} />
           </Route>
-          <Route path="sort/compare" element={<SortsTable />} />
+          <Route path="sort/compare" element={<ComparePage />} />
           <Route path="ds/" element={<DataStructuresPage/>} >
             <Route index element={<Navigate to="stack" replace />} />
             <Route path="stack" element={<DataStructure/>} />

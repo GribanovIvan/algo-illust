@@ -65,8 +65,9 @@ const SortsTable = () => {
 
   return (
     <>
-      <div>
-        <select defaultValue="all" name="sorts" aria-label="Algorithms" disabled={isSorting}
+      <div className={styles.controls}>
+        <label htmlFor="sorts">Algorithms:</label>
+        <select id="sorts" defaultValue="all" name="sorts" disabled={isSorting}
           onChange={event => setSortsToRun(event.target.value === 'all'
             ? sorts.map(sort => sort.id) : [event.target.value as SortTypeId])}>
           <option value="all">All</option>
