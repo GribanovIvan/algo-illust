@@ -133,3 +133,11 @@ test('red-black tree traversal and remove preserve ordering and colors', () => {
   expect(tree.isEmpty()).toBe(true);
   expect(tree.delete(100)).toBe(false);
 });
+
+test('fixing a double red on a path without a grandparent is a no-op', () => {
+  const tree = new RBTree();
+  tree.insert(10);
+  const path = tree.path(10);
+  expect(() => tree.fixDoubleRed(path[0], path[0], path, 1)).not.toThrow();
+  expect(tree.root?.element).toBe(10);
+});

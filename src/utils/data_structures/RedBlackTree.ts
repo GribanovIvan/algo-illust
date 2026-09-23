@@ -267,14 +267,14 @@ export class RBTree extends BST {
     path: RBTNode[],
     i: number
   ) {
-    // w is the grandparent of u
+    // w is the grandparent of u; a path shorter than that has nothing to fix
+    // (undefined slips past a === null check, so compare loosely)
     let w = path[i - 2];
+    if (u == null || v == null || w == null) return;
     let parentOfw = w === this.root ? null : path[i - 3];
-    if (v === null || w === null) return;
 
     // Get v's sibling named x
     let x = (w.left === v ? w.right : w.left);
-    if (u === null) return;
     if (x == null || x.isBlack()) {
       // Case 1: v's sibling x is black
       if (w.left === v && v.left === u) {
