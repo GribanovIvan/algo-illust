@@ -2,14 +2,6 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <script>
-      // Resolve relative assets when the server falls back to this file for a nested route.
-      const path = window.location.pathname;
-      const route = path.match(/\/(?:sort|search|ds)(?:\/|$)/);
-      const base = document.createElement('base');
-      base.href = route ? path.slice(0, route.index + 1) : path.slice(0, path.lastIndexOf('/') + 1);
-      document.head.appendChild(base);
-    </script>
     <link rel="icon" href="/favicon.ico" />
     <link rel="stylesheet" href="/root.css">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -24,5 +16,24 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root" ></div>
     <script type="module" src="/src/index.tsx"></script>
+    <script>
+      // Keep built resources inert until their deployment URLs are resolved.
+      const resources = document.getElementById('app-resources');
+      if (resources) {
+        const path = window.location.pathname;
+        const route = path.match(/\/(?:sort|search|ds)(?:\/|$)/);
+        const prefix = route ? path.slice(0, route.index + 1) : path.slice(0, path.lastIndexOf('/') + 1);
+        const base = new URL(prefix, window.location.href);
+        for (const resource of resources.content.children) {
+          const element = document.createElement(resource.tagName);
+          for (const attribute of resource.attributes) {
+            const value = ['href', 'src'].includes(attribute.name)
+              ? new URL(attribute.value, base).href : attribute.value;
+            element.setAttribute(attribute.name, value);
+          }
+          document.head.appendChild(element);
+        }
+      }
+    </script>
   </body>
 </html>

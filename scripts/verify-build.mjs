@@ -1,28 +1,28 @@
 import assert from 'node:assert/strict';
 import { readFile, readdir, access } from 'node:fs/promises';
-import vm from 'node:vm';
+import { JSDOM } from 'jsdom';
 import { Worker } from 'node:worker_threads';
 
 const html = await readFile('dist/index.html', 'utf8');
 const bootstrap = html.match(/<script>([\s\S]*?)<\/script>/)[1];
-const assets = [...html.matchAll(/(?:href|src)="(\.[^"]+)"/g)].map(match => match[1]);
-assert(assets.length >= 4);
+const template = html.match(/<template id="app-resources">([\s\S]*?)<\/template>/)[0];
+assert(!/<(?:link|script)\b[^>]*(?:href|src)=/.test(html.replace(template, '')));
 for (const [pathname, prefix] of [
-  ['/', '/'], ['/asd/', '/asd/'], ['/course/demo/', '/course/demo/'],
+  ['/', '/'], ['/sort/bubble', '/'], ['/asd/', '/asd/'], ['/qwe/', '/qwe/'],
+  ['/asd/sort/bubble', '/asd/'], ['/qwe/sort/bubble', '/qwe/'], ['/course/demo/', '/course/demo/'],
   ['/course/demo/sort/heap', '/course/demo/'],
   ['/asd/search/kmp', '/asd/'], ['/asd/ds/stack', '/asd/'],
 ]) {
-  let base;
-  vm.runInNewContext(bootstrap, {
-    window: { location: { pathname } },
-    document: { createElement: () => ({}), head: { appendChild: element => { base = element.href; } } },
-  });
-  assert.equal(base, prefix);
+  const dom = new JSDOM(html, {url: `https://example.test${pathname}`, runScripts: 'outside-only'});
+  dom.window.eval(bootstrap);
+  const assets = [...dom.window.document.head.querySelectorAll('link, script[src]')];
+  assert(assets.length >= 4);
   for (const asset of assets) {
-    const url = new URL(asset, `https://example.test${base}`);
+    const url = new URL(asset.href || asset.src);
     assert(url.pathname.startsWith(prefix));
     await access(`dist/${url.pathname.slice(prefix.length)}`);
   }
+  dom.window.close();
   console.log(`Relative assets verified: ${pathname}`);
 }
 
