@@ -10,7 +10,7 @@ import testDS from '../src/utils/data_structures/test';
 const lists = [LinkedList, DoublyLinkedList, CircularList];
 
 describe.each(lists)('%p', List => {
-  describe('Нормальні значення', () => {
+  describe('Normal values', () => {
     test('remove tail then append keeps all nodes reachable', () => {
       const list = new List([1, 2, 3]);
       expect(list.remove(3)).toBe(3);
@@ -32,7 +32,7 @@ describe.each(lists)('%p', List => {
       expect(list.head.value).toBe(2);
     });
   });
-  describe('Граничні значення', () => {
+  describe('Boundary values', () => {
     test('empty and missing values are safe', () => {
       const list = new List([1]);
       expect(list.remove(1)).toBe(1);
@@ -51,7 +51,7 @@ describe.each(lists)('%p', List => {
       expect(list.isEmpty()).toBe(true);
     });
   });
-  describe('Виняткові ситуації', () => {
+  describe('Exceptional cases', () => {
     test('self merge is rejected', () => {
       const list = new List([1]);
       expect(() => list.merge(list as never)).toThrow('itself');

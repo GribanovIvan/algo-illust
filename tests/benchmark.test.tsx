@@ -12,7 +12,7 @@ beforeEach(() => {
   jest.mocked(createBenchmarkWorker).mockReturnValue(worker as unknown as Worker);
 });
 
-describe('Нормальні значення', () => {
+describe('Normal values', () => {
   test('benchmark runs seven algorithms on identical input with valid stats', async () => {
     jest.spyOn(Math, 'random').mockReturnValue(.4);
     const report = jest.fn();
@@ -40,7 +40,7 @@ describe('Нормальні значення', () => {
   });
 });
 
-describe('Граничні значення', () => {
+describe('Boundary values', () => {
   test('leaving the table terminates a running worker', () => {
     const view = render(<SortsTable />);
     view.unmount();
@@ -48,7 +48,7 @@ describe('Граничні значення', () => {
   });
 });
 
-describe('Виняткові ситуації', () => {
+describe('Exceptional cases', () => {
   test.each([0, 1, 5001, NaN, Infinity])('invalid benchmark length %s', async length => {
     await expect(benchmark({length, sorts: ['heap']}, jest.fn())).rejects.toThrow();
   });

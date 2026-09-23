@@ -2,7 +2,7 @@ import { binarySearch, kmpSearch, bmSearch } from '../src/utils/searches/searche
 import { searchCases } from './fixtures/arrays';
 
 describe.each([['KMP', kmpSearch], ['Boyer-Moore', bmSearch]] as const)('%s', (_, search) => {
-  describe('Нормальні значення', () => {
+  describe('Normal values', () => {
     test.each(searchCases)('$text / $target', async ({ text, target, found }) => {
       const frame = jest.fn().mockResolvedValue(undefined);
       const [result, steps] = await search(text, target, frame);
@@ -10,13 +10,13 @@ describe.each([['KMP', kmpSearch], ['Boyer-Moore', bmSearch]] as const)('%s', (_
       expect(steps).toBeGreaterThanOrEqual(0);
     });
   });
-  describe('Граничні значення', () => {
+  describe('Boundary values', () => {
     test('empty text and empty target terminate', async () => {
       expect(await search('', '', jest.fn())).toEqual([0, 0]);
       expect((await search('', 'a', jest.fn()))[0]).toBeNull();
     });
   });
-  describe('Виняткові ситуації', () => {
+  describe('Exceptional cases', () => {
     test('propagates cancellation from renderer', async () => {
       await expect(search('ab', 'a', jest.fn().mockRejectedValue(new Error('cancel')))).rejects.toThrow('cancel');
     });

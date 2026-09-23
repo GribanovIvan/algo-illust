@@ -32,7 +32,7 @@ beforeEach(() => {
 });
 afterEach(() => jest.useRealTimers());
 
-describe('Нормальні значення', () => {
+describe('Normal values', () => {
   test.each(Object.keys(sortFunctions))('%s renders the custom array in either direction', async id => {
     const view = mount(id);
     submit('3, -1, 2.5');
@@ -54,7 +54,7 @@ describe('Нормальні значення', () => {
   });
 });
 
-describe('Граничні значення', () => {
+describe('Boundary values', () => {
   test('minimum size has counted heap step and final sorted frame', async () => {
     mount();
     submit('2 1');
@@ -80,7 +80,7 @@ describe('Граничні значення', () => {
   });
 });
 
-describe('Виняткові ситуації', () => {
+describe('Exceptional cases', () => {
   test('invalid input never calls sorting', () => {
     const sort = jest.fn().mockResolvedValue(0);
     mount('heap', sort);

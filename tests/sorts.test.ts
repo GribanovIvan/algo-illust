@@ -6,7 +6,7 @@ import { normalArrays, boundaryArrays, validInputs, invalidInputs } from './fixt
 
 for (const [name, sort] of Object.entries(sortFunctions)) {
   describe(name, () => {
-    describe('Нормальні значення', () => {
+    describe('Normal values', () => {
       test.each(normalArrays.map(array => [array]))('sorts %j in both directions with frames', async source => {
         for (const asc of [true, false]) {
           const array = [...source];
@@ -23,7 +23,7 @@ for (const [name, sort] of Object.entries(sortFunctions)) {
         }
       });
     });
-    describe('Граничні значення', () => {
+    describe('Boundary values', () => {
       test.each(boundaryArrays.map(array => [array]))('handles %j', async source => {
         for (const asc of [true, false]) {
           const array = [...source];
@@ -39,7 +39,7 @@ for (const [name, sort] of Object.entries(sortFunctions)) {
         expect(second).toEqual([3, 2, 1, 0]);
       });
     });
-    describe('Виняткові ситуації', () => {
+    describe('Exceptional cases', () => {
       test.each([NaN, Infinity, -Infinity])('rejects nonfinite %s', async value => {
         await expect(sort([value, 1], true)).rejects.toThrow();
       });
@@ -69,15 +69,15 @@ describe('Existing variants', () => {
 });
 
 describe('Array parser', () => {
-  describe('Нормальні значення', () => {
+  describe('Normal values', () => {
     test.each(validInputs)('$text', ({text, array}) => expect(parseArray(text)).toEqual(array));
   });
-  describe('Граничні значення', () => {
+  describe('Boundary values', () => {
     test('accepts exactly the maximum number of elements', () => {
       expect(parseArray(Array(MAX_ARRAY_LENGTH).fill('0').join(','))).toHaveLength(MAX_ARRAY_LENGTH);
     });
   });
-  describe('Виняткові ситуації', () => {
+  describe('Exceptional cases', () => {
     test.each(invalidInputs)('rejects %s', text => expect(() => parseArray(text)).toThrow());
     test('rejects excessive text length before tokenization', () => expect(() => parseArray('1'.repeat(10001))).toThrow('too long'));
   });

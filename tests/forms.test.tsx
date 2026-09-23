@@ -39,7 +39,7 @@ test('size fallback error uses English', () => {
   expect(screen.getByRole('alert')).toHaveTextContent('Invalid size.');
 });
 
-describe('Нормальні значення', () => {
+describe('Normal values', () => {
   test.each(validInputs)('submits $text', ({ text, array }) => {
     const submit = jest.fn();
     render(<ArrayForm onArraySubmit={submit} />);
@@ -50,7 +50,7 @@ describe('Нормальні значення', () => {
   });
 });
 
-describe('Граничні значення', () => {
+describe('Boundary values', () => {
   test('disabled form cannot launch another sort', () => {
     const submit = jest.fn();
     const { container } = render(<ArrayForm onArraySubmit={submit} disabled />);
@@ -67,7 +67,7 @@ describe('Граничні значення', () => {
   });
 });
 
-describe('Виняткові ситуації', () => {
+describe('Exceptional cases', () => {
   test.each(invalidInputs)('shows error without launching for %s', text => {
     const submit = jest.fn();
     render(<ArrayForm onArraySubmit={submit} />);
