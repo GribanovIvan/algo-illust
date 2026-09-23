@@ -1,6 +1,6 @@
 import { useId, useState } from 'react';
 import { MAX_ARRAY_LENGTH, validateLength } from '../utils/sorts/parseArray';
-import './Form.module.scss';
+import styles from './Form.module.scss';
 
 type SizeFormProps = {
   onLengthSubmit: (length: number) => void;
@@ -12,7 +12,7 @@ const SizeForm = ({ onLengthSubmit, max = MAX_ARRAY_LENGTH, disabled = false }: 
   const id = useId();
   const [error, setError] = useState('');
   return (
-    <form noValidate onSubmit={event => {
+    <form className={styles.form} noValidate onSubmit={event => {
       event.preventDefault();
       if (disabled) return;
       try {

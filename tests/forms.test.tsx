@@ -2,6 +2,16 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import ArrayForm from '../src/components/sorts/ArrayForm';
 import SizeForm from '../src/components/SizeForm';
 import { validInputs, invalidInputs } from './fixtures/arrays';
+import styles from '../src/components/Form.module.scss';
+
+test('size form attaches the CSS module to its label, input and submit container', () => {
+  render(<SizeForm onLengthSubmit={jest.fn()} />);
+  const input = screen.getByLabelText('Array Length:');
+  const form = input.closest('form');
+  expect(form).toHaveClass(styles.form);
+  expect(form).toContainElement(screen.getByRole('button', {name: 'Run'}));
+  expect(form).toContainElement(screen.getByText('Array Length:'));
+});
 
 describe('Нормальні значення', () => {
   test.each(validInputs)('submits $text', ({ text, array }) => {
