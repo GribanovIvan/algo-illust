@@ -90,11 +90,11 @@ import { RBTNode, RBTree } from "./RedBlackTree";
     y2: number
   ) {
     context.fillStyle = "black";
-    var d = Math.sqrt(vGap * vGap + (x2 - x1) * (x2 - x1));
-    var x11 = x1 - (radius * (x1 - x2)) / d;
-    var y11 = y1 - (radius * (y1 - y2)) / d;
-    var x21 = x2 + (radius * (x1 - x2)) / d;
-    var y21 = y2 + (radius * (y1 - y2)) / d;
+    const d = Math.sqrt(vGap * vGap + (x2 - x1) * (x2 - x1));
+    const x11 = x1 - (radius * (x1 - x2)) / d;
+    const y11 = y1 - (radius * (y1 - y2)) / d;
+    const x21 = x2 + (radius * (x1 - x2)) / d;
+    const y21 = y2 + (radius * (y1 - y2)) / d;
     context.moveTo(x11, y11);
     context.lineTo(x21, y21);
 

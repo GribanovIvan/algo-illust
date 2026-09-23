@@ -11,7 +11,7 @@ const menuItems = [
 ];
 
 const Home = () => {
-  const [showTittle, setShowTittle] = React.useState(true);
+  const [showTitle, setShowTitle] = React.useState(true);
   const [selectedItem, setSelectedItem] = React.useState(0);
   const selectedItemRef = React.useRef(selectedItem);
   selectedItemRef.current = selectedItem;
@@ -21,7 +21,7 @@ const Home = () => {
 
   useEffect(() => {
     const titleTimer = setTimeout(() => {
-      setShowTittle(false);
+      setShowTitle(false);
     }, 1700);
 
     const onKeyDown = (e: KeyboardEvent) => {
@@ -49,7 +49,7 @@ const Home = () => {
     }, 1000 * (header.length / 2 + 1));
     return () => clearTimeout(focusTimer);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [showTittle]);
+  }, [showTitle]);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length < 2) return;
@@ -62,7 +62,7 @@ const Home = () => {
 
   return (
       <div className={styles.central}>
-        {showTittle ?
+        {showTitle ?
           <h1 className={styles.loadScreen}>Algorithms Visualizer</h1>
           :
           <div className={styles.homeContent}>

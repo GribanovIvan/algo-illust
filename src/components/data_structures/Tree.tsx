@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import drawTree from "../../utils/data_structures/drawingTree";
 import { RBTree } from "../../utils/data_structures/RedBlackTree";
-import { BRTreeArrayElement } from "../../utils/types/ds.types";
 
 const Tree = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -17,26 +16,11 @@ const Tree = () => {
   }, [tree, isChar]);
 
 
-  function compare(a: BRTreeArrayElement, b: BRTreeArrayElement) {
-    if (a.value < b.value) return -1;
-    if (a.value > b.value) return 1;
-    return 0;
-  }
-
-  function isVowel(char: string) {
-    if (char.length === 1) {
-      const vowels = ["a", "e", "i", "o", "u"];
-      return vowels.includes(char.toLowerCase());
-    }
-    return null;
-  }
-
   function insert() {
-    let nodesArray: Array<BRTreeArrayElement> = [];
-    let input = inputRef.current;
+    const input = inputRef.current;
     if (input === null) return;
 
-    var value = input.value.trim();
+    const value = input.value.trim();
     if (!isChar) {
       if (value === "" || !Number.isFinite(+value)) return;
       if (tree.search(+value)) {
@@ -44,12 +28,6 @@ const Tree = () => {
       } else {
         setMessage("");
         tree.insert(+value);
-        console.log(tree.getInOrder(tree.root, nodesArray));
-        if (nodesArray.length > 1) {
-          let sorted = nodesArray.sort(compare);
-          let parent = tree.path(sorted[1].value);
-          console.log(sorted[1], parent[parent.length - 2]);
-        }
         drawTree(canvasRef?.current, tree, isChar);
       }
     } else {
@@ -59,15 +37,6 @@ const Tree = () => {
       } else {
         setMessage("");
         tree.insert(value.charCodeAt(0));
-        console.log(tree.getInOrder(tree.root, nodesArray));
-        let sorted = nodesArray.filter(e => !isVowel(String.fromCharCode(+e.value)));
-        sorted = sorted.map(e => {
-          return { value: String.fromCharCode(+e.value), red: e.red };
-        });
-        console.log(sorted);
-        sorted.forEach((e) =>
-          console.log({...tree.searchNode(e.value), element: e.value})
-        );
         drawTree(canvasRef?.current, tree, isChar);
       }
     }
