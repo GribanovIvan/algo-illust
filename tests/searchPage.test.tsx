@@ -71,3 +71,31 @@ test.each([
   expect(screen.getByRole('alert')).toHaveTextContent('Enter a nonempty pattern of up to 200 characters and text of up to 5000 characters.');
   expect(jest.getTimerCount()).toBe(0);
 });
+
+describe('binary search shows its result on the page', () => {
+  const searches = require('../src/utils/searches/generateArray');
+
+  test('variant 8 names the row and the positions of the zeros', async () => {
+    jest.spyOn(searches, 'generateArray8').mockReturnValue([[1, 2, 3], [-1, 0, 0, 5]]);
+    mount('binary');
+    await act(async () => { await jest.runAllTimersAsync(); });
+    expect(screen.getByRole('status')).toHaveTextContent('Found 0 in row 2 at positions 2, 3');
+    expect(window.alert).not.toHaveBeenCalled();
+  });
+
+  test('variant 8 reports a matrix without zeros', async () => {
+    jest.spyOn(searches, 'generateArray8').mockReturnValue([[1, 2], [3, 4]]);
+    mount('binary');
+    await act(async () => { await jest.runAllTimersAsync(); });
+    expect(screen.getByRole('status')).toHaveTextContent('0 not found in any row');
+  });
+
+  test('variant 12 reports the zeros it replaces', async () => {
+    const process = jest.spyOn(searches, 'processArray12').mockImplementation(() => {});
+    mount('binary');
+    fireEvent.change(screen.getByRole('combobox', {name: 'Variant'}), {target: {value: '12'}});
+    await act(async () => { await jest.runAllTimersAsync(); });
+    expect(screen.getByRole('status')).toHaveTextContent(/^(Found 0 at positions? [\d, ]+|0 not found)$/);
+    expect(process).toHaveBeenCalled();
+  });
+});
