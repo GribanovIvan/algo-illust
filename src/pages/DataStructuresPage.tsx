@@ -25,7 +25,6 @@ const dsClasses: DSClassMap = {
   "linked-list": LinkedListDS,
   "doubly-linked": DoublyLinkedListDS,
   "circular-linked": CircularListDS,
-  tree: StackDS,
 };
 
 const DataStructuresPage = () => {
@@ -93,7 +92,7 @@ const DataStructuresPage = () => {
     const data = new FormData(e.currentTarget);
     const toFindData = data.get("toFind")?.toString() || "0";
     const toFind = isNaN(+toFindData) ? toFindData : +toFindData;
-    setStats(testDS(array, toFind, dsClasses[type]));
+    if (type !== "tree") setStats(testDS(array, toFind, dsClasses[type]));
   };
 
   return (

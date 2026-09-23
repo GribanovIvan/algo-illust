@@ -34,10 +34,10 @@ export type DSClass =
   | typeof LinkedListDS
   | typeof DoublyLinkedListDS
   | typeof CircularListDS;
-// | typeof RBTree;
 
+// the tree page has no statistics, so only linear structures map to a class
 export type DSClassMap = {
-  [key in DSTypeId]: DSClass;
+  [key in Exclude<DSTypeId, "tree">]: DSClass;
 };
 
 export type DSType = {
