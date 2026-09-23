@@ -13,12 +13,14 @@ const SearchComponent = (search: Search, delay: number) => {
     const [array, setArray] = useState('');
     const [active, setActive] = useState<HighlightedElements>({});
     const [error, setError] = useState('');
+    const [result, setResult] = useState('');
     useEffect(() => {
       const generated = generateString(text, variant);
       const animation = createAnimation(generated.length > 30 ? 300 : delay);
       setArray(generated);
       setActive({});
       setError('');
+      setResult('');
       if (!target) return;
       const run = async () => {
         try {
@@ -27,7 +29,7 @@ const SearchComponent = (search: Search, delay: number) => {
             setActive(frame);
             await animation.wait();
           });
-          if (!animation.cancelled) alert(found === null ? 'Not found' : `Found at position ${found + 1}`);
+          if (!animation.cancelled) setResult(found === null ? 'Not found' : `Found at position ${found + 1}`);
         } catch (error) {
           if (!animation.cancelled) setError(error instanceof Error ? error.message : 'Search failed.');
         }
@@ -44,6 +46,7 @@ const SearchComponent = (search: Search, delay: number) => {
 
     return <>
       {error && <p role="alert">{error}</p>}
+      {result && <p role="status" className={styles.result}>{result}</p>}
       <div className={`${styles['search-array']} ${array.length > 30 ? styles.large : ''}`}>
         {array.split('').map((item, index) => <div key={index} className={characterClass(index, 'searchIn')}>{item}</div>)}
       </div>

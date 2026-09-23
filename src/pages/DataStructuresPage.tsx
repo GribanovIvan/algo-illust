@@ -31,6 +31,7 @@ const DataStructuresPage = () => {
   const [array, setArray] = React.useState<DSArray>([]);
   const type = useLocation().pathname.split("/").pop() as DSTypeId;
   const [stats, setStats] = React.useState<DSStats | null>(null);
+  const [inputError, setInputError] = React.useState("");
 
   const stringifyStats = (stats: DSStats) => {
     if (!stats) return "";
@@ -53,7 +54,7 @@ const DataStructuresPage = () => {
       return false;
 
     if (isNaN(+value) && value.toString().length > 1) {
-      alert("Strings are not allowed");
+      setInputError("Strings are not allowed");
       return false;
     }
     if (
@@ -61,9 +62,10 @@ const DataStructuresPage = () => {
       ((isNaN(+array[0]) && !isNaN(+value)) ||
         (!isNaN(+array[0]) && isNaN(+value)))
     ) {
-      alert("Only numbers OR chars allowed");
+      setInputError("Only numbers OR chars allowed");
       return false;
     }
+    setInputError("");
     return true;
   };
 
@@ -115,6 +117,7 @@ const DataStructuresPage = () => {
           </span>
         )}
       </header>
+      {inputError && <p role="alert" className="centerX">{inputError}</p>}
       {type === "tree" ? null : (
         <form onSubmit={runStats} className="centerX">
           <span>

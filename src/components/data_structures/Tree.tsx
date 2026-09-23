@@ -8,6 +8,7 @@ const Tree = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputState, setInputState] = useState("");
   const [isChar, setIsChar] = useState(false);
+  const [message, setMessage] = useState("");
   const tree = useMemo(() => new RBTree(), []);
 
   useEffect(() => {
@@ -39,8 +40,9 @@ const Tree = () => {
     if (!isChar) {
       if (value === "" || !Number.isFinite(+value)) return;
       if (tree.search(+value)) {
-        alert("key " + value + " is already in the tree");
+        setMessage("key " + value + " is already in the tree");
       } else {
+        setMessage("");
         tree.insert(+value);
         console.log(tree.getInOrder(tree.root, nodesArray));
         if (nodesArray.length > 1) {
@@ -53,8 +55,9 @@ const Tree = () => {
     } else {
       if (value === "" || value.length !== 1 || !value.match(/[a-z]/i)) return;
       if (tree.search(value.charCodeAt(0))) {
-        alert("key " + value + " is already in the tree");
+        setMessage("key " + value + " is already in the tree");
       } else {
+        setMessage("");
         tree.insert(value.charCodeAt(0));
         console.log(tree.getInOrder(tree.root, nodesArray));
         let sorted = nodesArray.filter(e => !isVowel(String.fromCharCode(+e.value)));
@@ -88,6 +91,7 @@ const Tree = () => {
         />
         <span>Char tree</span>
         <input type="checkbox" onChange={() => setIsChar(!isChar)} />
+        {message && <span role="alert">{message}</span>}
       </div>
 
       <div>

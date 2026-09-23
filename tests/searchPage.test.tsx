@@ -33,13 +33,23 @@ test.each(['kmp', 'bm'])('%s reruns when only the target changes', async id => {
   mount(id);
   submit('abc');
   await act(async () => { await jest.runAllTimersAsync(); });
-  expect(window.alert).toHaveBeenLastCalledWith('Found at position 1');
+  expect(screen.getByRole('status')).toHaveTextContent('Found at position 1');
   submit('bc');
   await act(async () => { await jest.runAllTimersAsync(); });
-  expect(window.alert).toHaveBeenLastCalledWith('Found at position 2');
+  expect(screen.getByRole('status')).toHaveTextContent('Found at position 2');
   submit('bc');
+  expect(screen.queryByRole('status')).not.toBeInTheDocument();
   await act(async () => { await jest.runAllTimersAsync(); });
-  expect(window.alert).toHaveBeenCalledTimes(3);
+  expect(screen.getByRole('status')).toHaveTextContent('Found at position 2');
+  expect(window.alert).not.toHaveBeenCalled();
+});
+
+test.each(['kmp', 'bm'])('%s reports a missing pattern on the page', async id => {
+  mount(id);
+  submit('zzz');
+  await act(async () => { await jest.runAllTimersAsync(); });
+  expect(screen.getByRole('status')).toHaveTextContent('Not found');
+  expect(window.alert).not.toHaveBeenCalled();
 });
 
 test.each(['kmp', 'bm', 'binary'])('%s cancels timers on unmount', async id => {
