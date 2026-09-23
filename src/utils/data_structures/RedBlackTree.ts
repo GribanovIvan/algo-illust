@@ -168,7 +168,7 @@ class BST {
 
   // Returns a path from the root leading to the specified element
   path(value: TreeNodeValue) {
-    let list: RBTNode[] = [];
+    const list: RBTNode[] = [];
     let current = this.root; // Start from the root
 
     while (current != null) {
@@ -232,7 +232,7 @@ export class RBTree extends BST {
   }
 
   insert(value: TreeNodeValue) {
-    let successful = BST.prototype.insert.call(this, value);
+    const successful = BST.prototype.insert.call(this, value);
     if (!successful) return false; // e is already in the tree
     else {
       this.ensureRBTree(value);
@@ -243,15 +243,15 @@ export class RBTree extends BST {
   /** Ensure that the tree is a red-black tree */
   ensureRBTree(e: TreeNodeValue) {
     // Get the path that leads to element e from the this.root
-    let path = this.path(e);
+    const path = this.path(e);
 
-    let i = path.length - 1; // Index to the current node in the path
+    const i = path.length - 1; // Index to the current node in the path
 
     // u is the last node in the path. u contains element e
-    let u = path[i];
+    const u = path[i];
 
     // v is the parent of of u, if exists
-    let v = u === this.root ? null : path[i - 1];
+    const v = u === this.root ? null : path[i - 1];
 
     u?.setRed(); // It is OK to set u red
 
@@ -269,12 +269,12 @@ export class RBTree extends BST {
   ) {
     // w is the grandparent of u; a path shorter than that has nothing to fix
     // (undefined slips past a === null check, so compare loosely)
-    let w = path[i - 2];
+    const w = path[i - 2];
     if (u == null || v == null || w == null) return;
-    let parentOfw = w === this.root ? null : path[i - 3];
+    const parentOfw = w === this.root ? null : path[i - 3];
 
     // Get v's sibling named x
-    let x = (w.left === v ? w.right : w.left);
+    const x = (w.left === v ? w.right : w.left);
     if (x == null || x.isBlack()) {
       // Case 1: v's sibling x is black
       if (w.left === v && v.left === u) {
@@ -339,14 +339,14 @@ export class RBTree extends BST {
   }
   /** Delete the last node from the path. */
   deleteLastNodeInPath(path: RBTNode[]) {
-    let i = path.length - 1; // Index to the node in the path
+    const i = path.length - 1; // Index to the node in the path
 
     // u is the last node in the path
-    let u = path[i];
-    let parentOfu = u === this.root ? null : path[i - 1];
-    let grandparentOfu =
+    const u = path[i];
+    const parentOfu = u === this.root ? null : path[i - 1];
+    const grandparentOfu =
       parentOfu == null || parentOfu === this.root ? null : path[i - 2];
-    let childOfu = u?.left == null ? u?.right : u.left;
+    const childOfu = u?.left == null ? u?.right : u.left;
 
     // Delete node u. Connect childOfu with parentOfu
     this.connectNewParent(parentOfu, u, childOfu ?? null);
@@ -369,9 +369,9 @@ export class RBTree extends BST {
     i: number
   ) {
     // Obtain y, y1, and y2
-    let y = parent?.right === db ? parent.left : parent?.right ?? null;
-    let y1 = y?.left ?? null;
-    let y2 = y?.right ?? null;
+    const y = parent?.right === db ? parent.left : parent?.right ?? null;
+    const y1 = y?.left ?? null;
+    const y2 = y?.right ?? null;
     if (parent === null || y === null) return;
     if (y?.isBlack() && y1 != null && y1.isRed()) {
       if (parent?.right === db) {

@@ -6,7 +6,7 @@ import { RBTNode, RBTree } from "./RedBlackTree";
  function draw(canvas: HTMLCanvasElement | null, tree: RBTree, isChar: boolean) {
     if (canvas === null) return;
     // let canvas: any = canvasRef.current;
-    let context = canvas?.getContext("2d"); //.current.getContext("2d");
+    const context = canvas?.getContext("2d"); //.current.getContext("2d");
     if (context === null) return;
 
     // Reset size will clear the canvas, but not for IE9
@@ -22,8 +22,8 @@ import { RBTNode, RBTree } from "./RedBlackTree";
     if (tree.isEmpty()) {
       context.fillText("tree is empty", canvas.width / 2 - 50, 15);
     } else {
-      let x = canvas.width / 2;
-      let y = 30;
+      const x = canvas.width / 2;
+      const y = 30;
 
       drawTree(context, x, y, radius, tree.root, canvas.width / 4, isChar);
     }

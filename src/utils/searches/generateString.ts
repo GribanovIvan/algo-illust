@@ -22,8 +22,8 @@ const getString = (text: string, varient: number) => {
             }
             // if it's second group
             else {
-              let [group, count] = match.split('{');
-              group = group.slice(1, group.length - 1);
+              const [bracketed, count] = match.split('{');
+              const group = bracketed.slice(1, bracketed.length - 1);
               const newGroup = group.repeat(Number(count.slice(0, count.length - 1)));
               text = text.replace(match, newGroup);
             } 
