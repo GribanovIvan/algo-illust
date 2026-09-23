@@ -87,7 +87,7 @@ test('duplicates and a thirteenth element are not added', () => {
 test('the dice adds a random element', () => {
   jest.spyOn(Math, 'random').mockReturnValue(.42);
   const view = mount('queue');
-  fireEvent.click(view.container.querySelector('header > span > svg')!);
+  fireEvent.click(screen.getByRole('button', {name: 'Add a random element'}));
   expect(items(view)).toEqual(['42']);
 });
 
@@ -134,4 +134,11 @@ test('the tree inserts on Enter and its controls are labelled', () => {
 test('the statistics field is reachable through its label', () => {
   mount('stack');
   expect(screen.getByRole('textbox', {name: 'Find:'})).toHaveValue('1');
+});
+
+test('icon-only controls have accessible names', () => {
+  mount('stack');
+  expect(screen.getByRole('link', {name: 'Home'})).toHaveAttribute('href', '/');
+  expect(screen.getByRole('textbox', {name: 'Element to add'})).toBeInTheDocument();
+  expect(screen.getByRole('button', {name: 'Add a random element'})).toHaveAttribute('type', 'button');
 });

@@ -17,7 +17,7 @@ const NavBar = ({type}: NavBarProps) => {
 
   return (
       <nav>
-        <Link to="/">
+        <Link to="/" aria-label="Home">
           <HomeIcon/>
         </Link>
         {searches.map(search => (

@@ -1,4 +1,11 @@
 header {
+  .dice {
+    display: flex;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+  }
   svg:hover {
     cursor: pointer;
     transition: .1s ease-in-out;

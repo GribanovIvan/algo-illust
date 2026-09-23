@@ -112,9 +112,12 @@ const DataStructuresPage = () => {
                   e.currentTarget.value = "";
                 }
               }}
+              aria-label="Element to add"
               placeholder="Enter to add el"
             />
-            <DiceIcon onClick={() => pushElement()} />
+            <button type="button" className={styles.dice} aria-label="Add a random element" onClick={() => pushElement()}>
+              <DiceIcon />
+            </button>
           </span>
         )}
       </header>
