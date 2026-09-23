@@ -1,6 +1,6 @@
 import React from 'react'
 
-const TerminalArrow = (props: any) => {
+const TerminalArrow = (props: React.ComponentProps<'span'>) => {
   return (
     <span {...props}>
       <svg width="18" height="29" viewBox="0 0 18 29" fill="none" xmlns="http://www.w3.org/2000/svg">
