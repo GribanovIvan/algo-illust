@@ -51,11 +51,17 @@ header {
     }
 }
 
+// the page headers are plain <header> elements, so the rule targets the element
+// (it used to name a .header class nobody set and never applied)
 @media screen and (max-width: 910px) {
-    .header {
+    header {
         flex-direction: column;
         align-items: center;
         gap: 1rem;
+        span {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
     }
 }
 
