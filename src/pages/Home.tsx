@@ -13,14 +13,18 @@ const menuItems = [
   {name: "data structures", path: "ds/stack"}
 ];
 
+const header = "Let's get started!";
+
 const Home = () => {
   const [showTitle, setShowTitle] = React.useState(true);
   const [selectedItem, setSelectedItem] = React.useState(0);
   const selectedItemRef = React.useRef(selectedItem);
-  selectedItemRef.current = selectedItem;
   const [inputFocus, setInputFocus] = useFocus();
   const navigate = useNavigate();
-  const header = "Let's get started!";
+
+  useEffect(() => {
+    selectedItemRef.current = selectedItem;
+  }, [selectedItem]);
 
   useEffect(() => {
     const titleTimer = setTimeout(() => {
@@ -51,8 +55,7 @@ const Home = () => {
       if (inputFocus.current) setInputFocus();
     }, 1000 * (header.length / 2 + 1));
     return () => clearTimeout(focusTimer);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [showTitle]);
+  }, [showTitle, inputFocus, setInputFocus]);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length < 2) return;

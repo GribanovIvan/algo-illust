@@ -42,7 +42,7 @@ const DSStyles = {
   'stack': (i: number, length: number) => 
     (i === length - 1) ? styles.deletable : '',
 
-  'queue': (i: number, _: number) => 
+  'queue': (i: number) => 
     (i === 0) ? styles.deletable : '',
 
   'deque': (i: number, length: number) => 
@@ -54,7 +54,7 @@ const DSStyles = {
   'doubly-linked': (i: number, length: number) => 
     `${styles.deletable} ${styles['doubly-list-item']} ${(i === length - 1) ? styles.null : ''}`,
 
-  'circular-linked': (i: number, _: number) => 
+  'circular-linked': (i: number) => 
     `${styles.deletable} ${(i === 0) ? styles['circular-arrow'] : ''}`,
 
   'tree': (i: number, length: number) =>
