@@ -39,7 +39,7 @@ const SearchPage = () => {
         <SearchNavBar type={type}/>      
       </header>
       <span className={styles.center}>
-        <select name="variants" onChange={e => setVariant(parseInt(e.target.value))}>
+        <select name="variants" aria-label="Variant" onChange={e => setVariant(parseInt(e.target.value))}>
           <option value={8}>Var 8</option>
           <option value={12}>Var 12</option>
         </select>
@@ -47,8 +47,8 @@ const SearchPage = () => {
           <SizeForm onLengthSubmit={length => 
             setBinaryArray(generateRandomArray(length, MAX, true).sort((a, b) => a - b))}/> :
           <form onSubmit={startSearching}>
-            <textarea name="searchIn" placeholder="Search in..." rows={3} cols={30} />
-            <input type="text" name="searchFor" placeholder="Search for..." />
+            <textarea name="searchIn" aria-label="Search in" placeholder="Search in..." rows={3} cols={30} />
+            <input type="text" name="searchFor" aria-label="Search for" placeholder="Search for..." />
             <input type="submit" value="Run" title="Start" />
           </form>
         }

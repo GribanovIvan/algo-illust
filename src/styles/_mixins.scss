@@ -1,3 +1,5 @@
+@use 'variables' as *;
+
 @mixin DS-item {
   position: relative;
   display: flex;
@@ -31,4 +33,29 @@
 @mixin flex-center-X {
   display: flex;
   justify-content: center;
+}
+
+// Form controls in the look of the array size form, shared by every page.
+@mixin control {
+  border-radius: .6rem;
+  padding: .5rem;
+  font: inherit;
+}
+
+@mixin button {
+  @include control;
+  background-color: $secondary-clr;
+  color: $primary-clr;
+  border: .15rem solid $primary-clr;
+  cursor: pointer;
+  transition: .1s ease-in-out;
+  &:hover:enabled {
+    transform: scale(1.1);
+    background-color: $primary-clr;
+    color: $secondary-clr;
+  }
+  &:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+  }
 }

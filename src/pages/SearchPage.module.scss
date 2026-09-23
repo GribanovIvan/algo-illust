@@ -4,17 +4,31 @@
 
 .center {
   @include flex-center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0 1rem;
+  select {
+    @include control;
+    cursor: pointer;
+  }
   form {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
+    gap: 1rem;
     input[type='text'] {
-      width: 8rem;
+      @include control;
+      width: 10rem;
     }
     textarea {
-      padding: .5rem;
+      @include control;
       border: 1px solid $primary-clr;
-      border-radius: 0.5rem;
       resize: none;
+    }
+    input[type='submit'] {
+      @include button;
+      margin: 0;
     }
   }
 }
