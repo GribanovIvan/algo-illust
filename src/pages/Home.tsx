@@ -4,19 +4,27 @@ import useFocus from '../hooks/useFocus';
 import TerminalArrow from '../images/TerminalArrow';
 import styles from './Home.module.scss';
 
+const menuItems = [
+  {name: "sort", path: "sort/bubble"},
+  {name: "search", path: "search/binary"},
+  {name: "data structures", path: "ds/stack"}
+];
+
 const Home = () => {
   const [showTittle, setShowTittle] = React.useState(true);
   const [selectedItem, setSelectedItem] = React.useState(0);
+  const selectedItemRef = React.useRef(selectedItem);
+  selectedItemRef.current = selectedItem;
   const [inputFocus, setInputFocus]: any = useFocus();
   const navigate = useNavigate();
   const header = "Let's get started!";
 
   useEffect(() => {
-    setTimeout(() => {
+    const titleTimer = setTimeout(() => {
       setShowTittle(false);
     }, 1700);
 
-    onkeydown = (e) => {
+    const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowDown') {
         setSelectedItem(selectedItem => selectedItem + 1 > 2 ? 0 : selectedItem + 1);
       }
@@ -24,28 +32,24 @@ const Home = () => {
         setSelectedItem(selectedItem => selectedItem - 1 < 0 ? 2 : selectedItem - 1);
       }
       if (e.key === 'Enter') {
-        // ...
-        setSelectedItem(selectedItem => {
-          navigate(menuItems[selectedItem].path);
-          return selectedItem;
-        });
+        navigate(menuItems[selectedItemRef.current].path);
       }
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    window.addEventListener('keydown', onKeyDown);
 
-  useEffect(() => {   
-    setTimeout(() => {
+    return () => {
+      clearTimeout(titleTimer);
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [navigate]);
+
+  useEffect(() => {
+    const focusTimer = setTimeout(() => {
       if (inputFocus.current) setInputFocus();
     }, 1000 * (header.length / 2 + 1));
+    return () => clearTimeout(focusTimer);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showTittle]);
-
-  const menuItems = [
-    {name: "sort", path: "sort/bubble"},
-    {name: "search", path: "search/binary"},
-    {name: "data structures", path: "ds/stack"}
-  ];
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length < 2) return;
