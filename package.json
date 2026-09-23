@@ -18,6 +18,7 @@
     "test": "jest --runInBand",
     "test:coverage": "jest --runInBand --coverage",
     "lint": "eslint src",
+    "typecheck": "tsc --noEmit -p tsconfig.test.json",
     "verify:build": "node scripts/verify-build.mjs"
   },
   "devDependencies": {

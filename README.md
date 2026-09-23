@@ -24,6 +24,7 @@ Requires Node.js 22.12 or newer.
 | `npm test` | run the Jest + React Testing Library suite once |
 | `npm run test:coverage` | the same with a coverage report |
 | `npm run lint` | ESLint |
+| `npm run typecheck` | TypeScript check of the app and the tests (`npm run build` checks the app only) |
 | `npm run verify:build` | check that the built `dist` resolves its assets under any folder and that the worker sorts correctly |
 
 ## Deployment
