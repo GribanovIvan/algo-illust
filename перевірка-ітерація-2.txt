@@ -1,0 +1,17 @@
+{"path":"/asd/","visible":true,"hash":"","failedRequests":[],"consoleErrors":[]}
+{"path":"/asd/sort/bubble","visible":true,"hash":"","failedRequests":[],"consoleErrors":[],"form":{"display":"flex","gap":"8px","radius":"9.6px","padding":"8px","background":"rgb(0, 0, 0)","border":"solid"}}
+{"path":"/qwe/","visible":true,"hash":"","failedRequests":[],"consoleErrors":[]}
+{"path":"/qwe/sort/bubble","visible":true,"hash":"","failedRequests":[],"consoleErrors":[],"form":{"display":"flex","gap":"8px","radius":"9.6px","padding":"8px","background":"rgb(0, 0, 0)","border":"solid"}}
+{"path":"/","visible":true,"hash":"","failedRequests":[],"consoleErrors":[]}
+{"path":"/sort/bubble","visible":true,"hash":"","failedRequests":[],"consoleErrors":[],"form":{"display":"flex","gap":"8px","radius":"9.6px","padding":"8px","background":"rgb(0, 0, 0)","border":"solid"}}
+Relative assets verified: /
+Relative assets verified: /sort/bubble
+Relative assets verified: /asd/
+Relative assets verified: /qwe/
+Relative assets verified: /asd/sort/bubble
+Relative assets verified: /qwe/sort/bubble
+Relative assets verified: /course/demo/
+Relative assets verified: /course/demo/sort/heap
+Relative assets verified: /asd/search/kmp
+Relative assets verified: /asd/ds/stack
+Built worker verified: 7 algorithms, including heap; all results sorted.
